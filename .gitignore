@@ -1,0 +1,30 @@
+# Environments & Dependencies
+node_modules/
+dist/
+vemv/
+venv/
+.env
+backend/.env
+frontend/.env
+*.local
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+.pytest_cache/
+
+# Databases & local uploads
+*.db
+*.sqlite3
+fractoes.db
+backend/fractoes.db
+backend/verifact.db
+*.log
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

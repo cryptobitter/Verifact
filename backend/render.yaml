@@ -1,0 +1,27 @@
+services:
+  # Backend Web Service on Render
+  - type: web
+    name: verifact-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+        # Paste your separate Neon/Supabase PostgreSQL connection string here:
+        # e.g., postgresql://user:password@ep-xyz.us-east-1.aws.neon.tech/verifact?sslmode=require
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CORS_ORIGINS
+        sync: false
+        # e.g., https://verifact.vercel.app,http://localhost:5173
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GMAIL_ADDRESS
+        sync: false
+      - key: GMAIL_APP_PASSWORD
+        sync: false
