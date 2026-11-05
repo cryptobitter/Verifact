@@ -1,0 +1,8 @@
+{
+  "model_name": "densenet121",
+  "checkpoint_file": "densenet121_best.pt",
+  "best_val_loss": 0.7365817400293613,
+  "best_val_auroc": 0.8517705064993276,
+  "target_layer_name": "features.norm5",
+  "img_size": 224
+}

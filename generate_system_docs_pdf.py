@@ -651,6 +651,49 @@ def build_pdf(output_path: str):
         ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
     ]))
     story.append(eval_table)
+    story.append(Spacer(1, 10))
+
+    story.append(Paragraph("Evaluated Upper-Extremity Benchmark Results (Fixed Seeded Subset, N=250)", h2_style))
+    results_table_data = [
+        [Paragraph("Pipeline", table_header_style), Paragraph("Dataset", table_header_style),
+         Paragraph("Sens (Recall)", table_header_style), Paragraph("Specificity", table_header_style),
+         Paragraph("PPV", table_header_style), Paragraph("F1 Score", table_header_style),
+         Paragraph("AUROC", table_header_style), Paragraph("ECE", table_header_style),
+         Paragraph("Mean Latency", table_header_style)],
+        [
+            Paragraph("<b>DenseNet-121 CNN</b>", table_cell_bold),
+            Paragraph("FracAtlas", table_cell_style),
+            Paragraph("<b>83.2%</b>", table_cell_bold),
+            Paragraph("<b>92.8%</b>", table_cell_bold),
+            Paragraph("<b>92.0%</b>", table_cell_bold),
+            Paragraph("<b>0.874</b>", table_cell_bold),
+            Paragraph("<b>0.947</b>", table_cell_bold),
+            Paragraph("<b>0.074</b>", table_cell_bold),
+            Paragraph("540.7 ms", table_cell_style),
+        ],
+        [
+            Paragraph("Offline CLAHE", table_cell_style),
+            Paragraph("FracAtlas", table_cell_style),
+            Paragraph("N/A", table_cell_style),
+            Paragraph("N/A", table_cell_style),
+            Paragraph("N/A", table_cell_style),
+            Paragraph("N/A", table_cell_style),
+            Paragraph("N/A", table_cell_style),
+            Paragraph("N/A", table_cell_style),
+            Paragraph("17.1 ms", table_cell_style),
+        ],
+    ]
+    results_table = Table(results_table_data, colWidths=[1.4 * inch, 0.8 * inch, 0.7 * inch, 0.7 * inch, 0.6 * inch, 0.6 * inch, 0.6 * inch, 0.5 * inch, 0.9 * inch])
+    results_table.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#0f172a")),
+        ("BACKGROUND", (0, 1), (-1, 1), colors.HexColor("#f0fdf4")),
+        ("BOX", (0, 0), (-1, -1), 0.5, colors.HexColor("#cbd5e1")),
+        ("INNERGRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#e2e8f0")),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("TOPPADDING", (0, 0), (-1, -1), 3),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+    ]))
+    story.append(results_table)
 
     # =========================================================================
     # SECTION 6: API REFERENCE & CLINICAL DISCLAIMER

@@ -166,6 +166,9 @@ def load_fracatlas_dataset(
     FracAtlas is evaluated as 'fracture_detection'.
     """
     base_path = Path(fracatlas_dir)
+    if (base_path / "FracAtlas").exists() and (base_path / "FracAtlas" / "dataset.csv").exists():
+        base_path = base_path / "FracAtlas"
+
     items: List[DatasetItem] = []
 
     # Check for metadata CSV
@@ -185,33 +188,48 @@ def load_fracatlas_dataset(
                     img_name = row.get("image_id") or row.get("image") or row.get("filename")
                     if not img_name:
                         continue
-                    if not img_name.lower().endswith((".png", ".jpg", ".jpeg")):
-                        img_name = f"{img_name}.png"
 
                     # Look for ground truth
                     fractured_val = row.get("fractured", row.get("fracture", row.get("label", "0")))
                     label = 1 if str(fractured_val).strip() in ["1", "true", "True", "positive"] else 0
 
-                    body_part = str(row.get("body_part", row.get("organ", "upper_extremity"))).lower()
+                    # Parse body part from FracAtlas binary columns or body_part column
+                    body_part = "upper_extremity"
+                    if row.get("hand") == "1":
+                        body_part = "hand"
+                    elif row.get("shoulder") == "1":
+                        body_part = "shoulder"
+                    elif row.get("body_part"):
+                        body_part = str(row.get("body_part")).lower()
+                    elif upper_extremity_only and (row.get("leg") == "1" or row.get("hip") == "1"):
+                        # Skip lower-extremity cases
+                        continue
+
                     if upper_extremity_only:
                         matches = any(p.lower() in body_part for p in UPPER_EXTREMITY_PARTS)
                         if not matches:
                             continue
 
-                    # Search possible image locations
-                    possible_paths = [
-                        base_path / "images" / ("Fractured" if label == 1 else "Non_fractured") / img_name,
-                        base_path / "images" / img_name,
-                        base_path / img_name
-                    ]
+                    # Search possible image locations (supporting both .jpg and .png)
+                    stem = Path(img_name).stem
+                    possible_names = [img_name, f"{stem}.jpg", f"{stem}.png", f"{stem}.jpeg"]
+                    possible_paths = []
+                    for name in possible_names:
+                        possible_paths.extend([
+                            base_path / "images" / ("Fractured" if label == 1 else "Non_fractured") / name,
+                            base_path / "images" / name,
+                            base_path / name
+                        ])
+
                     actual_path = next((p for p in possible_paths if p.exists()), possible_paths[0])
 
+                    patient_id = row.get("patient_id") or row.get("id") or Path(img_name).stem
                     items.append(DatasetItem(
                         image_path=str(actual_path),
                         ground_truth=label,
                         task="fracture_detection",
                         body_part=body_part,
-                        patient_id=str(row.get("patient_id", row.get("id", "unknown")))
+                        patient_id=str(patient_id)
                     ))
             if items:
                 return items

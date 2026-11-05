@@ -23,6 +23,10 @@ backend/fractoes.db
 backend/verifact.db
 *.log
 
+# Datasets & Large Evaluation Files
+evaluation/data/
+evaluation/mock_dataset/
+
 # OS & Editor
 .DS_Store
 Thumbs.db

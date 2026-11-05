@@ -6,7 +6,8 @@ Guarantees zero data leakage by grouping studies strictly by patient ID.
 import os
 import random
 from typing import List, Tuple, Dict, Any, Optional
-from PIL import Image
+from PIL import Image, ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 try:
     from torch.utils.data import Dataset
@@ -51,7 +52,16 @@ class RadiographDataset(Dataset):
         item = self.items[idx]
         img_path = item["image_path"]
 
-        image = Image.open(img_path).convert("RGB")
+        try:
+            image = Image.open(img_path).convert("RGB")
+        except Exception:
+            import cv2
+            bgr = cv2.imread(img_path)
+            if bgr is not None:
+                image = Image.fromarray(cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB))
+            else:
+                image = Image.new("RGB", (224, 224), (128, 128, 128))
+
         if self.transform:
             image_tensor = self.transform(image)
         else:
@@ -74,7 +84,9 @@ def split_by_patient(
     patients: Dict[str, List[Dict[str, Any]]] = {}
 
     for it in items:
-        pid = it.get("patient_id") or it.get("image_path")
+        pid = it.get("patient_id")
+        if not pid or str(pid).strip().lower() in ("unknown", "none", ""):
+            pid = it.get("image_path") or str(rng.random())
         if pid not in patients:
             patients[pid] = []
         patients[pid].append(it)

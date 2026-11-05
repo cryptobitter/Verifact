@@ -76,6 +76,12 @@ Evaluates the offline enhancement pipeline (checks fallback rate and honesty ban
 python evaluation/runner.py --dataset mock --provider offline --n-samples 20
 ```
 
+### Trained CNN Evaluation (DenseNet-121 with Real Grad-CAM)
+Evaluates the trained upper-extremity CNN checkpoint against the fixed 250-case benchmark:
+```bash
+python evaluation/runner.py --dataset fracatlas --provider cnn --manifest evaluation/manifests/fracatlas_subset_250.json
+```
+
 ### Live Provider Evaluation (Requires Dataset and API Keys in `.env`)
 ```bash
 # Evaluate Google Gemini Flash on FracAtlas fracture detection

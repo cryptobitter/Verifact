@@ -1,0 +1,2002 @@
+[
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002832.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0000822.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002392.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001441.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000610.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002464.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0000852.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003293.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0000044.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000421.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001781.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001026.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001392.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000641.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003280.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002583.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002568.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000408.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003218.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001965.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000087.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002218.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003552.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003985.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001131.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002336.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003917.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003396.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0000100.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000531.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "shoulder",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0004264.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000111.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000939.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002966.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003620.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001356.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002382.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003813.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001412.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0000156.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003878.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003102.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002486.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001342.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003590.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002416.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001760.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003734.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002445.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002698.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002494.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0004016.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000560.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002014.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001608.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001064.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002530.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003516.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0000801.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002198.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000423.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002408.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000031.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002469.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002597.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002647.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003904.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "shoulder",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0000351.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003927.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000675.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000422.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000198.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0004118.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003295.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003109.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003671.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002652.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003445.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "shoulder",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003350.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0004280.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001910.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003479.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002875.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002479.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000369.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000016.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001391.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0000142.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002450.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0000671.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002315.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001933.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002380.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002582.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002126.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001362.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001353.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003136.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002375.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002499.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0004081.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003201.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002412.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002560.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001794.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002501.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003397.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002360.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001226.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003214.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002309.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003298.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000236.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000662.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001611.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0000058.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003330.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0004226.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0004307.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002312.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002764.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002905.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003096.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001381.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002209.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001553.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002405.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002038.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002359.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001552.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003923.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002516.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001749.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001546.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002131.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001628.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001450.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "shoulder",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001148.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003095.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001762.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001883.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002485.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0000844.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002715.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002299.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003233.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000674.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000164.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000166.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001795.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001908.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002502.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000289.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002334.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003121.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002508.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002386.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002610.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0000155.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003952.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002938.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000793.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002831.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001002.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003110.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001161.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002263.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002492.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001860.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "shoulder",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001836.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001428.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000806.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0004236.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002553.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000030.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001478.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "shoulder",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002353.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001003.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002423.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003398.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0004045.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001308.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002350.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001938.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002427.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001000.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003336.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "shoulder",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001805.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002664.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003800.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002808.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003400.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002136.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003659.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "shoulder",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003614.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003327.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002352.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002376.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002934.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001396.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "shoulder",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0004206.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001668.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0004068.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001540.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0004232.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003150.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000630.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002810.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002330.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003731.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002356.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002585.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001969.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003960.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000147.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001515.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000145.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003213.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002482.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002999.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0004310.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001364.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002311.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002467.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001136.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001796.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001731.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002881.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003381.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001990.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0003509.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001496.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002328.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0000758.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002565.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0001198.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002329.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0004277.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0003561.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002086.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002503.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0002484.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000794.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002950.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000764.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001413.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0002693.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Fractured\\IMG0004009.jpg",
+    "ground_truth": 1,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0001088.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  },
+  {
+    "image_path": "evaluation\\data\\FracAtlas\\FracAtlas\\images\\Non_fractured\\IMG0000802.jpg",
+    "ground_truth": 0,
+    "task": "fracture_detection",
+    "body_part": "hand",
+    "patient_id": "unknown",
+    "study_id": "unknown"
+  }
+]

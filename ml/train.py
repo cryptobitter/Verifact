@@ -93,7 +93,7 @@ def train_model(
         model.train()
         running_loss = 0.0
 
-        for images, labels, _ in train_loader:
+        for step, (images, labels, _) in enumerate(train_loader, start=1):
             images = images.to(device)
             labels = labels.to(device).unsqueeze(1)
 
@@ -104,6 +104,8 @@ def train_model(
             optimizer.step()
 
             running_loss += loss.item() * images.size(0)
+            if step % 20 == 0 or step == len(train_loader):
+                print(f"  [Epoch {epoch}/{epochs}] Step {step}/{len(train_loader)} - Batch Loss: {loss.item():.4f}")
 
         scheduler.step()
         epoch_train_loss = running_loss / max(1, len(train_dataset))

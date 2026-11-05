@@ -74,22 +74,27 @@ Verifact enforces reproducible clinical benchmarking across upper-extremity radi
 
 | Dataset | Task | Evaluated Pipeline | N | Sensitivity (Recall) | Specificity | Precision (PPV) | F1 Score | AUROC | ECE | Mean Latency | Fallback Rate |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| **Stanford MURA v1.1** | Abnormality Detection | Offline Baseline | 250 | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *100.0%* |
-| **Stanford MURA v1.1** | Abnormality Detection | Gemini 1.5 Flash Vision | 250 | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* |
-| **Stanford MURA v1.1** | Abnormality Detection | Groq Llama 3.2 Vision | 250 | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* |
-| **FracAtlas** | Fracture Detection | Offline Baseline | 250 | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *100.0%* |
+| **FracAtlas** | Fracture Detection | **DenseNet-121 CNN (Grad-CAM)** | **250** | **0.832** | **0.928** | **0.920** | **0.874** | **0.947** | **0.074** | **540.7 ms** | **0.0%** |
+| **FracAtlas** | Fracture Detection | Offline Baseline (CLAHE) | 250 | *N/A* | *N/A* | *N/A* | *N/A* | *N/A* | *N/A* | 17.1 ms | 99.6% |
 | **FracAtlas** | Fracture Detection | Gemini 1.5 Flash Vision | 250 | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* |
 | **FracAtlas** | Fracture Detection | Groq Llama 3.2 Vision | 250 | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* |
+| **Stanford MURA v1.1** | Abnormality Detection | Offline Baseline (CLAHE) | 250 | *N/A* | *N/A* | *N/A* | *N/A* | *N/A* | *N/A* | *TBD* | *100.0%* |
+| **Stanford MURA v1.1** | Abnormality Detection | DenseNet-121 CNN | 250 | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* |
+| **Stanford MURA v1.1** | Abnormality Detection | Gemini 1.5 Flash Vision | 250 | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* |
+| **Stanford MURA v1.1** | Abnormality Detection | Groq Llama 3.2 Vision | 250 | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* | *TBD* |
 
 ### Running the Evaluation Harness
 ```bash
 # Instant dry-run validation (mock dataset)
 python evaluation/runner.py --dataset mock --provider mock --n-samples 20
 
+# Evaluate trained DenseNet-121 CNN on FracAtlas 250-case benchmark
+python evaluation/runner.py --dataset fracatlas --provider cnn --manifest evaluation/manifests/fracatlas_subset_250.json
+
 # Evaluate on Stanford MURA v1.1 (requires MURA_DATASET_PATH env var)
 python evaluation/runner.py --dataset mura --provider gemini --n-samples 250
 
-# Evaluate on FracAtlas (requires FRACATLAS_DATASET_PATH env var)
+# Evaluate on FracAtlas with Vision LLM (requires GEMINI_API_KEY env var)
 python evaluation/runner.py --dataset fracatlas --provider gemini --n-samples 250
 ```
 Detailed logs and per-sample results are saved to `evaluation/results/`. See [evaluation/README.md](file:///c:/Users/2k24c/OneDrive/Desktop/projects/self/evaluation/README.md) for full reproduction instructions.

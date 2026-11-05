@@ -55,35 +55,51 @@ def run_pipeline_on_image(
             y_prob = (h % 100) / 100.0
             y_pred = 1 if y_prob >= 0.50 else 0
             time.sleep(0.01)  # Simulate 10ms processing
+        elif provider == "cnn":
+            from ml.inference import FractureInferenceEngine
+            if not hasattr(run_pipeline_on_image, "_cnn_engine"):
+                run_pipeline_on_image._cnn_engine = FractureInferenceEngine()
+            engine = run_pipeline_on_image._cnn_engine
+            pred_res = engine.predict(image_path)
+            if not pred_res.get("is_ai_analysis", False) or pred_res.get("fracture_probability") is None:
+                is_fallback = True
+                y_pred = None
+                y_prob = None
+            else:
+                prob = float(pred_res["fracture_probability"])
+                y_prob = prob
+                y_pred = 1 if prob >= 0.50 else 0
         else:
             # Import backend ML pipeline
-            from app.services.ml_pipeline import _call_multimodal_vision, _clinical_offline_enhancement_engine
+            from app.services.ml_pipeline import _clinical_offline_enhancement_engine
             
             with open(image_path, "rb") as f:
                 image_bytes = f.read()
 
             if provider == "offline":
-                res = _clinical_offline_enhancement_engine(
-                    image_bytes=image_bytes,
-                    detected_body_part=body_part
-                )
+                import io
+                import numpy as np
+                from PIL import Image
+                pil_img = Image.open(io.BytesIO(image_bytes)).convert("L")
+                cv_gray = np.array(pil_img)
+                res = _clinical_offline_enhancement_engine(cv_gray)
                 is_fallback = True
                 # In offline enhancement mode, no AI prediction is made
                 y_pred = None
                 y_prob = None
             else:
-                res = _call_multimodal_vision(
-                    image_bytes=image_bytes,
-                    provider_override=provider,
-                    detected_body_part=body_part
-                )
-                if not res.get("is_ai_analysis", True) or res.get("analysis_mode") == "offline_enhancement_only":
+                import asyncio
+                from app.services.ml_pipeline import _call_multimodal_vision
+                res = asyncio.run(_call_multimodal_vision(image_bytes=image_bytes))
+                if not res or not res.get("is_ai_analysis", True) or res.get("analysis_mode") == "offline_enhancement_only":
                     is_fallback = True
-                
-                det = res.get("fracture_detected")
-                if det is not None:
-                    y_pred = 1 if det is True else 0
-                y_prob = res.get("confidence")
+                    y_pred = None
+                    y_prob = None
+                else:
+                    det = res.get("fracture_detected")
+                    if det is not None:
+                        y_pred = 1 if det is True else 0
+                    y_prob = res.get("confidence")
 
     except Exception as e:
         status = "failed"
@@ -264,7 +280,7 @@ def main():
     parser.add_argument("--dataset-path", type=str, default=None,
                         help="Path to dataset root directory (or set DATASET_PATH env var)")
     parser.add_argument("--provider", type=str, default="mock",
-                        help="Vision provider to test: 'gemini', 'groq', 'offline', or 'mock'")
+                        help="Vision provider to test: 'gemini', 'groq', 'offline', 'cnn', or 'mock'")
     parser.add_argument("--manifest", type=str, default=None,
                         help="Path to custom JSON subset manifest")
     parser.add_argument("--n-samples", type=int, default=250,
@@ -286,7 +302,10 @@ def main():
         mock_dir = str(PROJECT_ROOT / "evaluation" / "mock_dataset")
         items = create_mock_test_dataset(mock_dir, num_samples=min(args.n_samples, 20))
     elif args.dataset == "mura":
+        default_mura = PROJECT_ROOT / "evaluation" / "data" / "MURA-v1.1"
         dataset_path = args.dataset_path or os.getenv("MURA_DATASET_PATH") or os.getenv("DATASET_PATH")
+        if not dataset_path and default_mura.exists():
+            dataset_path = str(default_mura)
         if not dataset_path or not os.path.exists(dataset_path):
             print(f"ERROR: MURA dataset path not found. Please provide --dataset-path or set MURA_DATASET_PATH env var.")
             sys.exit(1)
@@ -294,7 +313,10 @@ def main():
         manifest_path = str(PROJECT_ROOT / "evaluation" / "manifests" / "mura_valid_subset_250.json")
         items = create_or_load_subset_manifest(raw_items, manifest_path, n_samples=args.n_samples, seed=args.seed)
     elif args.dataset == "fracatlas":
+        default_fa = PROJECT_ROOT / "evaluation" / "data" / "FracAtlas"
         dataset_path = args.dataset_path or os.getenv("FRACATLAS_DATASET_PATH") or os.getenv("DATASET_PATH")
+        if not dataset_path and default_fa.exists():
+            dataset_path = str(default_fa)
         if not dataset_path or not os.path.exists(dataset_path):
             print(f"ERROR: FracAtlas dataset path not found. Please provide --dataset-path or set FRACATLAS_DATASET_PATH env var.")
             sys.exit(1)

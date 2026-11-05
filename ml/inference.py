@@ -10,7 +10,8 @@ import json
 from pathlib import Path
 from typing import Dict, Any, Optional, Tuple, Union
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 import cv2
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -131,6 +132,7 @@ class FractureInferenceEngine:
             "analysis_mode": "cnn_triage",
             "model_version": self.model_version,
             "fracture_probability": round(prob, 4),
+            "confidence": round(prob, 4),
             "fracture_detected": detected,
             "uncertain": uncertain,
             "gradcam_heatmap_bytes": gradcam_bytes,
