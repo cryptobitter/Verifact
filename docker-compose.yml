@@ -1,20 +1,47 @@
 version: '3.8'
 
 services:
-  backend:
+  api:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: verifact-backend
+    container_name: verifact-api
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=sqlite:///./verifact.db
-      - SECRET_KEY=change_this_to_a_secure_random_key_in_production
+      - DATABASE_URL=postgresql://verifact:verifact_secret@db:5432/verifact
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=${SECRET_KEY:-change_this_to_a_secure_random_key_in_production}
       - GEMINI_API_KEY=${GEMINI_API_KEY:-}
       - GROQ_API_KEY=${GROQ_API_KEY:-}
+    depends_on:
+      - db
+      - redis
     volumes:
-      - ./backend/fractoes.db:/app/fractoes.db
+      - ./backend/uploads:/app/uploads
+      - ./ml/checkpoints:/app/ml/checkpoints
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    container_name: verifact-postgres
+    environment:
+      - POSTGRES_USER=verifact
+      - POSTGRES_PASSWORD=verifact_secret
+      - POSTGRES_DB=verifact
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: verifact-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
     restart: unless-stopped
 
   frontend:
@@ -25,5 +52,9 @@ services:
     ports:
       - "5173:80"
     depends_on:
-      - backend
+      - api
     restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:

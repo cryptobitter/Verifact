@@ -1,3 +1,5 @@
+import time
+from ml.inference import get_inference_engine
 import io
 import os
 import re
@@ -9,18 +11,20 @@ from typing import Optional, Tuple, Dict, Any
 import cv2
 import numpy as np
 from PIL import Image, UnidentifiedImageError
+from pydantic import ValidationError
 
 from app.config import settings
-from app.schemas.analysis_schema import ModelOutput
+from app.schemas.analysis_schema import ModelOutput, LlmStructuredOutput
+from app.services.dicom_services import deidentify_dicom_metadata, sanitize_image_pixels_for_external_api
 
-# Global state for PyTorch model if available
+# Global state for PyTorch model if available (Preserved for Phase 3 integration)
 _torch_model = None
 _torch_device = None
 _torch_gradcam = None
 
 
 class ResNetGradCAM:
-    """True Grad-CAM implementation hooking into model.layer4[-1]."""
+    """True Grad-CAM implementation hooking into model layer (to be generalized in Phase 3)."""
 
     def __init__(self, model, target_layer):
         self.model = model
@@ -83,36 +87,67 @@ _init_pytorch_engine()
 
 
 # ---------------------------------------------------------------------------
-# Engine B: Multimodal Vision AI Extractor (Gemini, Groq, OpenAI, xAI)
+# Multimodal Vision AI Extractor (Gemini primary + Groq fallback)
 # ---------------------------------------------------------------------------
 
 PROMPT_TEMPLATE = (
-    "You are an expert orthopedic radiologist and musculoskeletal imaging AI co-pilot reviewing a plain radiograph / X-ray. "
+    "You are an expert orthopedic radiologist and musculoskeletal imaging AI triage co-pilot reviewing a plain radiograph / X-ray. "
+    "Your scope is strictly upper-extremity radiographs (wrist, hand, forearm, elbow, clavicle/shoulder). "
     "{extra_context}"
     "Analyze the radiograph carefully and respond ONLY with a raw valid JSON object in this exact structure without markdown or commentary:\n"
     "{\n"
     '  "fracture_detected": true,\n'
-    '  "confidence": 0.95,\n'
-    '  "bone": "Distal Radius" | "Femur" | "Clavicle" | "Scaphoid" | "Tibia" | "Fibula" | "Humerus" | "Pelvis" | "Ankle" | "Foot" | "Hand",\n'
-    '  "location": "Metaphysis" | "Diaphysis" | "Epiphyseal plate" | "Mid-shaft" | "Neck" | "Waist" | "Intact",\n'
+    '  "confidence": 0.88,\n'
+    '  "bone": "Distal Radius" | "Scaphoid" | "Clavicle" | "Ulna" | "Metacarpal" | "Phalanx" | "Humerus",\n'
+    '  "location": "Metaphysis" | "Diaphysis" | "Epiphyseal plate" | "Mid-shaft" | "Waist" | "Intact",\n'
     '  "fracture_type": "Transverse" | "Oblique" | "Spiral" | "Comminuted" | "Greenstick" | "Hairline" | "Avulsion" | "None",\n'
     '  "displacement": "Non-displaced" | "Dorsally angulated" | "Volar displacement" | "Shortened" | "Displaced" | "None",\n'
     '  "severity": "Low" | "Moderate" | "Severe" | "None",\n'
-    '  "roi_coordinates": {"x": 0.55, "y": 0.62}\n'
+    '  "roi_coordinates": {{"x": 0.55, "y": 0.62}}\n'
     "}\n"
-    "Note: roi_coordinates are normalized (0.0 to 1.0) coordinates indicating the center point (x horizontal, y vertical from top) of the fracture line or cortical step-off."
+    "Note: roi_coordinates are normalized (0.0 to 1.0) coordinates indicating the center point of the focal fracture line or cortical step-off."
 )
 
 
+def _validate_and_sanitize_llm_dict(raw_dict: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """Validates raw LLM dictionary against Pydantic schema and clamps ROI coordinates."""
+    try:
+        validated = LlmStructuredOutput.model_validate(raw_dict)
+        data = validated.model_dump()
+
+        # Enforce strict ROI coordinate bounds [0.0, 1.0]
+        roi = data.get("roi_coordinates")
+        if roi and isinstance(roi, dict) and "x" in roi and "y" in roi:
+            try:
+                x = float(roi["x"])
+                y = float(roi["y"])
+                if 0.0 <= x <= 1.0 and 0.0 <= y <= 1.0:
+                    data["roi_coordinates"] = {"x": round(x, 4), "y": round(y, 4)}
+                else:
+                    data["roi_coordinates"] = {"x": round(float(np.clip(x, 0.05, 0.95)), 4), "y": round(float(np.clip(y, 0.05, 0.95)), 4)}
+            except Exception:
+                data["roi_coordinates"] = None
+
+        return data
+    except ValidationError as val_err:
+        print(f"[AI PIPELINE] Pydantic validation rejected LLM output: {val_err}")
+        return None
+    except Exception as exc:
+        print(f"[AI PIPELINE] Unexpected validation error: {exc}")
+        return None
+
+
 async def _call_gemini_vision(image_bytes: bytes, extra_context: str = "") -> Optional[Dict[str, Any]]:
-    gemini_key = getattr(settings, "GEMINI_API_KEY", None) or os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    gemini_key = getattr(settings, "GEMINI_API_KEY", None) or os.getenv("GEMINI_API_KEY")
     if not gemini_key:
         return None
+
+    model_name = getattr(settings, "GEMINI_VISION_MODEL", "gemini-1.5-flash")
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={gemini_key}"
 
     try:
         import httpx
         b64_img = base64.b64encode(image_bytes).decode("utf-8")
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_key}"
         prompt = PROMPT_TEMPLATE.format(extra_context=extra_context)
 
         payload = {
@@ -141,9 +176,31 @@ async def _call_gemini_vision(image_bytes: bytes, extra_context: str = "") -> Op
             if resp.status_code == 200:
                 res_data = resp.json()
                 text = res_data["candidates"][0]["content"]["parts"][0]["text"].strip()
-                return json.loads(text)
+                parsed = json.loads(text)
+                validated = _validate_and_sanitize_llm_dict(parsed)
+                if validated:
+                    return validated
+
+                # 1 retry with schema fix hint if invalid
+                print("[AI PIPELINE] Gemini output invalid, attempting 1 retry with schema correction...")
+                retry_payload = {
+                    "contents": [
+                        {
+                            "parts": [
+                                {"text": prompt + "\nREMINDER: Return strictly valid JSON conforming to the schema with numeric confidence between 0.0 and 1.0."},
+                                {"inline_data": {"mime_type": "image/png", "data": b64_img}}
+                            ]
+                        }
+                    ],
+                    "generationConfig": {"temperature": 0.0, "response_mime_type": "application/json"}
+                }
+                retry_resp = await client.post(url, json=retry_payload)
+                if retry_resp.status_code == 200:
+                    r_text = retry_resp.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+                    return _validate_and_sanitize_llm_dict(json.loads(r_text))
+
     except Exception as exc:
-        print(f"[AI PIPELINE] Gemini Vision call exception: {exc}")
+        print(f"[AI PIPELINE] Gemini Vision call exception ({model_name}): {exc}")
 
     return None
 
@@ -153,10 +210,12 @@ async def _call_groq_vision(image_bytes: bytes, extra_context: str = "") -> Opti
     if not groq_key:
         return None
 
+    model_name = getattr(settings, "GROQ_VISION_MODEL", "llama-3.2-11b-vision-preview")
+    url = "https://api.groq.com/openai/v1/chat/completions"
+
     try:
         import httpx
         b64_img = base64.b64encode(image_bytes).decode("utf-8")
-        url = "https://api.groq.com/openai/v1/chat/completions"
         prompt = PROMPT_TEMPLATE.format(extra_context=extra_context)
 
         headers = {
@@ -164,7 +223,7 @@ async def _call_groq_vision(image_bytes: bytes, extra_context: str = "") -> Opti
             "Content-Type": "application/json"
         }
         payload = {
-            "model": "llama-3.2-11b-vision-preview",
+            "model": model_name,
             "messages": [
                 {
                     "role": "user",
@@ -183,223 +242,101 @@ async def _call_groq_vision(image_bytes: bytes, extra_context: str = "") -> Opti
             resp = await client.post(url, headers=headers, json=payload)
             if resp.status_code == 200:
                 text = resp.json()["choices"][0]["message"]["content"].strip()
-                return json.loads(text)
+                parsed = json.loads(text)
+                return _validate_and_sanitize_llm_dict(parsed)
     except Exception as exc:
-        print(f"[AI PIPELINE] Groq Vision call exception: {exc}")
-
-    return None
-
-
-async def _call_openai_or_grok_vision(image_bytes: bytes, extra_context: str = "") -> Optional[Dict[str, Any]]:
-    openai_key = getattr(settings, "OPENAI_API_KEY", None) or os.getenv("OPENAI_API_KEY")
-    grok_key = getattr(settings, "GROK_API_KEY", None) or os.getenv("GROK_API_KEY")
-
-    api_key = openai_key or grok_key
-    if not api_key:
-        return None
-
-    api_url = "https://api.openai.com/v1/chat/completions" if openai_key else getattr(settings, "GROK_API_URL", "https://api.x.ai/v1/chat/completions")
-    model_name = "gpt-4o-mini" if openai_key else getattr(settings, "GROK_MODEL", "grok-2-vision-1212")
-
-    try:
-        import httpx
-        b64_img = base64.b64encode(image_bytes).decode("utf-8")
-        prompt = PROMPT_TEMPLATE.format(extra_context=extra_context)
-
-        headers = {
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json"
-        }
-        payload = {
-            "model": model_name,
-            "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": prompt},
-                        {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64_img}"}}
-                    ]
-                }
-            ],
-            "max_tokens": 400,
-            "temperature": 0.1
-        }
-
-        timeout = httpx.Timeout(float(getattr(settings, "AI_TIMEOUT_SECONDS", 15.0)), connect=3.0)
-        async with httpx.AsyncClient(timeout=timeout) as client:
-            resp = await client.post(api_url, headers=headers, json=payload)
-            if resp.status_code == 200:
-                text = resp.json()["choices"][0]["message"]["content"].strip()
-                text = re.sub(r"^```(?:json)?\s*", "", text)
-                text = re.sub(r"\s*```$", "", text)
-                return json.loads(text)
-    except Exception as exc:
-        print(f"[AI PIPELINE] OpenAI/xAI Vision call exception: {exc}")
+        print(f"[AI PIPELINE] Groq Vision call exception ({model_name}): {exc}")
 
     return None
 
 
 async def _call_multimodal_vision(image_bytes: bytes, metadata: Optional[Dict[str, Any]] = None) -> Optional[Dict[str, Any]]:
-    """Tries connected Multimodal Vision AI services in priority order."""
+    """Tries primary Gemini then fallback Groq with de-identified metadata and sanitized image bytes."""
     if os.getenv("OFFLINE_MODE") == "1":
         return None
 
+    # Enforce DICOM PHI De-identification before external API dispatch
+    clean_meta = deidentify_dicom_metadata(metadata)
     extra_context = ""
-    if metadata:
+    if clean_meta:
         parts = []
-        if metadata.get("body_part_examined"):
-            parts.append(f"Body Part Examined: {metadata['body_part_examined']}")
-        if metadata.get("view_position"):
-            parts.append(f"Radiographic View: {metadata['view_position']}")
-        if metadata.get("modality"):
-            parts.append(f"Modality: {metadata['modality']}")
+        if clean_meta.get("body_part_examined"):
+            parts.append(f"Body Part Examined: {clean_meta['body_part_examined']}")
+        if clean_meta.get("view_position"):
+            parts.append(f"Radiographic View: {clean_meta['view_position']}")
+        if clean_meta.get("modality"):
+            parts.append(f"Modality: {clean_meta['modality']}")
         if parts:
-            extra_context = f"Verified DICOM Clinical Study Tags: {', '.join(parts)}.\n"
+            extra_context = f"DICOM Technical Tags: {', '.join(parts)}.\n"
 
-    # 1. Try Google Gemini Vision
-    res = await _call_gemini_vision(image_bytes, extra_context=extra_context)
-    if res and "bone" in res:
+    # Sanitize burned-in patient text annotations from corner margins
+    sanitized_bytes, _ = sanitize_image_pixels_for_external_api(image_bytes)
+
+    # 1. Primary: Gemini Vision
+    res = await _call_gemini_vision(sanitized_bytes, extra_context=extra_context)
+    if res and res.get("fracture_detected") is not None:
         return res
 
-    # 2. Try Groq Vision
-    res = await _call_groq_vision(image_bytes, extra_context=extra_context)
-    if res and "bone" in res:
-        return res
-
-    # 3. Try OpenAI or Grok
-    res = await _call_openai_or_grok_vision(image_bytes, extra_context=extra_context)
-    if res and "bone" in res:
+    # 2. Fallback: Groq Vision
+    res = await _call_groq_vision(sanitized_bytes, extra_context=extra_context)
+    if res and res.get("fracture_detected") is not None:
         return res
 
     return None
 
 
 # ---------------------------------------------------------------------------
-# Advanced Clinical Computer Vision & Discontinuity Engine
+# Offline Computer Vision & Image Enhancement (Honest Fallback)
 # ---------------------------------------------------------------------------
 
-def _clinical_anatomical_vision_engine(
-    cv_gray: np.ndarray,
-    original_img: Image.Image,
-    metadata: Optional[Dict[str, Any]] = None
-) -> Dict[str, Any]:
+def _clinical_offline_enhancement_engine(cv_gray: np.ndarray) -> Dict[str, Any]:
     """
-    Advanced clinical radiograph analyzer using CLAHE, Canny step-off detection,
-    and DICOM metadata context integration.
+    Honest offline fallback: performs medical contrast enhancement (CLAHE).
+    Emits ZERO fabricated predictions or probabilities. Explicitly signals
+    that no AI analysis was conducted.
     """
-    h, w = cv_gray.shape
-
-    # Contrast Limited Adaptive Histogram Equalization (standard medical PACS algorithm)
-    clahe = cv2.createCLAHE(clipLimit=2.5, tileGridSize=(8, 8))
-    enhanced = clahe.apply(cv_gray)
-
-    is_horizontal = w > h
-
-    # Check distinct bone shafts across middle transverse slice
-    mid_row = enhanced[int(h * 0.5)] > 130
-    diffs = np.diff(mid_row.astype(int))
-    shaft_starts = np.where(diffs == 1)[0]
-    num_shafts = len(shaft_starts)
-
-    # Bone mask and cortical edge analysis
-    bone_mask = (enhanced > 115).astype(np.uint8)
-    edges = cv2.Canny(enhanced, 50, 150)
-    edges_in_bone = cv2.bitwise_and(edges, edges, mask=bone_mask)
-
-    # Check DICOM metadata guidance if available
-    body_part = (metadata.get("body_part_examined", "") or "").upper() if metadata else ""
-    view_pos = (metadata.get("view_position", "") or "").upper() if metadata else ""
-
-    roi_x, roi_y = 0.5, 0.5
-
-    if "CLAVICLE" in body_part or is_horizontal:
-        bone = "Clavicle"
-        location = "Mid-shaft"
-        fracture_type = "Comminuted"
-        displacement = "Displaced"
-        severity = "Severe"
-        fracture_detected = True
-        confidence = 0.98
-        roi_x, roi_y = 0.50, 0.52
-
-    elif "WRIST" in body_part or "RADIUS" in body_part or num_shafts >= 2:
-        bone = "Distal Radius"
-        location = "Metaphysis"
-        fracture_type = "Transverse"
-        displacement = "Dorsally angulated"
-        severity = "Moderate"
-        fracture_detected = True
-        confidence = 0.96
-        roi_x, roi_y = 0.58, 0.86
-
-    elif "SCAPHOID" in body_part or (h / max(w, 1) < 1.25 and np.mean(cv_gray) < 55):
-        bone = "Scaphoid"
-        location = "Waist"
-        fracture_type = "Hairline"
-        displacement = "Non-displaced"
-        severity = "Low"
-        fracture_detected = True
-        confidence = 0.89
-        roi_x, roi_y = 0.52, 0.51
-
-    else:
-        # Femur / Long bone analysis
-        femur_shaft = enhanced[int(h * 0.2):int(h * 0.8), int(w * 0.35):int(w * 0.65)]
-        has_break = float(np.min(femur_shaft)) < 30 and np.std(edges_in_bone) > 55
-
-        if has_break or "FRACTURE" in body_part:
-            bone = "Femur"
-            location = "Mid-shaft"
-            fracture_type = "Oblique"
-            displacement = "Displaced"
-            severity = "Severe"
-            fracture_detected = True
-            confidence = 0.94
-            roi_x, roi_y = 0.50, 0.60
-        else:
-            bone = "Femur"
-            location = "Intact"
-            fracture_type = "None"
-            displacement = "None"
-            severity = "None"
-            fracture_detected = False
-            confidence = 0.97
-            roi_x, roi_y = 0.50, 0.50
-
     return {
-        "fracture_detected": fracture_detected,
-        "confidence": confidence,
-        "bone": bone,
-        "location": location,
-        "fracture_type": fracture_type,
-        "displacement": displacement,
-        "severity": severity,
-        "roi_coordinates": {"x": roi_x, "y": roi_y}
+        "fracture_detected": None,
+        "confidence": None,
+        "bone": None,
+        "location": None,
+        "fracture_type": None,
+        "displacement": None,
+        "severity": None,
+        "roi_coordinates": None,
+        "is_ai_analysis": False,
+        "analysis_mode": "offline_enhancement_only",
+        "notice": "No AI analysis performed - image enhancement only",
+        "report_text": (
+            "No AI analysis performed - image enhancement only. "
+            "Radiograph contrast and cortical margins have been enhanced via adaptive histogram equalization (CLAHE) "
+            "for manual radiologist evaluation. Independent certified physician review required."
+        )
     }
 
 
 # ---------------------------------------------------------------------------
-# Dynamic Grad-CAM Visual Explainability Generator
+# AI-Localized Region Overlay Generator (Synthetic Overlay Path)
 # ---------------------------------------------------------------------------
 
-def generate_gradcam_heatmap(
+def generate_ai_localized_overlay(
     cv_bgr: np.ndarray,
     cv_gray: np.ndarray,
     findings: Dict[str, Any]
 ) -> Tuple[np.ndarray, str, bytes]:
     """
-    Generates a calibrated visual explainability Grad-CAM heatmap:
-    - Pins activation to model-localized ROI coordinates or cortical step-offs.
-    - Blends with the radiograph at 40% alpha (60% film + 40% JET colormap).
+    Generates an AI-localized region overlay highlighting the ROI or enhanced margins.
+    Notice: Renamed from Grad-CAM to reflect that this synthetic path is an overlay,
+    preserving ResNetGradCAM for the true backprop CNN in Phase 3.
     """
     h, w = cv_gray.shape
 
-    if not findings.get("fracture_detected", False):
+    # If offline enhancement only or no fracture detected, show neutral contrast map
+    if not findings.get("is_ai_analysis", False) or not findings.get("fracture_detected", False):
         cam = np.zeros((h, w), dtype=np.float32)
-        cv2.circle(cam, (w // 2, h // 2), int(min(w, h) * 0.35), 0.12, -1)
+        cv2.circle(cam, (w // 2, h // 2), int(min(w, h) * 0.35), 0.10, -1)
         cam = cv2.GaussianBlur(cam, (71, 71), 0)
     else:
-        # Compute gradient magnitude for bone edge structure
         sobel_x = cv2.Sobel(cv_gray, cv2.CV_64F, 1, 0, ksize=3)
         sobel_y = cv2.Sobel(cv_gray, cv2.CV_64F, 0, 1, ksize=3)
         grad_mag = np.sqrt(sobel_x**2 + sobel_y**2)
@@ -449,31 +386,34 @@ def generate_gradcam_heatmap(
 # ---------------------------------------------------------------------------
 
 def synthesize_clinical_report(findings: Dict[str, Any]) -> str:
+    if not findings.get("is_ai_analysis", False):
+        return findings.get("report_text") or "No AI analysis performed - image enhancement only."
+
     fracture_detected = findings.get("fracture_detected", False)
-    bone = findings.get("bone") or "visualized osseous structures"
+    bone = findings.get("bone") or "visualized upper-extremity osseous structures"
     location = findings.get("location") or "shaft"
     fracture_type = findings.get("fracture_type") or "cortical"
     displacement = findings.get("displacement") or "non-displaced"
 
-    if not fracture_detected or fracture_type.lower() == "none":
+    if not fracture_detected or str(fracture_type).lower() in ("none", "intact"):
         return (
-            f"Visualized radiograph demonstrates intact cortical margins and normal osseous alignment across the {bone.lower()} "
-            "without evidence of acute fracture, cortical disruption, or dislocation. "
-            "Visualized joint spaces and adjacent periarticular soft tissue planes appear preserved without joint effusion. "
-            "Routine clinical correlation advised; repeat plain radiography recommended only if focal bone tenderness persists."
+            f"Visualized upper-extremity radiograph demonstrates intact cortical margins and normal alignment across the {bone.lower()} "
+            "without acute cortical disruption, cortical step-off, or radiopaque dislocation. "
+            "Adjacent periarticular soft tissue planes appear preserved without overt hemarthrosis. "
+            "Routine clinical correlation advised; repeat plain radiography recommended only if focal tenderness persists."
         )
 
-    disp_phrase = f"{displacement.lower()}" if displacement.lower() != "none" else "non-displaced"
+    disp_phrase = f"{displacement.lower()}" if str(displacement).lower() != "none" else "non-displaced"
     sentence_1 = f"Visualized radiograph demonstrates a {disp_phrase} {fracture_type.lower()} fracture across the {location.lower()} of the {bone.lower()}."
 
-    if "comminuted" in fracture_type.lower() or "displaced" in disp_phrase:
-        sentence_2 = "Marked surrounding soft tissue swelling noted with cortical step-off and cortical breach; visualized articular congruity warrants close evaluation."
-    elif "hairline" in fracture_type.lower():
+    if "comminuted" in str(fracture_type).lower() or "displaced" in disp_phrase:
+        sentence_2 = "Marked surrounding soft tissue swelling noted with cortical step-off and breach; articular congruity warrants close evaluation."
+    elif "hairline" in str(fracture_type).lower():
         sentence_2 = "Mild localized soft tissue attenuation identified without overt cortical displacement or joint space widening."
     else:
-        sentence_2 = "Surrounding soft tissue swelling noted without evident radiocarpal joint dislocation or gross articular incongruity."
+        sentence_2 = "Surrounding soft tissue swelling noted without evident joint dislocation or gross articular incongruity."
 
-    sentence_3 = "Clinical correlation, orthopedic immobilization, and urgent orthopedic specialist consultation recommended."
+    sentence_3 = "Clinical correlation, orthopedic immobilization, and urgent specialist evaluation recommended."
 
     return f"{sentence_1} {sentence_2} {sentence_3}"
 
@@ -486,6 +426,7 @@ async def run_dual_engine_pipeline(
     image_bytes: bytes,
     metadata: Optional[Dict[str, Any]] = None
 ) -> ModelOutput:
+    t_start = time.perf_counter()
     try:
         pil_image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
     except UnidentifiedImageError as exc:
@@ -495,24 +436,96 @@ async def run_dual_engine_pipeline(
     cv_bgr = cv2.cvtColor(np_img, cv2.COLOR_RGB2BGR)
     cv_gray = cv2.cvtColor(cv_bgr, cv2.COLOR_BGR2GRAY)
 
-    llm_findings = await _call_multimodal_vision(image_bytes, metadata=metadata)
-    if llm_findings and isinstance(llm_findings, dict) and "bone" in llm_findings:
-        findings = llm_findings
-    else:
-        findings = _clinical_anatomical_vision_engine(cv_gray, pil_image, metadata=metadata)
+    # 1. Primary CNN Detector & Real Grad-CAM
+    cnn_engine = get_inference_engine()
+    cnn_result = cnn_engine.predict(np_img)
+    cnn_detected = cnn_result.get("fracture_detected")
+    cnn_prob = cnn_result.get("fracture_probability")
+    is_uncertain = cnn_result.get("uncertain", False)
+    model_version = cnn_result.get("model_version", "verifact-densenet121-v1.0")
 
-    blended_cv, heatmap_data_url, heatmap_bytes = generate_gradcam_heatmap(cv_bgr, cv_gray, findings)
+    # 2. Vision LLM: Draft report from CNN structured findings + independent assessment
+    cnn_summary = {
+        "cnn_suspected_fracture": cnn_detected,
+        "cnn_probability": cnn_prob,
+        "cnn_uncertain": is_uncertain,
+        "model_version": model_version
+    }
+    llm_findings = await _call_multimodal_vision(image_bytes, metadata=metadata)
+    
+    estimated_cost = 0.0
+    llm_detected = None
+    if llm_findings and isinstance(llm_findings, dict) and llm_findings.get("fracture_detected") is not None:
+        findings = llm_findings
+        findings["is_ai_analysis"] = True
+        findings["analysis_mode"] = "cnn_llm_hybrid"
+        findings["notice"] = None
+        llm_detected = llm_findings.get("fracture_detected")
+        estimated_cost = 0.0001  # Approx API cost
+    else:
+        # Offline enhancement fallback
+        findings = _clinical_offline_enhancement_engine(cv_gray)
+        if cnn_detected is not None:
+            findings["fracture_detected"] = cnn_detected
+            findings["confidence"] = cnn_prob
+            findings["is_ai_analysis"] = True
+            findings["analysis_mode"] = "cnn_triage_only"
+            findings["notice"] = "CNN automated triage (vision LLM unavailable)"
+
+    # 3. Use real Grad-CAM heatmap if available from CNN, else generate AI-localized overlay
+    if cnn_result.get("gradcam_heatmap_bytes"):
+        overlay_bytes = cnn_result["gradcam_heatmap_bytes"]
+        overlay_data_url = f"data:image/jpeg;base64,{base64.b64encode(overlay_bytes).decode('utf-8')}"
+    else:
+        _, overlay_data_url, overlay_bytes = generate_ai_localized_overlay(cv_bgr, cv_gray, findings)
+
+    # 4. Disagreement & Review Priority Logic
+    providers_agreed = None
+    review_priority = "normal"
+    review_reason = "Concordant triage assessment."
+
+    if cnn_detected is not None and llm_detected is not None:
+        providers_agreed = (cnn_detected == llm_detected)
+        if not providers_agreed:
+            review_priority = "priority"
+            review_reason = f"Discordance: CNN ({'Positive' if cnn_detected else 'Negative'}) vs Vision LLM ({'Positive' if llm_detected else 'Negative'}). Human verification required."
+        elif is_uncertain:
+            review_priority = "priority"
+            review_reason = f"Indeterminate CNN probability ({cnn_prob:.2f}) within uncertainty band [0.40, 0.70]."
+        elif findings.get("severity") == "High" or str(findings.get("displacement", "")).lower() == "displaced":
+            review_priority = "priority"
+            review_reason = "High severity or displaced fracture requiring priority orthopedic review."
+    elif is_uncertain:
+        review_priority = "priority"
+        review_reason = f"Indeterminate CNN confidence ({cnn_prob:.2f})."
+    elif findings.get("analysis_mode") == "offline_enhancement_only":
+        review_priority = "normal"
+        review_reason = "Offline enhancement only - no AI classification."
+
     report_text = synthesize_clinical_report(findings)
+    latency_ms = round((time.perf_counter() - t_start) * 1000.0, 1)
 
     return ModelOutput(
-        fracture_detected=findings["fracture_detected"],
-        confidence=round(float(findings.get("confidence", 0.95)), 4),
+        fracture_detected=findings.get("fracture_detected"),
+        confidence=round(float(findings["confidence"]), 4) if findings.get("confidence") is not None else None,
         bone=findings.get("bone"),
         location=findings.get("location"),
         fracture_type=findings.get("fracture_type"),
         displacement=findings.get("displacement"),
         severity=findings.get("severity"),
         report_text=report_text,
-        heatmap_bytes=heatmap_bytes,
-        heatmap_data_url=heatmap_data_url
+        heatmap_bytes=overlay_bytes,
+        heatmap_data_url=overlay_data_url,
+        is_ai_analysis=findings.get("is_ai_analysis", False),
+        analysis_mode=findings.get("analysis_mode", "offline_enhancement_only"),
+        notice=findings.get("notice"),
+        review_priority=review_priority,
+        review_reason=review_reason,
+        cnn_prediction=cnn_detected,
+        cnn_probability=cnn_prob,
+        llm_prediction=llm_detected,
+        providers_agreed=providers_agreed,
+        latency_ms=latency_ms,
+        estimated_cost_usd=estimated_cost,
+        model_version=model_version
     )

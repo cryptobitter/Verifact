@@ -131,7 +131,13 @@ export default function ReportReviewCard({
     }
   }
 
+  const isOffline = !analysis.is_ai_analysis || analysis.analysis_mode === 'offline_enhancement_only';
+  const isDemo = analysis.analysis_mode === 'demo_sample' || (analysis.notice && analysis.notice.includes('DEMO SAMPLE'));
+
   const getSeverityBadge = (sev) => {
+    if (isOffline) {
+      return 'bg-amber-500/10 text-amber-400 border-amber-500/30';
+    }
     const s = (sev || '').toLowerCase();
     if (s === 'severe' || s === 'high') {
       return 'bg-rose-500/10 text-rose-400 border-rose-500/30';
@@ -157,7 +163,7 @@ export default function ReportReviewCard({
             <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
               <span>Clinical Radiology Report</span>
               <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full border ${getSeverityBadge(severity)}`}>
-                {severity} Severity
+                {isOffline ? 'Offline Enhancement' : `${severity} Severity`}
               </span>
             </h3>
             <p className="text-[11px] text-slate-400">
@@ -172,6 +178,11 @@ export default function ReportReviewCard({
             <Award className="w-3.5 h-3.5 text-emerald-400" />
             <span>Physician Signed</span>
           </div>
+        ) : isOffline ? (
+          <div className="flex items-center space-x-1.5 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-semibold">
+            <Clock className="w-3.5 h-3.5 text-slate-400" />
+            <span>Manual Review Only</span>
+          </div>
         ) : (
           <div className="flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold">
             <Clock className="w-3.5 h-3.5 text-amber-400" />
@@ -182,6 +193,47 @@ export default function ReportReviewCard({
 
       {/* Main Content Area */}
       <div className="p-5 space-y-4 flex-1 overflow-y-auto text-xs">
+                {/* Transparency Banner: Priority Human Review */}
+        {analysis.review_priority === 'priority' && (
+          <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/40 text-rose-200 flex items-start space-x-2.5">
+            <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+            <div>
+              <div className="font-bold text-rose-300 flex items-center gap-1.5">
+                <span>PRIORITY HUMAN REVIEW REQUIRED</span>
+                <span className="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 font-semibold">Triage Alert</span>
+              </div>
+              <div className="text-[11px] text-rose-200/90 mt-0.5">
+                {analysis.review_reason || 'Discordance detected between CNN detector and vision model or indeterminate confidence band.'}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Transparency Banner: Offline Mode */}
+        {isOffline && (
+          <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 flex items-start space-x-2.5">
+            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+            <div>
+              <div className="font-bold text-amber-300">No AI analysis performed - image enhancement only</div>
+              <div className="text-[11px] text-amber-200/80 mt-0.5">
+                Radiograph contrast and edges have been enhanced via CLAHE. Independent physician evaluation required.
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Transparency Banner: Demo Sample */}
+        {isDemo && !isOffline && (
+          <div className="p-3 rounded-xl bg-sky-500/10 border border-sky-500/30 text-sky-200 flex items-start space-x-2.5">
+            <Sparkles className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
+            <div>
+              <div className="font-bold text-sky-300">DEMO SAMPLE - not a live analysis</div>
+              <div className="text-[11px] text-sky-200/80 mt-0.5">
+                Demonstration case for PACS tools and caliper testing.
+              </div>
+            </div>
+          </div>
+        )}
         {/* Patient Clinical Case Card (if demographics present) */}
         {(analysis.patient_id || analysis.patient_age || analysis.mechanism_of_injury) && (
           <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center justify-between font-mono text-[11px]">

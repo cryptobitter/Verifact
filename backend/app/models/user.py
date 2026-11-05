@@ -16,6 +16,7 @@ class User(Base):
     otp_expires_at = Column(DateTime(timezone=True), nullable=True)
 
     # Doctor profile fields
+    role = Column(String(50), nullable=True, default="physician")
     full_name = Column(String(255), nullable=True)
     phone = Column(String(20), nullable=True)
     dob = Column(Date, nullable=True)

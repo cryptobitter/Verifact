@@ -1,7 +1,16 @@
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000';
 
 export function getAuthToken() {
-  return localStorage.getItem('verifact_token') || localStorage.getItem('fractoes_token') || '';
+  let token = localStorage.getItem('verifact_token');
+  if (!token) {
+    const legacy = localStorage.getItem('fractoes_token');
+    if (legacy) {
+      token = legacy;
+      localStorage.setItem('verifact_token', legacy);
+      localStorage.removeItem('fractoes_token');
+    }
+  }
+  return token || '';
 }
 
 export function setAuthToken(token) {
@@ -9,12 +18,20 @@ export function setAuthToken(token) {
     localStorage.setItem('verifact_token', token);
   } else {
     localStorage.removeItem('verifact_token');
-    localStorage.removeItem('fractoes_token');
   }
+  localStorage.removeItem('fractoes_token');
 }
 
 export function getCurrentUser() {
-  const raw = localStorage.getItem('verifact_user') || localStorage.getItem('fractoes_user');
+  let raw = localStorage.getItem('verifact_user');
+  if (!raw) {
+    const legacy = localStorage.getItem('fractoes_user');
+    if (legacy) {
+      raw = legacy;
+      localStorage.setItem('verifact_user', legacy);
+      localStorage.removeItem('fractoes_user');
+    }
+  }
   if (!raw) return null;
   try {
     return JSON.parse(raw);
@@ -28,8 +45,8 @@ export function setCurrentUser(user) {
     localStorage.setItem('verifact_user', JSON.stringify(user));
   } else {
     localStorage.removeItem('verifact_user');
-    localStorage.removeItem('fractoes_user');
   }
+  localStorage.removeItem('fractoes_user');
 }
 
 async function request(endpoint, options = {}) {
@@ -48,17 +65,11 @@ async function request(endpoint, options = {}) {
   });
 
   if (!res.ok) {
-    let errorDetail = 'API request failed';
-    try {
-      const errJson = await res.json();
-      errorDetail = errJson.detail || errJson.message || errorDetail;
-    } catch {
-      errorDetail = `Error ${res.status}: ${res.statusText}`;
-    }
-    throw new Error(errorDetail);
+    const errData = await res.json().catch(() => ({}));
+    throw new Error(errData.detail || errData.message || `Request failed with status ${res.status}`);
   }
 
-  return res;
+  return res.json();
 }
 
 export const api = {
@@ -69,104 +80,120 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
     });
-    const data = await res.json();
-    setAuthToken(data.access_token);
-    setCurrentUser(data.user);
-    return data;
+    setAuthToken(res.access_token);
+    setCurrentUser(res.user);
+    return res;
   },
 
-  async signup(profile) {
-    const res = await request('/auth/signup', {
+  async signup(payload) {
+    return request('/auth/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(profile)
+      body: JSON.stringify(payload)
     });
-    return res.json();
   },
 
   async verifyOtp(email, otp_code) {
-    const res = await request('/auth/verify-otp', {
+    return request('/auth/verify-otp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, otp_code })
     });
-    return res.json();
   },
 
   async getProfile() {
-    const res = await request('/auth/me');
-    const user = await res.json();
-    setCurrentUser(user);
-    return user;
+    return request('/auth/me');
   },
 
-  // Samples
-  async getSamples() {
-    const res = await request('/samples');
-    return res.json();
-  },
-
-  // Analysis
-  async analyzeSample(sampleId) {
-    const res = await request(`/analyze/sample/${sampleId}`, {
-      method: 'POST'
+  async updateProfile(payload) {
+    return request('/auth/profile', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     });
-    return res.json();
   },
 
-  async analyzeFile(file) {
+  // Analyses
+  async getSamples() {
+    return request('/samples');
+  },
+
+  async analyzeSample(sampleId) {
+    return request(`/analyze/sample/${sampleId}`, { method: 'POST' });
+  },
+
+  async uploadAndAnalyze(file) {
     const formData = new FormData();
     formData.append('file', file);
-    const res = await request('/analyze', {
+    return request('/analyze', {
       method: 'POST',
       body: formData
     });
-    return res.json();
   },
 
-  async analyzeDualView(formData) {
-    const res = await request('/analyze/dual-view', {
+  async uploadDualView(apFile, lateralFile, clinicalMeta = {}) {
+    const formData = new FormData();
+    formData.append('ap_file', apFile);
+    if (lateralFile) {
+      formData.append('lateral_file', lateralFile);
+    }
+    if (clinicalMeta.patient_id) formData.append('patient_id', clinicalMeta.patient_id);
+    if (clinicalMeta.patient_age) formData.append('patient_age', clinicalMeta.patient_age);
+    if (clinicalMeta.patient_gender) formData.append('patient_gender', clinicalMeta.patient_gender);
+    if (clinicalMeta.mechanism_of_injury) formData.append('mechanism_of_injury', clinicalMeta.mechanism_of_injury);
+
+    return request('/analyze/dual-view', {
       method: 'POST',
       body: formData
     });
-    return res.json();
   },
 
-  async sendEmailReport(id, dispatchData) {
-    const res = await request(`/analysis/${id}/email`, {
-      method: 'POST',
+  async updateAnalysis(id, payload) {
+    return request(`/analysis/${id}`, {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dispatchData)
+      body: JSON.stringify(payload)
     });
-    return res.json();
-  },
-
-  async getFhirExport(id) {
-    const res = await request(`/analysis/${id}/fhir`);
-    return res.json();
   },
 
   async getHistory() {
-    const res = await request('/analysis/history');
-    return res.json();
+    return request('/analysis/history');
+  },
+
+  async getPriorityReviewQueue() {
+    return request('/analysis/priority-queue');
+  },
+
+  async uploadAndAnalyzeAsync(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return request('/analyze/async', {
+      method: 'POST',
+      body: formData
+    });
+  },
+
+  async getJobStatus(jobId) {
+    return request(`/jobs/${jobId}`);
   },
 
   async getAnalysis(id) {
-    const res = await request(`/analysis/${id}`);
-    return res.json();
+    return request(`/analysis/${id}`);
   },
 
-  async updateAndSignAnalysis(id, updateData) {
-    const res = await request(`/analysis/${id}`, {
-      method: 'PUT',
+  async getFhirReport(id) {
+    return request(`/analysis/${id}/fhir`);
+  },
+
+  async sendEmailReport(id, payload) {
+    return request(`/analysis/${id}/email`, {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updateData)
+      body: JSON.stringify(payload)
     });
-    return res.json();
   },
 
-  async getPdfBlob(id) {
-    const res = await request(`/analysis/${id}/pdf`);
-    return res.blob();
+  getPdfUrl(id) {
+    return `${API_BASE}/analysis/${id}/pdf`;
   }
 };

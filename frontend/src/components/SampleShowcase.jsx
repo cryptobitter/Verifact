@@ -59,7 +59,7 @@ export default function SampleShowcase({ onSelectSample, activeSampleId, isAnaly
                 1-Click Instant Demo
               </span>
             </h3>
-            <p className="text-xs text-slate-400">Test AI classification and Grad-CAM without uploading personal files</p>
+            <p className="text-xs text-slate-400">Demo showcase for interface evaluation and caliper testing [DEMO SAMPLE - not a live analysis]</p>
           </div>
         </div>
       </div>

@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 
 export default function DashboardHistory({
+  priorityFilter = false,
   history = [],
   onSelectRecord,
   onDownloadPdf,
@@ -22,6 +23,9 @@ export default function DashboardHistory({
   const fractureRatio = totalScans > 0 ? Math.round((fractureCount / totalScans) * 100) : 0;
   const signedCount = history.filter((h) => h.signed_off).length;
   const signedRatio = totalScans > 0 ? Math.round((signedCount / totalScans) * 100) : 0;
+  const priorityCount = history.filter(h => h.review_priority === 'priority' && !h.signed_off).length;
+  const [showPriorityOnly, setShowPriorityOnly] = React.useState(false);
+  const displayHistory = showPriorityOnly ? history.filter(h => h.review_priority === 'priority') : history;
 
   const getSeverityBadge = (sev) => {
     const s = (sev || '').toLowerCase();
@@ -80,13 +84,13 @@ export default function DashboardHistory({
         {/* Turnaround Time */}
         <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-lg backdrop-blur">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Avg AI Triage Time</span>
+            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Triage Latency</span>
             <div className="p-2 rounded-xl bg-purple-500/10 text-purple-400">
               <Clock className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-purple-400 tracking-tight">&lt; 2.5s</div>
-          <div className="text-[11px] text-slate-500 mt-1">Dual-engine inference & Grad-CAM</div>
+          <div className="text-2xl font-extrabold text-purple-400 tracking-tight">TBD</div>
+          <div className="text-[11px] text-slate-500 mt-1">Benchmarked via Phase 2 evaluation harness</div>
         </div>
       </div>
 

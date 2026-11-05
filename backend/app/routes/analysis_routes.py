@@ -4,7 +4,8 @@ from datetime import datetime
 from typing import List, Optional
 from pathlib import Path
 
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, status
+import uuid
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, status, BackgroundTasks
 from fastapi.responses import StreamingResponse, FileResponse
 from sqlalchemy.orm import Session
 
@@ -18,6 +19,8 @@ from app.schemas.analysis_schema import (
     AnalysisUpdateRequest,
     EmailDispatchRequest
 )
+from app.services.job_queue import get_job_manager
+from app.models.audit_log import AuditLog
 from app.services.storage_services import upload_xray_image, upload_image_bytes
 from app.services.detection_services import detect_fracture
 from app.services.pdf_services import generate_pdf_report
@@ -122,7 +125,10 @@ async def analyze_sample_case(
         severity=model_output.severity,
         fracture_detected=model_output.fracture_detected,
         confidence=model_output.confidence,
-        report_text=model_output.report_text,
+        report_text=f"[DEMO SAMPLE - not a live analysis] {model_output.report_text}",
+        is_ai_analysis=False,
+        analysis_mode="demo_sample",
+        notice="DEMO SAMPLE - not a live analysis",
         authenticity_flag=False,
         signed_off=False
     )
@@ -184,7 +190,7 @@ async def analyze_xray(
             try:
                 heatmap_url = await upload_image_bytes(
                     model_output.heatmap_bytes,
-                    filename_prefix="gradcam",
+                    filename_prefix="ai_overlay",
                     content_type="image/png"
                 )
             except Exception as exc:
@@ -198,6 +204,13 @@ async def analyze_xray(
         print(f"[ERROR] Dual-engine analysis failed: {e}")
         raise HTTPException(status_code=500, detail="Failed to process radiograph analysis.")
 
+    ps_str = None
+    if dicom_meta and dicom_meta.get("pixel_spacing"):
+        try:
+            ps_str = f"{dicom_meta['pixel_spacing'][0]:.4f},{dicom_meta['pixel_spacing'][1]:.4f}"
+        except Exception:
+            pass
+
     analysis = Analysis(
         user_id=current_user.id,
         image_url=image_url,
@@ -210,6 +223,19 @@ async def analyze_xray(
         fracture_detected=model_output.fracture_detected,
         confidence=model_output.confidence,
         report_text=model_output.report_text,
+        pixel_spacing=ps_str,
+        is_ai_analysis=model_output.is_ai_analysis,
+        analysis_mode=model_output.analysis_mode,
+        notice=model_output.notice,
+        review_priority=model_output.review_priority,
+        review_reason=model_output.review_reason,
+        cnn_prediction=model_output.cnn_prediction,
+        cnn_probability=model_output.cnn_probability,
+        llm_prediction=model_output.llm_prediction,
+        providers_agreed=model_output.providers_agreed,
+        latency_ms=model_output.latency_ms,
+        estimated_cost_usd=model_output.estimated_cost_usd,
+        model_version=model_output.model_version,
         authenticity_flag=False,
         signed_off=False
     )
@@ -218,7 +244,168 @@ async def analyze_xray(
     db.commit()
     db.refresh(analysis)
 
+    # Audit logging
+    try:
+        audit = AuditLog(
+            user_id=current_user.id,
+            analysis_id=analysis.id,
+            action="CREATE",
+            details=f"Analysis created. Priority: {analysis.review_priority}, Mode: {analysis.analysis_mode}"
+        )
+        db.add(audit)
+        db.commit()
+    except Exception:
+        pass
+
     return analysis
+
+
+
+@router.get("/analysis/priority-queue", response_model=List[AnalysisHistoryItem])
+def get_priority_review_queue(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """Returns pending cases flagged for priority physician review due to discordance or uncertainty."""
+    return (
+        db.query(Analysis)
+        .filter(
+            Analysis.user_id == current_user.id,
+            Analysis.review_priority == "priority",
+            Analysis.signed_off == False
+        )
+        .order_by(Analysis.created_at.desc())
+        .all()
+    )
+
+
+@router.get("/jobs/{job_id}")
+def get_analysis_job_status(job_id: str):
+    """Polls asynchronous triage job progress and retrieval."""
+    job = get_job_manager().get_job(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail=f"Job {job_id} not found.")
+    return job
+
+
+async def _execute_async_triage_job(job_id: str, image_bytes: bytes, filename: str, content_type: str, user_id: int):
+    from app.database import SessionLocal
+    job_mgr = get_job_manager()
+    db = SessionLocal()
+    try:
+        job_mgr.update_progress(job_id, 20, status="processing")
+        dicom_meta = None
+        if is_dicom_file(image_bytes, filename):
+            processed_bytes, dicom_meta = process_dicom_bytes(image_bytes)
+            image_url = await upload_image_bytes(processed_bytes, filename_prefix="dicom_xray", content_type="image/png", ext=".png")
+            model_input_bytes = processed_bytes
+        else:
+            image_url = await upload_image_bytes(image_bytes, filename_prefix="xray", content_type=content_type or "image/png", ext=".png")
+            model_input_bytes = image_bytes
+
+        job_mgr.update_progress(job_id, 50, status="processing")
+        model_output = await detect_fracture(model_input_bytes, metadata=dicom_meta)
+
+        job_mgr.update_progress(job_id, 80, status="processing")
+        heatmap_url = model_output.heatmap_data_url
+        if model_output.heatmap_bytes:
+            try:
+                heatmap_url = await upload_image_bytes(model_output.heatmap_bytes, filename_prefix="ai_overlay", content_type="image/png")
+            except Exception:
+                pass
+
+        ps_str = None
+        if dicom_meta and dicom_meta.get("pixel_spacing"):
+            try:
+                ps_str = f"{dicom_meta['pixel_spacing'][0]:.4f},{dicom_meta['pixel_spacing'][1]:.4f}"
+            except Exception:
+                pass
+
+        analysis = Analysis(
+            user_id=user_id,
+            image_url=image_url,
+            heatmap_url=heatmap_url,
+            bone=model_output.bone,
+            location=model_output.location,
+            fracture_type=model_output.fracture_type,
+            displacement=model_output.displacement,
+            severity=model_output.severity,
+            fracture_detected=model_output.fracture_detected,
+            confidence=model_output.confidence,
+            report_text=model_output.report_text,
+            pixel_spacing=ps_str,
+            is_ai_analysis=model_output.is_ai_analysis,
+            analysis_mode=model_output.analysis_mode,
+            notice=model_output.notice,
+            review_priority=model_output.review_priority,
+            review_reason=model_output.review_reason,
+            cnn_prediction=model_output.cnn_prediction,
+            cnn_probability=model_output.cnn_probability,
+            llm_prediction=model_output.llm_prediction,
+            providers_agreed=model_output.providers_agreed,
+            latency_ms=model_output.latency_ms,
+            estimated_cost_usd=model_output.estimated_cost_usd,
+            model_version=model_output.model_version,
+            authenticity_flag=False,
+            signed_off=False
+        )
+        db.add(analysis)
+        db.commit()
+        db.refresh(analysis)
+
+        job_mgr.complete_job(job_id, {
+            "id": analysis.id,
+            "fracture_detected": analysis.fracture_detected,
+            "confidence": analysis.confidence,
+            "bone": analysis.bone,
+            "location": analysis.location,
+            "fracture_type": analysis.fracture_type,
+            "displacement": analysis.displacement,
+            "severity": analysis.severity,
+            "report_text": analysis.report_text,
+            "image_url": analysis.image_url,
+            "heatmap_url": analysis.heatmap_url,
+            "review_priority": analysis.review_priority,
+            "review_reason": analysis.review_reason,
+            "analysis_mode": analysis.analysis_mode,
+            "notice": analysis.notice,
+            "created_at": analysis.created_at.isoformat() if analysis.created_at else None
+        })
+    except Exception as e:
+        job_mgr.fail_job(job_id, str(e))
+    finally:
+        db.close()
+
+
+@router.post("/analyze/async")
+async def analyze_xray_async(
+    background_tasks: BackgroundTasks,
+    file: UploadFile = File(...),
+    current_user: User = Depends(get_current_user)
+):
+    """Asynchronous endpoint: returns job_id immediately and dispatches background worker."""
+    image_bytes = await file.read()
+    if not image_bytes:
+        raise HTTPException(status_code=400, detail="Uploaded file is empty.")
+
+    job_id = uuid.uuid4().hex
+    get_job_manager().create_job(job_id, current_user.id)
+    background_tasks.add_task(
+        _execute_async_triage_job,
+        job_id=job_id,
+        image_bytes=image_bytes,
+        filename=file.filename,
+        content_type=file.content_type,
+        user_id=current_user.id
+    )
+
+    return {
+        "job_id": job_id,
+        "status": "queued",
+        "progress": 0,
+        "poll_url": f"/api/jobs/{job_id}",
+        "message": "Inference job queued for background processing."
+    }
 
 
 @router.put("/analysis/{analysis_id}", response_model=AnalysisResponse)
@@ -330,7 +517,7 @@ async def analyze_dual_view(
                 lateral_heatmap_url = lat_output.heatmap_data_url
                 if lat_output.heatmap_bytes:
                     try:
-                        lateral_heatmap_url = await upload_image_bytes(lat_output.heatmap_bytes, filename_prefix="lat_cam", content_type="image/png")
+                        lateral_heatmap_url = await upload_image_bytes(lat_output.heatmap_bytes, filename_prefix="lat_overlay", content_type="image/png")
                     except Exception:
                         pass
             except Exception as e:
@@ -341,7 +528,7 @@ async def analyze_dual_view(
     ap_heatmap_url = model_output.heatmap_data_url
     if model_output.heatmap_bytes:
         try:
-            ap_heatmap_url = await upload_image_bytes(model_output.heatmap_bytes, filename_prefix="ap_cam", content_type="image/png")
+            ap_heatmap_url = await upload_image_bytes(model_output.heatmap_bytes, filename_prefix="ap_overlay", content_type="image/png")
         except Exception:
             pass
 
@@ -349,6 +536,13 @@ async def analyze_dual_view(
     report_text = model_output.report_text
     if lateral_image_url:
         report_text += " Orthogonal lateral projection cross-correlated; alignment and displacement confirmed across bi-planar views."
+
+    ap_ps_str = None
+    if ap_dicom_meta and ap_dicom_meta.get("pixel_spacing"):
+        try:
+            ap_ps_str = f"{ap_dicom_meta['pixel_spacing'][0]:.4f},{ap_dicom_meta['pixel_spacing'][1]:.4f}"
+        except Exception:
+            pass
 
     analysis = Analysis(
         user_id=current_user.id,
@@ -368,6 +562,10 @@ async def analyze_dual_view(
         patient_age=patient_age,
         patient_gender=patient_gender,
         mechanism_of_injury=mechanism_of_injury,
+        pixel_spacing=ap_ps_str,
+        is_ai_analysis=model_output.is_ai_analysis,
+        analysis_mode=model_output.analysis_mode,
+        notice=model_output.notice,
         authenticity_flag=False,
         signed_off=False
     )

@@ -12,10 +12,10 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # Database connection string (defaults to local SQLite if neon postgres is offline)
-    DATABASE_URL: str = f"sqlite:///{(Path(__file__).resolve().parents[1] / 'fractoes.db').as_posix()}"
+    # Database connection string (defaults to local SQLite verifact.db)
+    DATABASE_URL: str = f"sqlite:///{(Path(__file__).resolve().parents[1] / 'verifact.db').as_posix()}"
 
-    # Supabase project details (completely optional, falls back to inline base64)
+    # Supabase project details (optional, falls back to inline base64 / local)
     SUPABASE_URL: Optional[str] = None
     SUPABASE_KEY: Optional[str] = None
     SUPABASE_BUCKET: str = "xray-images"
@@ -27,7 +27,7 @@ class Settings(BaseSettings):
 
     # CORS origins
     ALLOWED_ORIGINS: str = (
-        "https://fractoes.vercel.app,http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173,http://127.0.0.1:3000"
+        "https://verifact.vercel.app,http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173,http://127.0.0.1:3000"
     )
 
     @property
@@ -43,16 +43,20 @@ class Settings(BaseSettings):
                 pass
         return [origin.strip() for origin in raw.split(",") if origin.strip()]
 
-    # AI Vision APIs (Gemini, Groq, OpenAI, xAI Grok)
+    # Multimodal Vision AI Providers (Gemini primary + Groq fallback)
     GEMINI_API_KEY: Optional[str] = None
+    GEMINI_VISION_MODEL: str = "gemini-1.5-flash"
+
     GROQ_API_KEY: Optional[str] = None
-    OPENAI_API_KEY: Optional[str] = None
-    GROK_API_KEY: Optional[str] = None
-    GROK_API_URL: str = "https://api.x.ai/v1/chat/completions"
-    GROK_MODEL: str = "grok-2-vision-1212"
+    GROQ_VISION_MODEL: str = "llama-3.2-11b-vision-preview"
+
     AI_TIMEOUT_SECONDS: float = 15.0
 
-    # Gmail credentials for sending emails (optional)
+    # Uncertainty band (configurable, tuned strictly on validation set)
+    UNCERTAINTY_MIN: float = 0.40
+    UNCERTAINTY_MAX: float = 0.70
+
+    # Gmail credentials for sending clinical reports (optional)
     GMAIL_ADDRESS: Optional[str] = None
     GMAIL_APP_PASSWORD: Optional[str] = None
 

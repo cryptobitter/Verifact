@@ -37,7 +37,7 @@ export default function Navbar({
               </span>
             </div>
             <p className="text-[10px] text-slate-400 hidden sm:block">
-              Musculoskeletal Fracture Triage & Grad-CAM Visual Explainability
+              Musculoskeletal Fracture Triage & AI-Localized Region Overlay
             </p>
           </div>
         </div>

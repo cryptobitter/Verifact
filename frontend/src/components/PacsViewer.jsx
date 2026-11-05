@@ -27,6 +27,7 @@ export default function PacsViewer({
   scanTitle = "Musculoskeletal Radiograph",
   boneInfo,
   confidence,
+  pixelSpacing,
   initialAnnotations,
   onSaveAnnotations
 }) {
@@ -117,14 +118,35 @@ export default function PacsViewer({
         const dx = p2.x - p1.x;
         const dy = p2.y - p1.y;
         const pxDist = Math.sqrt(dx * dx + dy * dy);
-        const mmDist = (pxDist * 0.18).toFixed(1); // Standard 0.18 mm/px radiograph pixel spacing
+
+        let parsedSpacing = null;
+        if (pixelSpacing) {
+          if (Array.isArray(pixelSpacing) && pixelSpacing.length >= 2) {
+            parsedSpacing = [Number(pixelSpacing[0]), Number(pixelSpacing[1])];
+          } else if (typeof pixelSpacing === 'string' && pixelSpacing.includes(',')) {
+            parsedSpacing = pixelSpacing.split(',').map(Number);
+          }
+        }
+
+        let valueStr = '';
+        let labelStr = '';
+        if (parsedSpacing && !isNaN(parsedSpacing[0]) && !isNaN(parsedSpacing[1]) && parsedSpacing[0] > 0) {
+          const avgSpacing = (parsedSpacing[0] + parsedSpacing[1]) / 2;
+          const mm = (pxDist * avgSpacing).toFixed(1);
+          valueStr = `${mm} mm`;
+          labelStr = `Displacement: ${mm} mm`;
+        } else {
+          const pxRound = Math.round(pxDist);
+          valueStr = `${pxRound} uncalibrated (px)`;
+          labelStr = `Displacement: ${pxRound} uncalibrated (px)`;
+        }
 
         const newMeas = {
           id: Date.now(),
           type: 'ruler',
           points: [p1, p2],
-          value: `${mmDist} mm`,
-          label: `Displacement: ${mmDist} mm`
+          value: valueStr,
+          label: labelStr
         };
         const updated = [...measurements, newMeas];
         setMeasurements(updated);
@@ -475,7 +497,7 @@ export default function PacsViewer({
             {viewMode === 'overlay' && (
               <img
                 src={currentHeatmap}
-                alt="Grad-CAM Saliency"
+                alt="AI-localized region overlay"
                 style={{ ...filterStyle, opacity: heatmapAlpha / 100 }}
                 className="absolute inset-0 max-h-[530px] w-auto object-contain pointer-events-none mix-blend-screen"
                 draggable={false}
@@ -490,7 +512,7 @@ export default function PacsViewer({
               >
                 <img
                   src={currentHeatmap}
-                  alt="Grad-CAM Heatmap"
+                  alt="AI-localized region overlay"
                   style={filterStyle}
                   className="max-h-[530px] w-auto object-contain pointer-events-none"
                   draggable={false}

@@ -1,77 +1,78 @@
 import io
 import json
-import base64
-from app.models.analysis import Analysis
+from pathlib import Path
 from reportlab.lib.pagesizes import letter
-from reportlab.lib.colors import red, orange, green, HexColor, grey
 from reportlab.lib.units import inch
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image as RLImage
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.colors import HexColor
 
 
-def generate_pdf_report(analysis: Analysis) -> bytes:
+def generate_pdf_report(analysis) -> bytes:
     buffer = io.BytesIO()
     doc = SimpleDocTemplate(
         buffer,
         pagesize=letter,
-        rightMargin=0.8 * inch,
-        leftMargin=0.8 * inch,
-        topMargin=0.8 * inch,
-        bottomMargin=0.8 * inch
+        rightMargin=0.6 * inch,
+        leftMargin=0.6 * inch,
+        topMargin=0.6 * inch,
+        bottomMargin=0.6 * inch
     )
 
     styles = getSampleStyleSheet()
 
     header_title_style = ParagraphStyle(
-        'HeaderTitleStyle',
-        parent=styles['Heading1'],
-        fontSize=20,
-        leading=24,
-        textColor=HexColor("#0f172a"),
+        'HeaderTitle',
+        parent=styles['Normal'],
         fontName="Helvetica-Bold",
-        spaceAfter=4
+        fontSize=18,
+        leading=22,
+        textColor=HexColor("#0f172a"),
+        alignment=1
     )
 
     header_subtitle_style = ParagraphStyle(
-        'HeaderSubtitleStyle',
+        'HeaderSubtitle',
         parent=styles['Normal'],
-        fontSize=10,
+        fontName="Helvetica",
+        fontSize=9.5,
+        leading=13,
         textColor=HexColor("#64748b"),
-        spaceAfter=15
+        alignment=1
     )
 
     section_heading = ParagraphStyle(
         'SectionHeading',
-        parent=styles['Heading2'],
-        fontSize=12,
-        leading=15,
-        textColor=HexColor("#1e293b"),
+        parent=styles['Normal'],
         fontName="Helvetica-Bold",
-        spaceBefore=10,
-        spaceAfter=6
+        fontSize=11,
+        leading=14,
+        textColor=HexColor("#0284c7")
     )
 
     body_style = ParagraphStyle(
-        'BodyReportStyle',
+        'BodyDark',
         parent=styles['Normal'],
-        fontSize=9.5,
-        leading=14,
-        textColor=HexColor("#334155")
+        fontName="Helvetica",
+        fontSize=9,
+        leading=13,
+        textColor=HexColor("#1e293b")
     )
 
     stamp_style = ParagraphStyle(
-        'DoctorStampStyle',
+        'StampStyle',
         parent=styles['Normal'],
+        fontName="Helvetica-Bold",
         fontSize=9,
-        leading=13,
-        textColor=HexColor("#047857"),
-        fontName="Helvetica-Bold"
+        leading=12,
+        textColor=HexColor("#059669")
     )
 
     disclaimer_style = ParagraphStyle(
-        'DisclaimerStyle',
+        'Disclaimer',
         parent=styles['Normal'],
-        fontSize=8,
+        fontName="Helvetica",
+        fontSize=7.5,
         leading=11,
         textColor=HexColor("#94a3b8"),
         alignment=1
@@ -81,13 +82,50 @@ def generate_pdf_report(analysis: Analysis) -> bytes:
 
     # Title Banner
     elements.append(Paragraph("<b>VERIFACT CLINICAL RADIOLOGY REPORT</b>", header_title_style))
-    elements.append(Paragraph("Musculoskeletal Fracture Triage & PACS Explainability System", header_subtitle_style))
+    elements.append(Paragraph("Musculoskeletal Fracture Triage & AI-Localized Region Overlay", header_subtitle_style))
+    elements.append(Spacer(1, 0.1 * inch))
+
+    # Transparency Notice Banners (Offline vs Demo vs Live AI)
+    is_ai = getattr(analysis, "is_ai_analysis", False)
+    analysis_mode = getattr(analysis, "analysis_mode", "")
+
+    if not is_ai and analysis_mode == "offline_enhancement_only":
+        offline_box = [
+            [Paragraph("<b>⚠️ NOTICE: No AI analysis performed - image enhancement only.</b> Contrast enhanced via CLAHE for manual radiologist inspection. Independent certified physician review required.", ParagraphStyle('OffWarn', parent=styles['Normal'], fontName="Helvetica", fontSize=8.5, textColor=HexColor("#9a3412")))]
+        ]
+        t_off = Table(offline_box, colWidths=[6.8 * inch])
+        t_off.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, -1), HexColor("#ffedd5")),
+            ('BOX', (0, 0), (-1, -1), 1, HexColor("#ea580c")),
+            ('TOPPADDING', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+        ]))
+        elements.append(t_off)
+        elements.append(Spacer(1, 0.1 * inch))
+    elif analysis_mode == "demo_sample" or "DEMO SAMPLE" in str(getattr(analysis, "notice", "")):
+        demo_box = [
+            [Paragraph("<b>ℹ️ NOTICE: DEMO SAMPLE - not a live analysis.</b> This document reflects pre-configured demonstration data for interface testing only.", ParagraphStyle('DemoWarn', parent=styles['Normal'], fontName="Helvetica", fontSize=8.5, textColor=HexColor("#0369a1")))]
+        ]
+        t_demo = Table(demo_box, colWidths=[6.8 * inch])
+        t_demo.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, -1), HexColor("#e0f2fe")),
+            ('BOX', (0, 0), (-1, -1), 1, HexColor("#0284c7")),
+            ('TOPPADDING', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+        ]))
+        elements.append(t_demo)
+        elements.append(Spacer(1, 0.1 * inch))
 
     # Meta Info Table
     date_str = analysis.created_at.strftime("%B %d, %Y - %I:%M %p UTC") if analysis.created_at else "N/A"
-    status_str = "FRACTURE DETECTED" if analysis.fracture_detected else "NO ACUTE FRACTURE DETECTED"
-    study_series = "Orthogonal Dual-View (AP + Lateral)" if analysis.lateral_image_url else "Standard Plain Radiograph"
+    if not is_ai and analysis_mode == "offline_enhancement_only":
+        status_str = "NOT ASSESSED (OFFLINE ENHANCEMENT)"
+        conf_str = "N/A"
+    else:
+        status_str = "FRACTURE DETECTED" if analysis.fracture_detected else "NO ACUTE FRACTURE DETECTED"
+        conf_str = f"{((analysis.confidence or 0.88) * 100):.1f}%" if analysis.confidence is not None else "N/A"
 
+    study_series = "Orthogonal Dual-View (AP + Lateral)" if analysis.lateral_image_url else "Standard Plain Radiograph"
     patient_label = analysis.patient_id or f"PT-{analysis.id:04d}"
     age_str = f"{analysis.patient_age} yrs" if analysis.patient_age else "Unspecified"
     gender_str = analysis.patient_gender or "Unspecified"
@@ -95,7 +133,7 @@ def generate_pdf_report(analysis: Analysis) -> bytes:
     meta_data = [
         ["Scan ID:", f"FRX-{analysis.id:06d}", "Study Date:", date_str],
         ["Patient ID:", f"{patient_label} ({gender_str}, {age_str})", "Study Series:", study_series],
-        ["Diagnostic Status:", status_str, "AI Confidence:", f"{((analysis.confidence or 0.95) * 100):.1f}%"]
+        ["Diagnostic Status:", status_str, "AI Confidence:", conf_str]
     ]
 
     meta_table = Table(meta_data, colWidths=[1.3 * inch, 2.3 * inch, 1.2 * inch, 2.0 * inch])
@@ -117,11 +155,18 @@ def generate_pdf_report(analysis: Analysis) -> bytes:
     elements.append(Spacer(1, 0.12 * inch))
 
     # Findings Table
-    bone = analysis.bone if analysis.bone else "Osseous structures"
-    location = analysis.location if analysis.location else "Intact"
-    fracture_type = analysis.fracture_type if analysis.fracture_type else "None"
-    displacement = analysis.displacement if analysis.displacement else "None"
-    severity_text = (analysis.severity or "None").capitalize()
+    if not is_ai and analysis_mode == "offline_enhancement_only":
+        bone = "Upper Extremity Osseous structures"
+        location = "Manual inspection required"
+        fracture_type = "Not assessed (Offline Mode)"
+        displacement = "Not assessed"
+        severity_text = "Not Assessed"
+    else:
+        bone = analysis.bone if analysis.bone else "Osseous structures"
+        location = analysis.location if analysis.location else "Intact"
+        fracture_type = analysis.fracture_type if analysis.fracture_type else "None"
+        displacement = analysis.displacement if analysis.displacement else "None"
+        severity_text = (analysis.severity or "None").capitalize()
 
     table_data = [
         ["Anatomical Bone", bone],
@@ -150,7 +195,7 @@ def generate_pdf_report(analysis: Analysis) -> bytes:
     elif sev_lower in ["moderate", "medium"]:
         t_style.append(('TEXTCOLOR', (1, 4), (1, 4), HexColor("#ea580c")))
         t_style.append(('FONTNAME', (1, 4), (1, 4), 'Helvetica-Bold'))
-    else:
+    elif is_ai:
         t_style.append(('TEXTCOLOR', (1, 4), (1, 4), HexColor("#16a34a")))
         t_style.append(('FONTNAME', (1, 4), (1, 4), 'Helvetica-Bold'))
 

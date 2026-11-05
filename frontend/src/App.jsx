@@ -252,6 +252,7 @@ export default function App() {
                   scanTitle={`FRX-${String(currentAnalysis.id).padStart(6, '0')}`}
                   boneInfo={currentAnalysis.bone}
                   confidence={currentAnalysis.confidence}
+                  pixelSpacing={currentAnalysis.pixel_spacing}
                   initialAnnotations={currentAnalysis.annotations}
                   onSaveAnnotations={(measurements) => {
                     handleSaveAndSign({ annotations: JSON.stringify({ measurements }) });

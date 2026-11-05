@@ -16,8 +16,8 @@ class Analysis(Base):
     fracture_type = Column(String(100), nullable=True)
     displacement = Column(String(100), nullable=True)
     severity = Column(String(20), nullable=True)
-    fracture_detected = Column(Boolean, nullable=True, default=True)
-    confidence = Column(Float, nullable=True)
+    fracture_detected = Column(Boolean, nullable=True, default=None)
+    confidence = Column(Float, nullable=True, default=None)
     report_text = Column(Text, nullable=True)
     clinical_notes = Column(Text, nullable=True)
     signed_off = Column(Boolean, nullable=True, default=False)
@@ -37,6 +37,25 @@ class Analysis(Base):
 
     # Interactive PACS Caliper / Angle / Ruler Annotations (JSON string)
     annotations = Column(Text, nullable=True)
+
+    # DICOM Spacing & Calibration
+    pixel_spacing = Column(String(50), nullable=True)
+
+    # Triage & Pipeline Status Transparency
+    is_ai_analysis = Column(Boolean, nullable=True, default=False)
+    analysis_mode = Column(String(50), nullable=True, default="offline_enhancement_only")
+    notice = Column(String(255), nullable=True)
+
+    # Router & Disagreement Triage
+    review_priority = Column(String(20), nullable=True, default="normal")  # "normal" or "priority"
+    review_reason = Column(String(255), nullable=True)
+    cnn_prediction = Column(Boolean, nullable=True)
+    cnn_probability = Column(Float, nullable=True)
+    llm_prediction = Column(Boolean, nullable=True)
+    providers_agreed = Column(Boolean, nullable=True)
+    latency_ms = Column(Float, nullable=True)
+    estimated_cost_usd = Column(Float, nullable=True)
+    model_version = Column(String(100), nullable=True, default="verifact-v1.0")
 
     # Clinical Dispatch Tracking
     email_sent_to = Column(String(255), nullable=True)
