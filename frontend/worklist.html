@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Sans+3:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet"/>
+<style>html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors": {
+  "bg": "#FFFFFF",
+  "bg-soft": "#FFF4E8",
+  "surface": "#FFFFFF",
+  "surface-alt": "#FAF6F1",
+  "border": "#EADFD3",
+  "text": "#1F1612",
+  "text-muted": "#6B5B52",
+  "primary": "#C8512D",
+  "primary-hover": "#B04624",
+  "primary-contrast": "#FFFFFF",
+  "primary-container": "#FBE3D6",
+  "on-primary": "#FFFFFF",
+  "on-primary-container": "#1F1612",
+  "secondary": "#3A1F14",
+  "secondary-container": "#FAF6F1",
+  "on-secondary": "#FFFFFF",
+  "on-secondary-container": "#1F1612",
+  "tertiary": "#F5A524",
+  "tertiary-container": "#FFF4E8",
+  "on-tertiary": "#1F1612",
+  "on-tertiary-container": "#1F1612",
+  "accent": "#F5A524",
+  "blush": "#FBE3D6",
+  "deep": "#3A1F14",
+  "error": "#D92D20",
+  "error-container": "#FDE8E8",
+  "on-error": "#FFFFFF",
+  "on-error-container": "#D92D20",
+  "background": "#FFFFFF",
+  "on-background": "#1F1612",
+  "surface-dim": "#FAF6F1",
+  "surface-bright": "#FFFFFF",
+  "surface-container-lowest": "#FFFFFF",
+  "surface-container-low": "#FFF4E8",
+  "surface-container": "#FAF6F1",
+  "surface-container-high": "#F5ECE1",
+  "surface-container-highest": "#EADFD3",
+  "on-surface": "#1F1612",
+  "on-surface-variant": "#6B5B52",
+  "outline": "#C5B4A5",
+  "outline-variant": "#EADFD3",
+  "inverse-surface": "#3A1F14",
+  "inverse-on-surface": "#FAF6F1",
+  "inverse-primary": "#FBE3D6",
+  "primary-fixed": "#FBE3D6",
+  "primary-fixed-dim": "#F5ECE1",
+  "on-primary-fixed": "#1F1612",
+  "on-primary-fixed-variant": "#6B5B52",
+  "secondary-fixed": "#EADFD3",
+  "secondary-fixed-dim": "#D8C7B8",
+  "on-secondary-fixed": "#1F1612",
+  "on-secondary-fixed-variant": "#6B5B52",
+  "tertiary-fixed": "#F5A524",
+  "tertiary-fixed-dim": "#E59418",
+  "on-tertiary-fixed": "#1F1612",
+  "on-tertiary-fixed-variant": "#1F1612",
+  "status-urgent": "#D92D20",
+  "status-review": "#F5A524",
+  "status-routine": "#3A1F14",
+  "status-discordant": "#E5799A",
+  "status-signed": "#C8512D",
+  "surface-tint": "#C8512D"
+},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xl":"2.5rem","space-xs":"0.375rem","gutter":"1.25rem","space-md":"1.25rem","gutter-mobile":"0.75rem","margin":"2rem","margin-mobile":"1rem","space-lg":"1.75rem","space-sm":"0.75rem"},"fontFamily":{"label-sm":["\"Source Sans 3\""],"body-lg":["\"Source Sans 3\""],"body-strong":["\"Source Sans 3\""],"mono-data":["JetBrains Mono"],"body-md":["\"Source Sans 3\""],"headline-md":["\"Source Serif 4\""],"headline-lg":["\"Source Serif 4\""],"headline-sm":["\"Source Serif 4\""],"label-md":["\"Source Sans 3\""],"headline-xl-mobile":["\"Source Serif 4\""],"headline-xl":["\"Source Serif 4\""],"headline-xl":["\"Source Serif 4\""]},"fontSize":{"label-sm":["13px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"body-lg":["17px",{"lineHeight":"26px","fontWeight":"400"}],"body-strong":["15px",{"lineHeight":"22px","fontWeight":"600"}],"mono-data":["13px",{"lineHeight":"18px","fontWeight":"400"}],"body-md":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-sm":["17px",{"lineHeight":"24px","fontWeight":"600"}],"label-md":["13px",{"lineHeight":"18px","fontWeight":"500"}],"headline-xl-mobile":["26px",{"lineHeight":"34px","fontWeight":"600"}],"headline-xl":["32px",{"lineHeight":"40px","fontWeight":"600"}]}}}}</script>  <link rel="stylesheet" href="/css/design-system.css"/>
+</head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-[#EADFD3] shadow-[0_2px_8px_rgba(58,31,20,0.06)]"><div class="h-16 w-full max-w-7xl mx-auto px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-xl"><a class="flex items-center gap-space-xs" data-path="worklist" href="/worklist.html"><div class="w-2.5 h-2.5 bg-primary rounded-DEFAULT"></div><span class="font-headline-md text-headline-md tracking-tight text-primary">Verifact</span></a><nav class="hidden md:flex items-center gap-space-xs" data-active-classes="bg-surface-container-high text-on-surface font-body-strong rounded-lg"><a aria-current="page" class="px-3 py-1.5 transition-colors bg-primary text-white font-semibold rounded-lg" data-path="worklist" href="/worklist.html">Worklist</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="upload" href="/upload.html">Upload</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="analytics" href="/analytics.html">Analytics</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="audit-log" href="/audit-log.html">Audit Log</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="about" href="/about.html">About</a></nav></div><div class="flex items-center gap-space-md"><span class="inline-flex items-center px-2 py-0.5 rounded font-mono-data text-xs bg-[#F5A524] text-[#1F1612] font-semibold tracking-wide uppercase shadow-sm">Demo Mode</span><div class="hidden lg:flex flex-col text-right"><span class="font-body-strong text-label-md text-on-surface leading-tight">Dr. K. Vance, MD</span><span class="font-label-md text-label-sm text-on-surface-variant leading-tight">Attending Radiologist</span></div><a class="hidden sm:inline-block font-label-md text-label-md text-on-surface-variant hover:text-error transition-colors" data-path="login" href="/login.html">Sign out</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><i class="ph ph-user"></i></div></div></div></header><main class="w-full pt-16 flex-1 bg-surface"><div class="w-full max-w-7xl mx-auto px-margin py-space-lg"><div class="flex flex-col w-full">
+<!-- Top Operational Banner & Summary Metric Rail -->
+<section class="mb-space-lg flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="w-2 h-2 rounded-full bg-error inline-block"></span>
+<span class="font-mono-data text-mono-data uppercase tracking-wider text-on-surface-variant">Clinical Queue · Active Session</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">Worklist</h1>
+<div class="w-12 h-1 bg-primary rounded-full mt-2"></div>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">What is this page? Studies waiting for physician review and sign-off.</p>
+</div>
+<!-- Live Telemetry Counters -->
+<div class="flex items-center gap-space-sm">
+<div class="bg-surface-container-lowest px-space-md py-space-xs shadow-sm flex flex-col rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Queue Load</span>
+<span class="font-mono-data text-headline-sm text-on-surface">14 Studies</span>
+</div>
+<div class="bg-surface-container-lowest px-space-md py-space-xs shadow-sm flex flex-col rounded-lg">
+<span class="font-label-sm text-label-sm text-error">Critical Attention</span>
+<span class="font-mono-data text-headline-sm text-error">4 Awaiting</span>
+</div>
+<div class="bg-surface-container-lowest px-space-md py-space-xs shadow-sm flex flex-col rounded-lg">
+<span class="font-label-sm text-label-sm text-secondary">Mean Turnaround</span>
+<span class="font-mono-data text-headline-sm text-secondary">11.4 min</span>
+</div>
+</div>
+</section>
+<!-- Filter, Search and Queue Controller -->
+<section class="bg-surface-container-lowest shadow-sm rounded-lg p-space-md mb-space-md flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<!-- State Filter Tabs -->
+<div class="flex flex-wrap items-center gap-1.5" id="filter-tabs-container">
+<button class="filter-btn px-space-md py-1.5 rounded-lg font-label-md text-label-md bg-primary text-white hover:bg-primary-hover transition-colors flex items-center gap-1.5" id="tab-all" onclick="filterQueue('all')">
+<span>All</span>
+<span class="font-mono-data text-[11px] px-1.5 py-0.2 bg-surface-container-lowest/20 rounded-DEFAULT">14</span>
+</button>
+<button class="filter-btn px-space-md py-1.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors flex items-center gap-1.5" id="tab-urgent" onclick="filterQueue('urgent')">
+<span>Needs priority review</span>
+<span class="font-mono-data text-[11px] px-1.5 py-0.2 bg-error-container text-on-error-container rounded-DEFAULT">4</span>
+</button>
+<button class="filter-btn px-space-md py-1.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors flex items-center gap-1.5" id="tab-pending" onclick="filterQueue('pending')">
+<span>Pending review</span>
+<span class="font-mono-data text-[11px] px-1.5 py-0.2 bg-surface-container-high rounded-DEFAULT">6</span>
+</button>
+<button class="filter-btn px-space-md py-1.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors flex items-center gap-1.5" id="tab-signed" onclick="filterQueue('signed')">
+<span>Signed off</span>
+<span class="font-mono-data text-[11px] px-1.5 py-0.2 bg-secondary-container text-on-secondary-container rounded-DEFAULT">4</span>
+</button>
+</div>
+<!-- Search and Toggles -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm">
+<div class="relative min-w-[280px]">
+<i class="ph ph-magnifying-glass"></i>
+<input class="w-full bg-surface pl-9 pr-3 py-1.5 text-body-md font-body-md text-on-surface rounded-lg placeholder:text-on-surface-variant/70 focus:outline-none focus:bg-surface-container-lowest shadow-sm" id="worklist-search" oninput="handleSearch(this.value)" placeholder="Search Study ID, anatomy, or date..." type="text"/>
+</div>
+<button class="px-space-sm py-1.5 bg-surface text-on-surface-variant hover:text-on-surface rounded-lg font-label-md text-label-md flex items-center justify-center gap-1 transition-colors whitespace-nowrap" id="toggle-empty-view-btn" onclick="toggleEmptyQueueState()" title="Simulate all cases completed">
+<i class="ph ph-ruler"></i>
+<span id="empty-toggle-label">Simulate Complete</span>
+</button>
+</div>
+</div>
+<!-- Plain Priority Color Legend -->
+<div class="pt-space-xs flex flex-wrap items-center gap-x-space-md gap-y-1 bg-surface-container-low px-space-md py-space-xs rounded-lg text-body-md font-body-md text-on-surface-variant">
+<span class="font-body-strong text-on-surface">Triage status guide:</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-error inline-block"></span>
+<span class="text-on-surface"><strong class="font-body-strong text-error">Urgent</strong> = Likely fracture</span>
+</div>
+<span class="text-outline-variant hidden sm:inline">·</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary inline-block"></span>
+<span class="text-on-surface"><strong class="font-body-strong text-on-surface">Review</strong> = Uncertain / Needs review</span>
+</div>
+<span class="text-outline-variant hidden sm:inline">·</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary inline-block"></span>
+<span class="text-on-surface"><strong class="font-body-strong text-secondary">Routine ✓</strong> = Confident normal</span>
+</div>
+<span class="text-outline-variant hidden sm:inline">·</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#E5799A] inline-block"></span>
+<span class="text-on-surface"><strong class="font-body-strong text-[#E5799A]">Discordant</strong> = CNN &amp; LLM disagree</span>
+</div>
+<span class="text-outline-variant hidden sm:inline">·</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-primary inline-block"></span>
+<span class="text-on-surface"><strong class="font-body-strong text-primary">Signed ✓</strong> = Physician signed off</span>
+</div>
+</div>
+</section>
+<!-- Worklist Table Container -->
+<section class="bg-surface-container-lowest shadow-sm rounded-lg overflow-hidden" id="table-wrapper">
+<div class="overflow-x-auto">
+<table class="w-full text-left" id="studies-table">
+<thead class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<tr>
+<th class="px-space-md py-space-sm w-36">Priority</th>
+<th class="px-space-md py-space-sm w-32">Image / Anatomy</th>
+<th class="px-space-md py-space-sm">Patient &amp; Protocol</th>
+<th class="px-space-md py-space-sm w-64">AI Fracture Risk</th>
+<th class="px-space-md py-space-sm w-56">Review Status</th>
+<th class="px-space-md py-space-sm text-right w-28">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-on-surface font-body-md text-body-md" id="worklist-rows">
+<!-- Row 1: Urgent Case -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-category="urgent" data-search="FRX-2026-0891 ANON-8841 right wrist ap lat acute distal radius fracture">
+<td class="px-space-md py-space-md align-middle">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-DEFAULT bg-error-container text-on-error-container font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                Urgent
+              </span>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="relative w-16 h-16 rounded-lg overflow-hidden bg-inverse-surface shadow-sm">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="Close-up clinical diagnostic radiograph of adult wrist showcasing acute distal radius colles fracture with hairline bone discontinuity, monochrome medical film style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS1S4UYUWreemSetqUyk81L8eeussVSw3y1X0vO6hNN-HPu7IizNgTcDU_X_Xh_17VUXaSLniP8INSEErK6AV-XkHlVTdFN2YVvWdjnXBk0klUUTN9FbTLJUn7UIJg4gh5SLDEHk0VBHXvzbYymG2hsfkdl5a0L6Plewtqr8Zh5bTsJ137kmbsiunYTKI5kkYc3lmDFn39iC2HfnXti2hgzGWcDdveEjnEV8Bvj7ji"/>
+<span class="absolute bottom-0 inset-x-0 bg-inverse-surface/90 text-inverse-on-surface text-[10px] font-mono-data text-center py-0.5 uppercase tracking-tighter">Wrist AP</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex flex-col">
+<span class="font-body-strong text-body-strong text-on-surface group-hover:text-primary transition-colors">ANON-8841 · Right Wrist AP/Lat</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant text-[12px] mt-0.5">ID: FRX-2026-0891 · 2026-03-31 08:42:19 EST</span>
+<span class="font-label-md text-[13px] text-error mt-0.5 flex items-center gap-1">
+<i class="ph ph-warning"></i>
+                  Displaced distal radius cortices
+                </span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="w-full max-w-[200px] flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<span class="font-label-sm text-label-sm text-error font-semibold">Fracture Probable</span>
+<span class="font-mono-data text-mono-data font-semibold text-error">94.7%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 94.7%"></div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-body-strong text-body-strong">Unreviewed</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">Queue dwell: 14m</span>
+</td>
+<td class="px-space-md py-space-md align-middle text-right">
+<a class="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-primary hover:bg-primary text-white hover:bg-primary-hover font-label-md text-label-md shadow-sm transition-colors" href="#">
+                Open
+              </a>
+</td>
+</tr>
+<!-- Row 2: Urgent Case -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-category="urgent" data-search="FRX-2026-0892 ANON-9204 left tibia fibula ap lateral displaced fracture">
+<td class="px-space-md py-space-md align-middle">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-DEFAULT bg-error-container text-on-error-container font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                Urgent
+              </span>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="relative w-16 h-16 rounded-lg overflow-hidden bg-inverse-surface shadow-sm">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="Medical radiographic film showing lower leg AP view displaying oblique tibial shaft displacement against deep obsidian radiological background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlp4ei7ZbMekXmsMnNNEFguaBCC2CxvD4cWlIB0GO1HjXBBW1zOuvKz0Krp42NIptNLerX9q9GBDksu2zf10fr0FohVpwGPr9hJP_ypwy8kfIpJISqogtzwZHvqx3XWC7R8N9g6irGY2WomHcDBptBY1LELfvTPGKlwZvlJReN_sf52_MSszkD9jx8188JZEH_d1HmyK4cOCGxxiLw7EUT9ZOLIRS3KkEoQyPMmhRw"/>
+<span class="absolute bottom-0 inset-x-0 bg-inverse-surface/90 text-inverse-on-surface text-[10px] font-mono-data text-center py-0.5 uppercase tracking-tighter">Tib-Fib</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex flex-col">
+<span class="font-body-strong text-body-strong text-on-surface group-hover:text-primary transition-colors">ANON-9204 · Left Tibia/Fibula AP</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant text-[12px] mt-0.5">ID: FRX-2026-0892 · 2026-03-31 08:35:10 EST</span>
+<span class="font-label-md text-[13px] text-error mt-0.5 flex items-center gap-1">
+<i class="ph ph-report-problem"></i>
+                  Diaphyseal cortical disruption
+                </span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="w-full max-w-[200px] flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<span class="font-label-sm text-label-sm text-error font-semibold">Fracture Probable</span>
+<span class="font-mono-data text-mono-data font-semibold text-error">91.2%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 91.2%"></div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-body-strong text-body-strong">Unreviewed</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">STAT order triage</span>
+</td>
+<td class="px-space-md py-space-md align-middle text-right">
+<a class="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-primary hover:bg-primary text-white hover:bg-primary-hover font-label-md text-label-md shadow-sm transition-colors" href="#">
+                Open
+              </a>
+</td>
+</tr>
+<!-- Row 3: Uncertain Case -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-category="pending" data-search="FRX-2026-0893 ANON-4109 left scaphoid 4-view carpal navicular">
+<td class="px-space-md py-space-md align-middle">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-DEFAULT bg-tertiary-fixed text-tertiary font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                Uncertain
+              </span>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="relative w-16 h-16 rounded-lg overflow-hidden bg-inverse-surface shadow-sm">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="High-resolution clinical X-ray magnification of the human carpal navicular bone focusing on scaphoid waist trabecular architecture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtiY-6nM5ljDcruSveFH0XORHK08LChLMxR6v0917fvG7lI4F5LEaH7aqxD4HMVkiiFX-B-CL4OKkLYabNr_dggDrgaYSzC_ULAeVpG9KE8bc-cg0tg3aCtS96rrAbHjyFCVVKqF9RbFW2Bo4UWCM5Rz928FKAAnhVMOBg89WvoXCUOznm5G4yhSMPRyYxlocaeVRsNhYhoEyzjz2F9_tnPoEH59bZWxMTMPz5j-Hi"/>
+<span class="absolute bottom-0 inset-x-0 bg-inverse-surface/90 text-inverse-on-surface text-[10px] font-mono-data text-center py-0.5 uppercase tracking-tighter">Scaphoid</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex flex-col">
+<span class="font-body-strong text-body-strong text-on-surface group-hover:text-primary transition-colors">ANON-4109 · Left Scaphoid 4-View</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant text-[12px] mt-0.5">ID: FRX-2026-0893 · 2026-03-31 08:29:44 EST</span>
+<span class="font-label-md text-[13px] text-tertiary mt-0.5">Faint lucency across scaphoid waist</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="w-full max-w-[200px] flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">Equivocal</span>
+<span class="font-mono-data text-mono-data font-semibold text-tertiary">58.2%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-on-tertiary-container rounded-full" style="width: 58.2%"></div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+<span class="font-body-strong text-body-strong">Unreviewed</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">Correlate with snuffbox pain</span>
+</td>
+<td class="px-space-md py-space-md align-middle text-right">
+<a class="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-primary hover:bg-primary text-white hover:bg-primary-hover font-label-md text-label-md shadow-sm transition-colors" href="#">
+                Open
+              </a>
+</td>
+</tr>
+<!-- Row 4: Urgent Case -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-category="urgent" data-search="FRX-2026-0894 ANON-1773 right shoulder ap axillary y-view fracture humerus">
+<td class="px-space-md py-space-md align-middle">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-DEFAULT bg-error-container text-on-error-container font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                Urgent
+              </span>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="relative w-16 h-16 rounded-lg overflow-hidden bg-inverse-surface shadow-sm">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="Shoulder AP radiograph demonstrating surgical neck of humerus displacement and anatomical landmarks in neutral rotation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0cQ5xy4HhidvEPM3Cd3nTtuVYK2rBfmX-cpxBFFRkzaOmyOcRlscBYTD8zGTv45nyabTsrO6MhT3tlSsYYf_LCZCOkaLlACoBs5GwmIZ167P-llsg03VenZNydhrRkZUrDzKANt0_R7rgCrzZFkmlMoALmygPA7HvuJ5piUdhEVO4O5wPP66IGIyk-0YxkhC8nLEpPy1eZfzXDg3aj9mx7OLZwn_u047brEJkENL9"/>
+<span class="absolute bottom-0 inset-x-0 bg-inverse-surface/90 text-inverse-on-surface text-[10px] font-mono-data text-center py-0.5 uppercase tracking-tighter">Shoulder</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex flex-col">
+<span class="font-body-strong text-body-strong text-on-surface group-hover:text-primary transition-colors">ANON-1773 · Right Shoulder 3-View</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant text-[12px] mt-0.5">ID: FRX-2026-0894 · 2026-03-31 08:21:02 EST</span>
+<span class="font-label-md text-[13px] text-error mt-0.5 flex items-center gap-1">
+<i class="ph ph-warning"></i>
+                  Proximal humeral surgical neck fracture
+                </span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="w-full max-w-[200px] flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<span class="font-label-sm text-label-sm text-error font-semibold">Fracture Probable</span>
+<span class="font-mono-data text-mono-data font-semibold text-error">88.9%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 88.9%"></div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-body-strong text-body-strong">Unreviewed</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">Sling applied in trauma bay</span>
+</td>
+<td class="px-space-md py-space-md align-middle text-right">
+<a class="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-primary hover:bg-primary text-white hover:bg-primary-hover font-label-md text-label-md shadow-sm transition-colors" href="#">
+                Open
+              </a>
+</td>
+</tr>
+<!-- Row 5: Uncertain Case -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-category="pending" data-search="FRX-2026-0895 ANON-6031 right ankle mortise ap lat lateral malleolus">
+<td class="px-space-md py-space-md align-middle">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-DEFAULT bg-tertiary-fixed text-tertiary font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                Uncertain
+              </span>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="relative w-16 h-16 rounded-lg overflow-hidden bg-inverse-surface shadow-sm">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="Diagnostic ankle joint radiograph showing mortise view and distal fibula clear space without frank diastasis." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALSO6MvcVEp5Med-1dirO07gwYxPn3dgAIqOJyx4eh6Ys18jWLmGJeIQCg9K1vhghOSRSV17cdUBkaALm-GPSJ-SGGu8EZv5og-C3oX5A87R7Idvqup0LFaI11Jahr3hoSkmx7jOboQQdzFEwW62PJBCYRdwwecytSyt4FA0jo4vZ3yJi1rqqOAlOoJHxMQZFxjltApkaSJ7mvTwQqStQTKB6cAM6dTeGJoPUsJTb8"/>
+<span class="absolute bottom-0 inset-x-0 bg-inverse-surface/90 text-inverse-on-surface text-[10px] font-mono-data text-center py-0.5 uppercase tracking-tighter">Ankle</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex flex-col">
+<span class="font-body-strong text-body-strong text-on-surface group-hover:text-primary transition-colors">ANON-6031 · Right Ankle Mortise/Lat</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant text-[12px] mt-0.5">ID: FRX-2026-0895 · 2026-03-31 08:14:55 EST</span>
+<span class="font-label-md text-[13px] text-tertiary mt-0.5">Subtle avulsion versus accessory os</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="w-full max-w-[200px] flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">Borderline</span>
+<span class="font-mono-data text-mono-data font-semibold text-tertiary">46.5%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-on-tertiary-container rounded-full" style="width: 46.5%"></div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+<span class="font-body-strong text-body-strong">Unreviewed</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">Lateral ligament tender</span>
+</td>
+<td class="px-space-md py-space-md align-middle text-right">
+<a class="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-primary hover:bg-primary text-white hover:bg-primary-hover font-label-md text-label-md shadow-sm transition-colors" href="#">
+                Open
+              </a>
+</td>
+</tr>
+<!-- Row 6: Routine Case -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-category="pending" data-search="FRX-2026-0896 ANON-3320 left knee 3-view patella fabella normal">
+<td class="px-space-md py-space-md align-middle">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-DEFAULT bg-secondary-container text-on-secondary-container font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                Routine
+              </span>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="relative w-16 h-16 rounded-lg overflow-hidden bg-inverse-surface shadow-sm">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="Standard radiographic study of knee joint showing intact femorotibial joint spacing and preserved cortical margins." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKHw6tCUSwQoDCuon4sDpctIEgcdSojg3jM27b02CT_cjZif1CyAHp4V1O7_9NVY4PflPtXOiSTzlWhaYDJlKJGYobagc17au6O7qbZxF9MxqMk64yJhVRYeQ6oTk0cY-d_RuarHnpcQB4VmwXdZXoFjnK5SNIRmsVm4qRwwopoIlOy3FGeKVOhjHlpCln7RvVxjnMAVnr66I9aup9R-7KnEhif9AXqtuhidtqNFEl"/>
+<span class="absolute bottom-0 inset-x-0 bg-inverse-surface/90 text-inverse-on-surface text-[10px] font-mono-data text-center py-0.5 uppercase tracking-tighter">Knee AP</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex flex-col">
+<span class="font-body-strong text-body-strong text-on-surface group-hover:text-primary transition-colors">ANON-3320 · Left Knee Complete AP/Lat</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant text-[12px] mt-0.5">ID: FRX-2026-0896 · 2026-03-31 08:02:18 EST</span>
+<span class="font-label-md text-[13px] text-secondary mt-0.5">Joint alignment maintained, no effusion</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="w-full max-w-[200px] flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Normal</span>
+<span class="font-mono-data text-mono-data font-semibold text-secondary">8.4%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 8.4%"></div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-strong text-body-strong">Unreviewed</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">Rule out occult plateau fracture</span>
+</td>
+<td class="px-space-md py-space-md align-middle text-right">
+<a class="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-primary hover:bg-primary text-white hover:bg-primary-hover font-label-md text-label-md shadow-sm transition-colors" href="#">
+                Open
+              </a>
+</td>
+</tr>
+<!-- Row 7: Urgent Case -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group" data-category="urgent" data-search="FRX-2026-0897 ANON-5192 right clavicle ap zanca view midshaft fracture">
+<td class="px-space-md py-space-md align-middle">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-DEFAULT bg-error-container text-on-error-container font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                Urgent
+              </span>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="relative w-16 h-16 rounded-lg overflow-hidden bg-inverse-surface shadow-sm">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="Direct AP radiograph of right clavicle showing clear cortical step-off and bone fragment displacement at midshaft." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDzdsjZOddWJOTqYbRufmrU9AYyVndtv9L_sJuMwGPL9vxreieVyU1kBjG448w9N9aOr4rBl_vZfZCzC31uPY1VY4Dex4xQ0-LQfL9Gmb00PpjaNc1OquNEFOm_57HsQm0fOPuLr7MWXwxjxJStUG6i52qCxaRhajt9CGniyUPaBjILBlI09qZIc74-khyJGhbo05TIZMztVcu_oYBKyM2n443Z3CfpKKLr1Mhl9PS"/>
+<span class="absolute bottom-0 inset-x-0 bg-inverse-surface/90 text-inverse-on-surface text-[10px] font-mono-data text-center py-0.5 uppercase tracking-tighter">Clavicle</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex flex-col">
+<span class="font-body-strong text-body-strong text-on-surface group-hover:text-primary transition-colors">ANON-5192 · Right Clavicle AP/Zanca</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant text-[12px] mt-0.5">ID: FRX-2026-0897 · 2026-03-31 07:54:11 EST</span>
+<span class="font-label-md text-[13px] text-error mt-0.5 flex items-center gap-1">
+<i class="ph ph-warning"></i>
+                  Displaced midshaft cortical step-off
+                </span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="w-full max-w-[200px] flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<span class="font-label-sm text-label-sm text-error font-semibold">Fracture Probable</span>
+<span class="font-mono-data text-mono-data font-semibold text-error">96.1%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 96.1%"></div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-body-strong text-body-strong">Unreviewed</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">Fall from bicycle</span>
+</td>
+<td class="px-space-md py-space-md align-middle text-right">
+<a class="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-primary hover:bg-primary text-white hover:bg-primary-hover font-label-md text-label-md shadow-sm transition-colors" href="#">
+                Open
+              </a>
+</td>
+</tr>
+<!-- Row 8: Signed Off (Dr. Vance) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group opacity-90" data-category="signed" data-search="FRX-2026-0898 ANON-7114 pelvis ap view normal dr vance signed off">
+<td class="px-space-md py-space-md align-middle">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-DEFAULT bg-secondary-container text-on-secondary-container font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                Routine
+              </span>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="relative w-16 h-16 rounded-lg overflow-hidden bg-inverse-surface shadow-sm">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="Pelvis AP scout radiographic view presenting intact pelvic ring and preserved femoral heads bilaterally." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwdW5Ctrh3N1q_QTcq9ELzRtMyooMW5oHgbFowIBxUILyifamXnKTKEWvkmTJHHoByKrrUha3Qz3aSPdPYiE4n_--_-vNOxfjH5sXHiCF5QgDJI7S6ioCgquXehxB8XvdhbXbjrFyJj-1DGwdwOTALraByAv3fd2UtBvXUClGKkjoDzGDglzmJY5mVcCr-kdrwV_BB5228ltg1JCRqO3H86NmPszaRah7Hoy0PL7ac"/>
+<span class="absolute bottom-0 inset-x-0 bg-inverse-surface/90 text-inverse-on-surface text-[10px] font-mono-data text-center py-0.5 uppercase tracking-tighter">Pelvis AP</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex flex-col">
+<span class="font-body-strong text-body-strong text-on-surface group-hover:text-primary transition-colors">ANON-7114 · Pelvis AP Single View</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant text-[12px] mt-0.5">ID: FRX-2026-0898 · 2026-03-31 07:31:00 EST</span>
+<span class="font-label-md text-[13px] text-on-surface-variant mt-0.5">Intact pelvic ring; Shenton line preserved</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="w-full max-w-[200px] flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Normal</span>
+<span class="font-mono-data text-mono-data font-semibold text-secondary">3.1%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 3.1%"></div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex items-center gap-1.5 text-secondary">
+<i class="ph ph-seal-check"></i>
+<span class="font-body-strong text-body-strong">Signed off</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">Dr. K. Vance, MD · 07:44 EST</span>
+</td>
+<td class="px-space-md py-space-md align-middle text-right">
+<a class="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-surface hover:bg-surface-container text-on-surface font-label-md text-label-md shadow-sm transition-colors" href="#">
+                View
+              </a>
+</td>
+</tr>
+<!-- Row 9: Signed Off (Dr. Vance) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group opacity-90" data-category="signed" data-search="FRX-2026-0899 ANON-6288 right 5th metatarsal foot jones fracture dr vance">
+<td class="px-space-md py-space-md align-middle">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-DEFAULT bg-error-container text-on-error-container font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                Urgent
+              </span>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="relative w-16 h-16 rounded-lg overflow-hidden bg-inverse-surface shadow-sm">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="Oblique foot radiograph displaying transverse fracture through zone 2 of the fifth metatarsal tuberosity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx8YkiNK0AaoqsvJSb6AtnAVAJHyyV8pRLQq6D_QqeT7v5QQoIBiZWTLQNCyZL8qMVdb7DhIhgKbYwkD_eHX5luDwWvO-lHYKqP-FkFPc_rE-bIhev4B7QhHatzO41KU3tmS3pirERqB4rut6qsiUoBCtjVS2XoKizga1tTgemhSWt2rQpb-WuzXxbHW0CC5GnMyIp3Os2MsMiboIXdkqJM4A57rSCGl3GweHegliQ"/>
+<span class="absolute bottom-0 inset-x-0 bg-inverse-surface/90 text-inverse-on-surface text-[10px] font-mono-data text-center py-0.5 uppercase tracking-tighter">Foot Oblique</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex flex-col">
+<span class="font-body-strong text-body-strong text-on-surface group-hover:text-primary transition-colors">ANON-6288 · Right Foot 3-View AP/Obl</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant text-[12px] mt-0.5">ID: FRX-2026-0899 · 2026-03-31 07:15:40 EST</span>
+<span class="font-label-md text-[13px] text-on-surface-variant mt-0.5">Zone II Jones fracture confirmed</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="w-full max-w-[200px] flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<span class="font-label-sm text-label-sm text-error font-semibold">Fracture Confirmed</span>
+<span class="font-mono-data text-mono-data font-semibold text-error">97.8%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 97.8%"></div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex items-center gap-1.5 text-secondary">
+<i class="ph ph-seal-check"></i>
+<span class="font-body-strong text-body-strong">Signed off</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">Dr. K. Vance, MD · 07:28 EST</span>
+</td>
+<td class="px-space-md py-space-md align-middle text-right">
+<a class="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-surface hover:bg-surface-container text-on-surface font-label-md text-label-md shadow-sm transition-colors" href="#">
+                View
+              </a>
+</td>
+</tr>
+<!-- Row 10: Signed Off (Dr. Vance) -->
+<tr class="hover:bg-surface-container-low/60 transition-colors group opacity-90" data-category="signed" data-search="FRX-2026-0900 ANON-9943 left elbow ap lateral radial head dr vance">
+<td class="px-space-md py-space-md align-middle">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-DEFAULT bg-secondary-container text-on-secondary-container font-label-md text-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                Routine
+              </span>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="relative w-16 h-16 rounded-lg overflow-hidden bg-inverse-surface shadow-sm">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="True lateral radiograph of elbow showing normal anterior fat pad without sail sign elevation or radial neck step." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5Z6MJDWyVI3gDaHXjPBRUnV_AzahEkEHjSYSNR5PdTD2GckEhka7OQkdqtbTN_K5Ymondskb0GkMG0bgvD8i4fhPbBX_AHurvoFYCIyeGjDwVzGBMQllayKc4p467QpcKQK8E2IUCCsHxIxoK4oWsctLmQ2c02p_kLP8NcKvtUDiObJQhTzsU4SI8MmM8Bt3PwrKaSyrGkaR5u1JGWuvDs9tObCj9Hlg9I5l0wyVY"/>
+<span class="absolute bottom-0 inset-x-0 bg-inverse-surface/90 text-inverse-on-surface text-[10px] font-mono-data text-center py-0.5 uppercase tracking-tighter">Elbow Lat</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex flex-col">
+<span class="font-body-strong text-body-strong text-on-surface group-hover:text-primary transition-colors">ANON-9943 · Left Elbow AP/Lateral</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant text-[12px] mt-0.5">ID: FRX-2026-0900 · 2026-03-31 06:45:19 EST</span>
+<span class="font-label-md text-[13px] text-on-surface-variant mt-0.5">Negative posterior fat pad; congruous joint</span>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="w-full max-w-[200px] flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Normal</span>
+<span class="font-mono-data text-mono-data font-semibold text-secondary">5.2%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 5.2%"></div>
+</div>
+</div>
+</td>
+<td class="px-space-md py-space-md align-middle">
+<div class="flex items-center gap-1.5 text-secondary">
+<i class="ph ph-seal-check"></i>
+<span class="font-body-strong text-body-strong">Signed off</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-0.5">Dr. K. Vance, MD · 07:05 EST</span>
+</td>
+<td class="px-space-md py-space-md align-middle text-right">
+<a class="inline-flex items-center justify-center px-4 py-1.5 rounded-lg bg-surface hover:bg-surface-container text-on-surface font-label-md text-label-md shadow-sm transition-colors" href="#">
+                View
+              </a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Empty State Component (Toggled via button or filters) -->
+<div class="hidden p-space-xl text-center flex flex-col items-center justify-center bg-surface-container-lowest" id="worklist-empty-state">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-secondary flex items-center justify-center mb-space-sm">
+<i class="ph ph-task-alt"></i>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Queue Cleared</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-md">
+        All studies reviewed. No urgent cases waiting in the queue.
+      </p>
+<div class="mt-space-md flex gap-space-sm">
+<button class="px-space-md py-1.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm hover:bg-primary-container transition-colors" onclick="resetWorklistFilters()">
+          Reset Filter View
+        </button>
+</div>
+</div>
+<!-- Worklist Pagination / Footnote -->
+<div class="px-space-md py-space-sm bg-surface-container-lowest flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-label-sm text-label-sm shadow-[inset_0_1px_0_rgba(58,31,20,0.05)]">
+<span class="font-mono-data text-mono-data">Displaying 10 of 14 studies · Automated PACS polling interval 30s</span>
+<div class="flex items-center gap-1">
+<button class="px-2.5 py-1 rounded-DEFAULT bg-surface text-on-surface hover:bg-surface-container transition-colors disabled:opacity-40" disabled="">Previous</button>
+<span class="px-2 font-mono-data text-mono-data text-on-surface">1</span>
+<button class="px-2.5 py-1 rounded-DEFAULT bg-surface text-on-surface hover:bg-surface-container transition-colors">Next</button>
+</div>
+</div>
+</section>
+<!-- Physician Batch Oversight & Contextual Card -->
+<section class="mt-space-lg grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+<div class="flex items-center gap-space-xs mb-space-xs text-primary">
+<i class="ph ph-shield-check"></i>
+<h3 class="font-headline-sm text-headline-sm">Attending Verification</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Every fracture prediction is probabilistic. Radiologists retain legal and clinical authority for sign-off.
+      </p>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+<div class="flex items-center gap-space-xs mb-space-xs text-primary">
+<i class="ph ph-notifications-active"></i>
+<h3 class="font-headline-sm text-headline-sm">Discordance Alerts</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Cases where AI identifies subtle hairline features divergent from preliminary triage order notes are elevated to Red.
+      </p>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+<div class="flex items-center gap-space-xs mb-space-xs text-primary">
+<i class="ph ph-history-edu"></i>
+<h3 class="font-headline-sm text-headline-sm">Audit Compliance</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Timestamps recorded down to millisecond accuracy compliant with DICOM Part 18 Web Access and FDA SaMD guidelines.
+      </p>
+</div>
+</section>
+</div>
+<script>
+  let currentFilter = 'all';
+  let isSimulatedEmpty = false;
+
+  function filterQueue(filter) {
+    if (isSimulatedEmpty) {
+      toggleEmptyQueueState();
+    }
+    currentFilter = filter;
+
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+      btn.className = 'filter-btn px-space-md py-1.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors flex items-center gap-1.5';
+    });
+
+    const activeBtn = document.getElementById(`tab-${filter}`);
+    if (activeBtn) {
+      activeBtn.className = 'filter-btn px-space-md py-1.5 rounded-lg font-label-md text-label-md bg-primary text-white hover:bg-primary-hover transition-colors flex items-center gap-1.5';
+    }
+
+    applyFiltering();
+  }
+
+  function handleSearch(query) {
+    applyFiltering();
+  }
+
+  function applyFiltering() {
+    const searchInput = document.getElementById('worklist-search');
+    const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+    const rows = document.querySelectorAll('#worklist-rows tr');
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+      const category = row.getAttribute('data-category');
+      const searchData = row.getAttribute('data-search') || '';
+
+      let matchesCategory = true;
+      if (currentFilter === 'urgent') matchesCategory = (category === 'urgent');
+      else if (currentFilter === 'pending') matchesCategory = (category === 'pending');
+      else if (currentFilter === 'signed') matchesCategory = (category === 'signed');
+
+      const matchesSearch = query === '' || searchData.toLowerCase().includes(query);
+
+      if (matchesCategory && matchesSearch) {
+        row.style.display = '';
+        visibleCount++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+
+    const emptyBox = document.getElementById('worklist-empty-state');
+    const tableElement = document.getElementById('studies-table');
+
+    if (visibleCount === 0) {
+      tableElement.style.display = 'none';
+      emptyBox.classList.remove('hidden');
+    } else {
+      tableElement.style.display = '';
+      emptyBox.classList.add('hidden');
+    }
+  }
+
+  function toggleEmptyQueueState() {
+    isSimulatedEmpty = !isSimulatedEmpty;
+    const emptyBox = document.getElementById('worklist-empty-state');
+    const tableElement = document.getElementById('studies-table');
+    const toggleLabel = document.getElementById('empty-toggle-label');
+
+    if (isSimulatedEmpty) {
+      tableElement.style.display = 'none';
+      emptyBox.classList.remove('hidden');
+      toggleLabel.textContent = 'Restore Active Rows';
+    } else {
+      toggleLabel.textContent = 'Simulate Complete';
+      applyFiltering();
+    }
+  }
+
+  function resetWorklistFilters() {
+    const searchInput = document.getElementById('worklist-search');
+    if (searchInput) searchInput.value = '';
+    isSimulatedEmpty = false;
+    document.getElementById('empty-toggle-label').textContent = 'Simulate Complete';
+    filterQueue('all');
+  }
+</script></div></main><footer class="w-full bg-surface py-space-md shadow-[0_-1px_8px_rgba(58,31,20,0.04)]"><div class="w-full max-w-7xl mx-auto px-margin flex items-center justify-center"><p class="font-label-md text-label-md text-on-surface-variant text-center">Decision support only. A physician must review and sign off every study.</p></div></footer><script type="module" src="/js/verifact-engine.js"></script>
+</body></html>

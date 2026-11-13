@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Study Not Found — Verifact PACS</title>
+  <link rel="stylesheet" href="/css/design-system.css"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-surface font-sans text-ink antialiased min-h-screen flex flex-col justify-between selection:bg-blush selection:text-ink">
+  <main class="flex-1 flex flex-col items-center justify-center p-6 text-center bg-bg-soft">
+    <div class="vf-card max-w-md w-full p-8 text-center bg-white border border-border shadow-warm rounded-lg">
+      <div class="w-12 h-12 rounded-full bg-blush text-primary flex items-center justify-center mx-auto mb-4">
+        <i class="ph ph-warning-circle text-3xl"></i>
+      </div>
+      <span class="text-xs text-primary uppercase font-mono font-medium block mb-1">Status Code 404</span>
+      <h1 class="text-xl font-bold text-ink mb-2">Radiologic Record Not Found</h1>
+      <p class="text-sm text-ink-muted mb-6">
+        The requested study accession number or clinical path is unavailable or has been archived per hospital retention protocol.
+      </p>
+      <div class="flex items-center justify-center gap-3">
+        <a href="/worklist.html" class="btn-primary">
+          <i class="ph ph-list-dashes"></i>
+          <span>Return to Worklist</span>
+        </a>
+        <a href="/index.html" class="btn-secondary">
+          <span>Home</span>
+        </a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

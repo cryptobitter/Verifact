@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Sans+3:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet"/>
+<style>html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors": {
+  "bg": "#FFFFFF",
+  "bg-soft": "#FFF4E8",
+  "surface": "#FFFFFF",
+  "surface-alt": "#FAF6F1",
+  "border": "#EADFD3",
+  "text": "#1F1612",
+  "text-muted": "#6B5B52",
+  "primary": "#C8512D",
+  "primary-hover": "#B04624",
+  "primary-contrast": "#FFFFFF",
+  "primary-container": "#FBE3D6",
+  "on-primary": "#FFFFFF",
+  "on-primary-container": "#1F1612",
+  "secondary": "#3A1F14",
+  "secondary-container": "#FAF6F1",
+  "on-secondary": "#FFFFFF",
+  "on-secondary-container": "#1F1612",
+  "tertiary": "#F5A524",
+  "tertiary-container": "#FFF4E8",
+  "on-tertiary": "#1F1612",
+  "on-tertiary-container": "#1F1612",
+  "accent": "#F5A524",
+  "blush": "#FBE3D6",
+  "deep": "#3A1F14",
+  "error": "#D92D20",
+  "error-container": "#FDE8E8",
+  "on-error": "#FFFFFF",
+  "on-error-container": "#D92D20",
+  "background": "#FFFFFF",
+  "on-background": "#1F1612",
+  "surface-dim": "#FAF6F1",
+  "surface-bright": "#FFFFFF",
+  "surface-container-lowest": "#FFFFFF",
+  "surface-container-low": "#FFF4E8",
+  "surface-container": "#FAF6F1",
+  "surface-container-high": "#F5ECE1",
+  "surface-container-highest": "#EADFD3",
+  "on-surface": "#1F1612",
+  "on-surface-variant": "#6B5B52",
+  "outline": "#C5B4A5",
+  "outline-variant": "#EADFD3",
+  "inverse-surface": "#3A1F14",
+  "inverse-on-surface": "#FAF6F1",
+  "inverse-primary": "#FBE3D6",
+  "primary-fixed": "#FBE3D6",
+  "primary-fixed-dim": "#F5ECE1",
+  "on-primary-fixed": "#1F1612",
+  "on-primary-fixed-variant": "#6B5B52",
+  "secondary-fixed": "#EADFD3",
+  "secondary-fixed-dim": "#D8C7B8",
+  "on-secondary-fixed": "#1F1612",
+  "on-secondary-fixed-variant": "#6B5B52",
+  "tertiary-fixed": "#F5A524",
+  "tertiary-fixed-dim": "#E59418",
+  "on-tertiary-fixed": "#1F1612",
+  "on-tertiary-fixed-variant": "#1F1612",
+  "status-urgent": "#D92D20",
+  "status-review": "#F5A524",
+  "status-routine": "#3A1F14",
+  "status-discordant": "#E5799A",
+  "status-signed": "#C8512D",
+  "surface-tint": "#C8512D"
+},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xl":"2.5rem","space-xs":"0.375rem","gutter":"1.25rem","space-md":"1.25rem","gutter-mobile":"0.75rem","margin":"2rem","margin-mobile":"1rem","space-lg":"1.75rem","space-sm":"0.75rem"},"fontFamily":{"label-sm":["\"Source Sans 3\""],"body-lg":["\"Source Sans 3\""],"body-strong":["\"Source Sans 3\""],"mono-data":["JetBrains Mono"],"body-md":["\"Source Sans 3\""],"headline-md":["\"Source Serif 4\""],"headline-lg":["\"Source Serif 4\""],"headline-sm":["\"Source Serif 4\""],"label-md":["\"Source Sans 3\""],"headline-xl-mobile":["\"Source Serif 4\""],"headline-xl":["\"Source Serif 4\""],"headline-xl":["\"Source Serif 4\""]},"fontSize":{"label-sm":["13px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"body-lg":["17px",{"lineHeight":"26px","fontWeight":"400"}],"body-strong":["15px",{"lineHeight":"22px","fontWeight":"600"}],"mono-data":["13px",{"lineHeight":"18px","fontWeight":"400"}],"body-md":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-sm":["17px",{"lineHeight":"24px","fontWeight":"600"}],"label-md":["13px",{"lineHeight":"18px","fontWeight":"500"}],"headline-xl-mobile":["26px",{"lineHeight":"34px","fontWeight":"600"}],"headline-xl":["32px",{"lineHeight":"40px","fontWeight":"600"}]}}}}</script>  <link rel="stylesheet" href="/css/design-system.css"/>
+</head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-[#EADFD3] shadow-[0_2px_8px_rgba(58,31,20,0.06)]"><div class="h-16 w-full max-w-7xl mx-auto px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-xl"><a class="flex items-center gap-space-xs" data-path="worklist" href="/worklist.html"><div class="w-2.5 h-2.5 bg-primary rounded-DEFAULT"></div><span class="font-headline-md text-headline-md tracking-tight text-primary">Verifact</span></a><nav class="hidden md:flex items-center gap-space-xs" data-active-classes="bg-surface-container-high text-on-surface font-body-strong rounded-lg"><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="worklist" href="/worklist.html">Worklist</a><a aria-current="page" class="px-3 py-1.5 transition-colors bg-primary text-white font-semibold rounded-lg" data-path="upload" href="/upload.html">Upload</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="analytics" href="/analytics.html">Analytics</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="audit-log" href="/audit-log.html">Audit Log</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="about" href="/about.html">About</a></nav></div><div class="flex items-center gap-space-md"><span class="inline-flex items-center px-2 py-0.5 rounded font-mono-data text-xs bg-[#F5A524] text-[#1F1612] font-semibold tracking-wide uppercase shadow-sm">Demo Mode</span><div class="hidden lg:flex flex-col text-right"><span class="font-body-strong text-label-md text-on-surface leading-tight">Dr. K. Vance, MD</span><span class="font-label-md text-label-sm text-on-surface-variant leading-tight">Attending Radiologist</span></div><a class="hidden sm:inline-block font-label-md text-label-md text-on-surface-variant hover:text-error transition-colors" data-path="login" href="/login.html">Sign out</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><i class="ph ph-user"></i></div></div></div></header><main class="w-full pt-16 flex-1 bg-surface"><div class="w-full max-w-7xl mx-auto px-margin py-space-lg"><div class="flex flex-col w-full">
+<!-- Stepper Progress Tracker -->
+<div class="w-full mb-space-lg">
+<div class="bg-surface-container-low px-space-md py-space-sm rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="font-mono-data text-mono-data text-on-surface-variant uppercase tracking-wider">Protocol Pipeline</span>
+<span class="font-body-md text-outline-variant">/</span>
+<span class="font-body-strong text-label-md text-primary">In-Memory Sanitization (HIPAA §164.514)</span>
+</div>
+<!-- Steps Strip -->
+<ol class="flex items-center gap-space-xs text-label-sm">
+<!-- Step 1 -->
+<li class="flex items-center gap-1.5 text-secondary">
+<span class="w-5 h-5 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-[11px] font-mono-data">✓</span>
+<span class="font-label-sm text-label-sm">1. Ingestion</span>
+</li>
+<span class="text-outline-variant text-[11px] px-1">―</span>
+<!-- Step 2 (Active) -->
+<li class="flex items-center gap-1.5 text-primary">
+<span class="w-5 h-5 rounded-full bg-primary text-white hover:bg-primary-hover flex items-center justify-center text-[11px] font-mono-data">2</span>
+<span class="font-body-strong text-label-sm text-primary">Privacy Check</span>
+</li>
+<span class="text-outline-variant text-[11px] px-1">―</span>
+<!-- Step 3 -->
+<li class="flex items-center gap-1.5 text-outline">
+<span class="w-5 h-5 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center text-[11px] font-mono-data">3</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">AI Scan</span>
+</li>
+<span class="text-outline-variant text-[11px] px-1">―</span>
+<!-- Step 4 -->
+<li class="flex items-center gap-1.5 text-outline">
+<span class="w-5 h-5 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center text-[11px] font-mono-data">4</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Review &amp; Sign-off</span>
+</li>
+</ol>
+</div>
+</div>
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-space-md">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-mono-data text-mono-data uppercase tracking-wider text-secondary">Pre-Flight Redaction Guard</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">Patient Privacy &amp; De-Identification</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1 max-w-3xl">
+        Review and confirm what patient information is removed before the AI analyzes the image.
+      </p>
+</div>
+<div class="flex items-center gap-space-xs self-start md:self-auto bg-surface-container px-3 py-1.5 rounded-DEFAULT">
+<i class="ph ph-shield-check"></i>
+<span class="font-mono-data text-mono-data text-on-surface">Client-Side Memory Sandbox</span>
+</div>
+</div>
+<!-- Main Content 2-Column Bento Structure -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Controls and Guarantees (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Interactive Toggle Controls -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-2">
+<h2 class="font-headline-sm text-headline-sm text-primary">Redaction Parameters</h2>
+<span class="font-mono-data text-mono-data text-on-surface-variant">2 Active Filters</span>
+</div>
+<!-- Toggle 1: DICOM Metadata -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-start justify-between gap-space-sm">
+<div class="flex flex-col pr-space-xs">
+<span class="font-body-strong text-body-strong text-on-surface">Remove patient information from the file</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 leading-relaxed">
+              Strips patient name, medical record number, and date of birth from DICOM metadata before processing in browser memory.
+            </p>
+<div class="flex items-center gap-2 mt-2 font-mono-data text-mono-data text-secondary">
+<i class="ph ph-check-circle"></i>
+<span>TAGS: (0010,0010), (0010,0020), (0010,0030)</span>
+</div>
+</div>
+<button aria-checked="true" class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full transition-colors ease-in-out duration-200 focus:outline-none bg-primary-container" id="toggle-dicom" onclick="toggleState(this, 'badge-dicom', 'diff-dicom')" type="button">
+<span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-surface-container-lowest shadow ring-0 transition ease-in-out duration-200 mt-0.5 ml-0.5"></span>
+</button>
+</div>
+<!-- Toggle 2: Pixel Burn-in Corner Redaction -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-start justify-between gap-space-sm">
+<div class="flex flex-col pr-space-xs">
+<span class="font-body-strong text-body-strong text-on-surface">Blank out any text burned into the image corners</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 leading-relaxed">
+              Redacts corner hospital identifiers, technician initials, and time stamps embedded in the image pixels.
+            </p>
+<div class="flex items-center gap-2 mt-2 font-mono-data text-mono-data text-secondary">
+<i class="ph ph-crop"></i>
+<span>FOUR-CORNER ROIs (120px bounding box mask)</span>
+</div>
+</div>
+<button aria-checked="true" class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full transition-colors ease-in-out duration-200 focus:outline-none bg-primary-container" id="toggle-pixels" onclick="toggleState(this, 'badge-pixels', 'diff-corners')" type="button">
+<span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-surface-container-lowest shadow ring-0 transition ease-in-out duration-200 mt-0.5 ml-0.5"></span>
+</button>
+</div>
+<div class="pt-2 flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span>De-identification profile:</span>
+<span class="font-mono-data text-mono-data text-primary font-medium">DICOM PS 3.15 Annex E</span>
+</div>
+</div>
+<!-- Institutional Privacy Reassurance Card -->
+<div class="bg-secondary-container text-on-secondary-container p-space-md rounded-xl flex items-start gap-space-sm">
+<i class="ph ph-shield"></i>
+<div class="flex flex-col">
+<h3 class="font-body-strong text-body-strong text-secondary leading-snug">Zero patient names or identifiers leave your hospital network.</h3>
+<p class="font-body-md text-body-md text-on-secondary-container mt-1">
+            Data cleansing occurs strictly within client RAM using WebAssembly before telemetry or model payload transmission. Raw DICOM headers never touch the neural inference service.
+          </p>
+<div class="mt-space-sm flex flex-wrap items-center gap-3 font-mono-data text-mono-data text-secondary text-[12px]">
+<span class="px-2 py-0.5 bg-surface-container-lowest/80 rounded-DEFAULT">Zero-Retention Ingest</span>
+<span class="px-2 py-0.5 bg-surface-container-lowest/80 rounded-DEFAULT">TLS 1.3 End-to-End</span>
+</div>
+</div>
+</div>
+<!-- Audit Metadata Snippet -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<i class="ph ph-fingerprint"></i>
+<span class="font-mono-data text-mono-data text-on-surface-variant">SHA-256 Checksum:</span>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface font-medium">9f83…4c2e (Clean)</span>
+</div>
+</div>
+<!-- Right Column: Visual Before / After Radiograph Comparison (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col">
+<!-- Card Header & Status Badges -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Inspection Console</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">Live comparison of image frame and metadata manifest</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-space-xs py-0.5 bg-surface-container text-secondary font-mono-data text-mono-data rounded-DEFAULT" id="badge-dicom">
+              ✓ Tag Stripping Active
+            </span>
+<span class="px-space-xs py-0.5 bg-surface-container text-secondary font-mono-data text-mono-data rounded-DEFAULT" id="badge-pixels">
+              ✓ Corner Mask Applied
+            </span>
+</div>
+</div>
+<!-- Before / After Side-by-Side Canvas Box -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm mt-space-xs">
+<!-- LEFT: Before Redaction -->
+<div class="flex flex-col bg-surface-container rounded-lg overflow-hidden">
+<div class="bg-surface-container-high px-space-sm py-2 flex items-center justify-between">
+<span class="font-mono-data text-mono-data text-error font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span> Before Redaction
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Raw Ingest</span>
+</div>
+<!-- Simulated Radiograph Header Overlay View -->
+<div class="relative bg-inverse-surface text-inverse-on-surface h-72 flex flex-col justify-between p-3 select-none overflow-hidden">
+<!-- Raw High-Contrast DICOM Radiograph Placeholder -->
+<img class="absolute inset-0 w-full h-full object-cover opacity-75 mix-blend-luminosity pointer-events-none" data-alt="High-resolution clinical frontal chest radiograph scan in dark monochrome diagnostic viewing window showing thoracic rib cage, lungs, and mediastinum with burned-in yellow clinical text markings in upper margins, medical imaging display standard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9k67FVJYN7dyZFCmtHP0XDYq6iM3Kvx1x6kYNRGpHlwCGg1Lhuic5tIn6JF-OSxnDyDxM2-TS6kJCKoZ9z569NmvxniDZU4ObniX5KFqUDgHhBI6cG7u8JFlI2sOpSP3ljG4R4kuYtIcacteSrqCAT8y2by096W__OPtq8coqf5re-M6tEPaJ2NfBcov-pL_3A5fjqwUVS2OjGNl0SeWpbYxpXyqzlRhJArUqF7hV"/>
+<!-- Raw Burned-in Header Info (Upper Left) -->
+<div class="relative z-10 bg-error/90 text-on-error p-1.5 rounded-DEFAULT max-w-[210px] text-[11px] font-mono-data leading-snug">
+<div class="font-bold flex items-center gap-1">
+<i class="ph ph-warning"></i> IDENTIFIABLE DATA
+                </div>
+<div>PT: MILLER, ELEANOR J.</div>
+<div>MRN: #409-281-9941</div>
+<div>DOB: 14-OCT-1958 (F)</div>
+</div>
+<!-- Raw Hospital & Timestamp Burn-in (Upper Right) -->
+<div class="relative z-10 self-end bg-error/90 text-on-error p-1.5 rounded-DEFAULT max-w-[190px] text-[11px] font-mono-data text-right leading-snug">
+<div class="font-bold">ST. JUDE MEMORIAL</div>
+<div>EAST WING - RAD 04</div>
+<div>2024-05-18 09:41:22 EDT</div>
+<div>TECH: KLR / PORTABLE AP</div>
+</div>
+<!-- Center Anatomical Label Marker -->
+<div class="relative z-10 self-center text-center opacity-40 font-mono-data text-[12px] tracking-widest text-surface">
+                AP ERECT CHEST
+              </div>
+<!-- Bottom Raw Attributes -->
+<div class="relative z-10 flex justify-between text-[11px] font-mono-data text-inverse-on-surface bg-inverse-surface/80 p-1.5 rounded-DEFAULT backdrop-blur-sm">
+<span>kVp: 120 / mAs: 3.2</span>
+<span class="text-error font-medium">Unsanitized DICOM Tags</span>
+</div>
+</div>
+<!-- Raw DICOM Metadata Preview -->
+<div class="p-space-sm bg-surface-container-low flex flex-col gap-1 text-[12px] font-mono-data text-on-surface-variant">
+<div class="flex justify-between">
+<span>(0010,0010) Patient's Name:</span>
+<span class="text-error font-medium truncate max-w-[140px]">Miller^Eleanor^J</span>
+</div>
+<div class="flex justify-between">
+<span>(0010,0020) Patient ID:</span>
+<span class="text-error font-medium">4092819941</span>
+</div>
+<div class="flex justify-between">
+<span>(0008,0080) Institution:</span>
+<span class="text-error font-medium truncate max-w-[140px]">St. Jude Memorial</span>
+</div>
+</div>
+</div>
+<!-- RIGHT: After Redaction -->
+<div class="flex flex-col bg-surface-container rounded-lg overflow-hidden">
+<div class="bg-surface-container-high px-space-sm py-2 flex items-center justify-between">
+<span class="font-mono-data text-mono-data text-secondary font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> After Redaction
+              </span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Verified Safe</span>
+</div>
+<!-- Sanitized Radiograph Simulation View -->
+<div class="relative bg-inverse-surface text-inverse-on-surface h-72 flex flex-col justify-between p-3 select-none overflow-hidden">
+<!-- Clear Sanitized Clinical Image View -->
+<img class="absolute inset-0 w-full h-full object-cover opacity-85 mix-blend-luminosity pointer-events-none" data-alt="Clean clinical monochrome frontal chest radiograph strictly devoid of any visible patient typography or names with clear anatomical contrast across parenchyma and cardiac silhouette, black solid safety redaction rectangles obscuring upper border corners." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcp8dRG-KDaht--35IMOHIPOEJTUB84RrwFDLQ2e77qybwzuBO61940jkLqECYjM_dIi4faVQg88rw-Lv7qAGxhBbF6VD2OnfS3fh8ynKh_wUj-Fy2YRi00CkEryNDFpqT6rcQrLiy99hV-_M0bKrhXoIJ3-1BtpM0AtdD4zKWOmT6l_81GPwhHuJyIrNfxuW7ZskA2N7NbLoaN4jB3S6FccWClA_GUVzIPHH8udue"/>
+<!-- Anonymized ID & Pixel Redaction Box (Upper Left) -->
+<div class="relative z-10 bg-inverse-surface text-secondary-fixed p-1.5 rounded-DEFAULT max-w-[210px] text-[11px] font-mono-data leading-snug" id="diff-corners-l">
+<div class="flex items-center gap-1 font-bold text-secondary-fixed">
+<i class="ph ph-lock"></i> SECURE HASH
+                </div>
+<div class="text-surface-bright font-bold">PT: ANON-8841</div>
+<div class="text-outline-variant">MRN: [REDACTED MASK]</div>
+<div class="text-outline-variant">DOB: [AGE BAND: 60-69]</div>
+</div>
+<!-- Pixel Redacted Black Margin Box (Upper Right) -->
+<div class="relative z-10 self-end bg-inverse-surface text-outline-variant p-1.5 rounded-DEFAULT max-w-[190px] text-[11px] font-mono-data text-right leading-snug" id="diff-corners-r">
+<div class="font-bold text-secondary-fixed flex items-center justify-end gap-1">
+<span>PIXEL MASKED</span>
+<i class="ph ph-visibility-off"></i>
+</div>
+<div>INSTITUTION: [ZEROED]</div>
+<div>DEVICE ID: [SCRUBBED]</div>
+<div>ACQUISITION: UTC NORMAL</div>
+</div>
+<!-- Center Clean Anatomical Label -->
+<div class="relative z-10 self-center text-center opacity-40 font-mono-data text-[12px] tracking-widest text-surface">
+                AP ERECT CHEST
+              </div>
+<!-- Bottom Sanitized Safe Verification Ribbon -->
+<div class="relative z-10 flex justify-between text-[11px] font-mono-data text-inverse-on-surface bg-inverse-surface/80 p-1.5 rounded-DEFAULT backdrop-blur-sm">
+<span>kVp: 120 / mAs: 3.2</span>
+<span class="text-secondary-fixed flex items-center gap-1 font-medium">
+<i class="ph ph-task-alt"></i> Zero Identifiers Present
+                </span>
+</div>
+</div>
+<!-- Sanitized DICOM Manifest Preview -->
+<div class="p-space-sm bg-surface-container-low flex flex-col gap-1 text-[12px] font-mono-data text-on-surface-variant" id="diff-dicom-block">
+<div class="flex justify-between">
+<span>(0010,0010) Patient's Name:</span>
+<span class="text-secondary font-medium font-mono-data">ANON-8841</span>
+</div>
+<div class="flex justify-between">
+<span>(0010,0020) Patient ID:</span>
+<span class="text-secondary font-medium font-mono-data">[REDACTED]</span>
+</div>
+<div class="flex justify-between">
+<span>(0008,0080) Institution:</span>
+<span class="text-secondary font-medium font-mono-data">[REMOVED]</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Technical Footnote -->
+<div class="mt-space-sm pt-space-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-on-surface-variant font-label-md text-label-md">
+<div class="flex items-center gap-1.5">
+<i class="ph ph-info"></i>
+<span>Pixel redaction replaces corner bounds with zero-intensity black padding without altering lung apexes or costophrenic angles.</span>
+</div>
+<span class="font-mono-data text-mono-data text-primary shrink-0">Safe Harbor Confirmed</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action Bar -->
+<div class="mt-space-xl pt-space-md flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm text-on-surface-variant">
+<a class="px-space-md py-2.5 rounded-lg text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors flex items-center gap-1.5" data-path="upload" href="/upload.html">
+<i class="ph ph-arrow-left"></i>
+<span>Back to File Selection</span>
+</a>
+<span class="hidden sm:inline text-outline-variant font-mono-data text-mono-data">•</span>
+<span class="hidden sm:inline font-mono-data text-mono-data text-[12px] text-on-surface-variant">Study UID: 1.2.840.113619.2.55.3</span>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto">
+<a id="run-ai-scan-btn" class="w-full sm:w-auto px-space-xl py-3 rounded-lg bg-primary text-white hover:bg-primary-hover font-body-strong text-body-strong transition-colors flex items-center justify-center gap-2 shadow-sm text-center cursor-pointer" data-path="scan-in-progress" href="/scan-in-progress.html">
+<span>Run AI Scan</span>
+<i class="ph ph-arrow-right"></i>
+</a>
+</div>
+</div>
+</div>
+<script>
+  function toggleState(btn, badgeId, diffKey) {
+    const isChecked = btn.getAttribute('aria-checked') === 'true';
+    const newState = !isChecked;
+    btn.setAttribute('aria-checked', newState);
+    
+    const knob = btn.querySelector('span');
+    const badge = document.getElementById(badgeId);
+    
+    if (newState) {
+      btn.classList.remove('bg-outline-variant');
+      btn.classList.add('bg-primary-container');
+      knob.classList.remove('translate-x-0');
+      knob.classList.add('translate-x-5');
+      if (badge) {
+        badge.classList.remove('text-on-surface-variant', 'bg-surface-variant');
+        badge.classList.add('text-secondary', 'bg-surface-container');
+        badge.textContent = badgeId === 'badge-dicom' ? '✓ Tag Stripping Active' : '✓ Corner Mask Applied';
+      }
+    } else {
+      btn.classList.remove('bg-primary-container');
+      btn.classList.add('bg-outline-variant');
+      knob.classList.remove('translate-x-5');
+      knob.classList.add('translate-x-0');
+      if (badge) {
+        badge.classList.remove('text-secondary', 'bg-surface-container');
+        badge.classList.add('text-on-surface-variant', 'bg-surface-variant');
+        badge.textContent = badgeId === 'badge-dicom' ? 'Tag Stripping Paused' : 'Mask Bypassed';
+      }
+    }
+
+    // Interactive feedback in preview card
+    if (diffKey === 'diff-dicom') {
+      const container = document.getElementById('diff-dicom-block');
+      if (container) {
+        if (!newState) {
+          container.classList.add('opacity-40');
+        } else {
+          container.classList.remove('opacity-40');
+        }
+      }
+    } else if (diffKey === 'diff-corners') {
+      const cornerL = document.getElementById('diff-corners-l');
+      const cornerR = document.getElementById('diff-corners-r');
+      if (cornerL && cornerR) {
+        if (!newState) {
+          cornerL.classList.add('opacity-30');
+          cornerR.classList.add('opacity-30');
+        } else {
+          cornerL.classList.remove('opacity-30');
+          cornerR.classList.remove('opacity-30');
+        }
+      }
+    }
+  }
+</script></div></main><footer class="w-full bg-surface py-space-md shadow-[0_-1px_8px_rgba(58,31,20,0.04)]"><div class="w-full max-w-7xl mx-auto px-margin flex items-center justify-center"><p class="font-label-md text-label-md text-on-surface-variant text-center">Decision support only. A physician must review and sign off every study.</p></div></footer><script type="module" src="/js/verifact-engine.js"></script>
+</body></html>

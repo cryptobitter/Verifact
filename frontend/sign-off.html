@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Sans+3:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet"/>
+
+<style>html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors": {
+  "bg": "#FFFFFF",
+  "bg-soft": "#FFF4E8",
+  "surface": "#FFFFFF",
+  "surface-alt": "#FAF6F1",
+  "border": "#EADFD3",
+  "text": "#1F1612",
+  "text-muted": "#6B5B52",
+  "primary": "#C8512D",
+  "primary-hover": "#B04624",
+  "primary-contrast": "#FFFFFF",
+  "primary-container": "#FBE3D6",
+  "on-primary": "#FFFFFF",
+  "on-primary-container": "#1F1612",
+  "secondary": "#3A1F14",
+  "secondary-container": "#FAF6F1",
+  "on-secondary": "#FFFFFF",
+  "on-secondary-container": "#1F1612",
+  "tertiary": "#F5A524",
+  "tertiary-container": "#FFF4E8",
+  "on-tertiary": "#1F1612",
+  "on-tertiary-container": "#1F1612",
+  "accent": "#F5A524",
+  "blush": "#FBE3D6",
+  "deep": "#3A1F14",
+  "error": "#D92D20",
+  "error-container": "#FDE8E8",
+  "on-error": "#FFFFFF",
+  "on-error-container": "#D92D20",
+  "background": "#FFFFFF",
+  "on-background": "#1F1612",
+  "surface-dim": "#FAF6F1",
+  "surface-bright": "#FFFFFF",
+  "surface-container-lowest": "#FFFFFF",
+  "surface-container-low": "#FFF4E8",
+  "surface-container": "#FAF6F1",
+  "surface-container-high": "#F5ECE1",
+  "surface-container-highest": "#EADFD3",
+  "on-surface": "#1F1612",
+  "on-surface-variant": "#6B5B52",
+  "outline": "#C5B4A5",
+  "outline-variant": "#EADFD3",
+  "inverse-surface": "#3A1F14",
+  "inverse-on-surface": "#FAF6F1",
+  "inverse-primary": "#FBE3D6",
+  "primary-fixed": "#FBE3D6",
+  "primary-fixed-dim": "#F5ECE1",
+  "on-primary-fixed": "#1F1612",
+  "on-primary-fixed-variant": "#6B5B52",
+  "secondary-fixed": "#EADFD3",
+  "secondary-fixed-dim": "#D8C7B8",
+  "on-secondary-fixed": "#1F1612",
+  "on-secondary-fixed-variant": "#6B5B52",
+  "tertiary-fixed": "#F5A524",
+  "tertiary-fixed-dim": "#E59418",
+  "on-tertiary-fixed": "#1F1612",
+  "on-tertiary-fixed-variant": "#1F1612",
+  "status-urgent": "#D92D20",
+  "status-review": "#F5A524",
+  "status-routine": "#3A1F14",
+  "status-discordant": "#E5799A",
+  "status-signed": "#C8512D",
+  "surface-tint": "#C8512D"
+},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xl":"2.5rem","space-xs":"0.375rem","gutter":"1.25rem","space-md":"1.25rem","gutter-mobile":"0.75rem","margin":"2rem","margin-mobile":"1rem","space-lg":"1.75rem","space-sm":"0.75rem"},"fontFamily":{"label-sm":["\"Source Sans 3\""],"body-lg":["\"Source Sans 3\""],"body-strong":["\"Source Sans 3\""],"mono-data":["JetBrains Mono"],"body-md":["\"Source Sans 3\""],"headline-md":["\"Source Serif 4\""],"headline-lg":["\"Source Serif 4\""],"headline-sm":["\"Source Serif 4\""],"label-md":["\"Source Sans 3\""],"headline-xl-mobile":["\"Source Serif 4\""],"headline-xl":["\"Source Serif 4\""],"headline-xl":["\"Source Serif 4\""]},"fontSize":{"label-sm":["13px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"body-lg":["17px",{"lineHeight":"26px","fontWeight":"400"}],"body-strong":["15px",{"lineHeight":"22px","fontWeight":"600"}],"mono-data":["13px",{"lineHeight":"18px","fontWeight":"400"}],"body-md":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-sm":["17px",{"lineHeight":"24px","fontWeight":"600"}],"label-md":["13px",{"lineHeight":"18px","fontWeight":"500"}],"headline-xl-mobile":["26px",{"lineHeight":"34px","fontWeight":"600"}],"headline-xl":["32px",{"lineHeight":"40px","fontWeight":"600"}]}}}}</script>  <link rel="stylesheet" href="/css/design-system.css"/>
+</head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-[#EADFD3] shadow-[0_2px_8px_rgba(58,31,20,0.06)]"><div class="h-16 w-full max-w-7xl mx-auto px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-xl"><a class="flex items-center gap-space-xs" data-path="worklist" href="/worklist.html"><div class="w-2.5 h-2.5 bg-primary rounded-DEFAULT"></div><span class="font-headline-md text-headline-md tracking-tight text-primary">Verifact</span></a><nav class="hidden md:flex items-center gap-space-xs" data-active-classes="bg-surface-container-high text-on-surface font-body-strong rounded-lg"><a aria-current="page" class="px-3 py-1.5 transition-colors bg-primary text-white font-semibold rounded-lg" data-path="worklist" href="/worklist.html">Worklist</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="upload" href="/upload.html">Upload</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="analytics" href="/analytics.html">Analytics</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="audit-log" href="/audit-log.html">Audit Log</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="about" href="/about.html">About</a></nav></div><div class="flex items-center gap-space-md"><span class="inline-flex items-center px-2 py-0.5 rounded font-mono-data text-xs bg-[#F5A524] text-[#1F1612] font-semibold tracking-wide uppercase shadow-sm">Demo Mode</span><div class="hidden lg:flex flex-col text-right"><span class="font-body-strong text-label-md text-on-surface leading-tight">Dr. K. Vance, MD</span><span class="font-label-md text-label-sm text-on-surface-variant leading-tight">Attending Radiologist</span></div><a class="hidden sm:inline-block font-label-md text-label-md text-on-surface-variant hover:text-error transition-colors" data-path="login" href="/login.html">Sign out</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><i class="ph ph-user"></i></div></div></div></header><main class="w-full pt-16 flex-1 bg-surface"><div class="flex flex-col w-full">
+<div class="w-full max-w-7xl mx-auto px-margin py-space-xl flex flex-col gap-space-xl">
+<!-- Workflow Breadcrumb & Header Metadata -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-on-surface-variant font-label-md text-label-md">
+<span class="flex items-center gap-1 font-body-strong text-primary">
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+            Step 4 of 4
+          </span>
+<span class="text-outline-variant">/</span>
+<span>Review &amp; Sign-off (Final Step)</span>
+<span class="text-outline-variant">/</span>
+<span class="px-space-xs py-0.5 bg-surface-container font-mono-data text-mono-data text-on-surface-variant rounded-DEFAULT">FRX-2026-0891</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight mt-1">Clinical Sign-off &amp; Export</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+          What is this page? Confirm your final report, attach your electronic medical signature, and send the validated findings to your hospital PACS or EHR.
+        </p>
+</div>
+<div class="flex items-center gap-space-md self-start md:self-auto bg-surface-container-low px-space-md py-space-sm rounded-xl">
+<div class="flex flex-col text-right">
+<span class="font-mono-data text-mono-data text-on-surface">ANON-8841</span>
+<span class="font-label-md text-label-sm text-on-surface-variant">Attending: Dr. K. Vance, MD</span>
+</div>
+<div class="w-9 h-9 bg-primary-container rounded-lg flex items-center justify-center">
+<i class="ph ph-assignment-turned-in"></i>
+</div>
+</div>
+</header>
+<!-- Main 2-Column Clinical Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Final Report Summary (8 cols) -->
+<section class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- Summary Card: What You Are Signing -->
+<article class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface">What you are signing</h2>
+<span class="px-space-xs py-0.5 bg-surface-container-high text-on-surface font-label-md text-label-sm rounded-DEFAULT">
+                Final Review
+              </span>
+</div>
+<span class="inline-flex items-center gap-1.5 px-space-xs py-0.5 bg-secondary-container text-on-secondary-container font-label-md text-label-sm rounded-DEFAULT">
+<i class="ph ph-edit-note"></i>
+              Physician verified (1 edit made to AI draft)
+            </span>
+</div>
+<!-- Structured Clinical Metric Ribbon -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm bg-surface-container-low p-space-md rounded-lg">
+<div class="flex flex-col">
+<span class="font-label-md text-label-sm text-on-surface-variant uppercase tracking-wider">AI Initial Probability</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-mono-data text-headline-sm text-on-surface">94.7%</span>
+<span class="font-label-md text-label-sm text-secondary font-medium">Fracture</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-sm text-on-surface-variant uppercase tracking-wider">Physician Diagnosis</span>
+<span class="font-body-strong text-body-strong text-on-surface mt-0.5">Acute Colles Fracture</span>
+<span class="font-label-md text-label-sm text-secondary font-medium">Confirmed</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-sm text-on-surface-variant uppercase tracking-wider">Target Anatomy</span>
+<span class="font-body-strong text-body-strong text-on-surface mt-0.5">Right Wrist</span>
+<span class="font-label-md text-label-sm text-on-surface-variant">PA + Lateral Projections</span>
+</div>
+</div>
+<!-- Formatted Report Preview -->
+<div class="flex flex-col gap-space-sm">
+<label class="font-label-md text-label-sm uppercase tracking-wider text-on-surface-variant">Clinical Impression &amp; Findings Preview</label>
+<div class="bg-surface p-space-md rounded-lg flex flex-col gap-space-sm text-on-surface font-body-md text-body-md leading-relaxed">
+<p>
+<strong class="font-body-strong text-on-surface">EXAMINATION:</strong> 2-view radiograph of the right wrist (PA and lateral).
+              </p>
+<p>
+<strong class="font-body-strong text-on-surface">FINDINGS:</strong> Transverse fracture of the distal radial metaphysis with approximately 14.2 mm dorsal displacement and mild dorsal comminution. The distal articular surface of the radius demonstrates intact alignment without evident intra-articular extension. No secondary ulnar styloid avulsion noted. Soft tissue swelling pronounced over the dorsal aspect of the carpus.
+              </p>
+<p>
+<strong class="font-body-strong text-on-surface">IMPRESSION:</strong> Acute extra-articular distal radius fracture (Colles type). Correlates with initial automated model inference; fracture displacement verified manually by attending caliper measurement.
+              </p>
+</div>
+</div>
+<!-- Verification Checkbox -->
+<div class="mt-space-xs p-space-sm bg-surface-container-low rounded-lg flex items-start gap-space-sm">
+<input checked="" class="mt-1 w-4 h-4 accent-primary rounded-DEFAULT cursor-pointer" id="physician-attestation" onchange="document.getElementById('signoff-btn').disabled = !this.checked; document.getElementById('signoff-btn').classList.toggle('opacity-50', !this.checked);" type="checkbox"/>
+<label class="font-body-md text-body-md text-on-surface cursor-pointer select-none" for="physician-attestation">
+              I have reviewed the original radiograph and verify that this report accurately reflects my clinical findings.
+            </label>
+</div>
+</article>
+<!-- Audit & Review History Timeline -->
+<article class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Review History for #FRX-2026-0891</h3>
+<span class="font-mono-data text-mono-data text-on-surface-variant bg-surface-container px-space-xs py-0.5 rounded-DEFAULT">4 entries</span>
+</div>
+<div class="relative flex flex-col gap-space-md pl-4">
+<!-- Timeline Item 1 -->
+<div class="relative flex items-start gap-space-md group">
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant mt-1.5 flex-shrink-0"></div>
+<div class="flex flex-col sm:flex-row sm:items-center sm:gap-space-md flex-1">
+<span class="font-mono-data text-mono-data text-on-surface-variant min-w-[110px]">08:42:19 EST</span>
+<span class="font-body-md text-body-md text-on-surface">Study ingested and de-identified</span>
+<span class="font-label-md text-label-sm text-on-surface-variant sm:ml-auto">Automated pipeline</span>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative flex items-start gap-space-md group">
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant mt-1.5 flex-shrink-0"></div>
+<div class="flex flex-col sm:flex-row sm:items-center sm:gap-space-md flex-1">
+<span class="font-mono-data text-mono-data text-on-surface-variant min-w-[110px]">08:43:01 EST</span>
+<span class="font-body-md text-body-md text-on-surface">Opened in Viewer</span>
+<span class="font-label-md text-label-sm text-on-surface-variant sm:ml-auto">Dr. K. Vance, MD</span>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative flex items-start gap-space-md group">
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant mt-1.5 flex-shrink-0"></div>
+<div class="flex flex-col sm:flex-row sm:items-center sm:gap-space-md flex-1">
+<span class="font-mono-data text-mono-data text-on-surface-variant min-w-[110px]">08:45:20 EST</span>
+<span class="font-body-md text-body-md text-on-surface">Caliper measurement (14.2 mm) added</span>
+<span class="font-label-md text-label-sm text-on-surface-variant sm:ml-auto">Overlay recorded</span>
+</div>
+</div>
+<!-- Timeline Item 4 -->
+<div class="relative flex items-start gap-space-md group">
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant mt-1.5 flex-shrink-0"></div>
+<div class="flex flex-col sm:flex-row sm:items-center sm:gap-space-md flex-1">
+<span class="font-mono-data text-mono-data text-on-surface-variant min-w-[110px]">08:46:15 EST</span>
+<span class="font-body-md text-body-md text-on-surface">Draft report edited</span>
+<span class="font-label-md text-label-sm text-on-surface-variant sm:ml-auto">Dr. K. Vance, MD</span>
+</div>
+</div>
+<!-- Status Item -->
+<div class="relative flex items-start gap-space-md pt-space-xs">
+<div class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim mt-1.5 flex-shrink-0"></div>
+<div class="flex items-center justify-between w-full">
+<span class="font-body-strong text-body-strong text-on-surface">Status</span>
+<span class="font-label-md text-label-md text-tertiary px-space-xs py-0.5 bg-tertiary-fixed rounded-DEFAULT">
+                  Pending final electronic signature
+                </span>
+</div>
+</div>
+</div>
+</article>
+</section>
+<!-- Right Column: Signature & Export Actions (4 cols) -->
+<aside class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Electronic Signature Block Card -->
+<article class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-space-xs text-primary">
+<i class="ph ph-draw"></i>
+<h2 class="font-headline-md text-headline-md text-on-surface">Electronic Signature</h2>
+</div>
+<!-- Credential Identity Detail -->
+<div class="flex flex-col gap-space-sm bg-surface p-space-md rounded-lg">
+<div class="flex flex-col">
+<span class="font-label-md text-label-sm text-on-surface-variant">Attending Radiologist</span>
+<span class="font-body-strong text-body-strong text-on-surface">Dr. Katherine Vance, MD</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-sm text-on-surface-variant">License &amp; Credential</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="font-mono-data text-mono-data text-on-surface font-medium">MCI-2024-88419</span>
+<i class="ph ph-seal-check text-primary"></i>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-sm text-on-surface-variant">Hospital Department</span>
+<span class="font-body-md text-body-md text-on-surface">St. Jude ED &amp; Trauma Imaging</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-sm text-on-surface-variant">Timestamp (EST)</span>
+<span class="font-mono-data text-mono-data text-on-surface">2026-03-31 08:49:12 EST</span>
+</div>
+</div>
+<!-- Signature Pad Impression Box -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col items-center justify-center text-center py-space-lg">
+<span class="font-headline-lg text-headline-lg text-primary italic font-serif">K. Vance, M.D.</span>
+<span class="font-label-md text-label-sm text-on-surface-variant mt-1">Cryptographically Sealed Key: SHA-256 #8841-A7</span>
+</div>
+<!-- Primary Sign-off CTA Button -->
+<button class="w-full bg-primary text-white hover:bg-primary-hover py-space-sm px-space-md rounded-lg font-body-strong text-body-strong flex items-center justify-center gap-space-xs transition-colors shadow-sm" id="signoff-btn" onclick="handleSignoff()">
+<i class="ph ph-shield-check"></i>
+<span>Sign Off Study</span>
+</button>
+</article>
+<!-- Export Options Section -->
+<article class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Export Options</h3>
+<span class="font-label-md text-label-sm text-on-surface-variant">Post-Signature</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Option 1: PDF Export -->
+<button class="w-full text-left p-space-md bg-surface hover:bg-surface-container transition-colors rounded-lg flex flex-col gap-1 group" onclick="triggerExport('PDF')">
+<div class="flex items-center justify-between">
+<span class="font-body-strong text-body-strong text-on-surface group-hover:text-primary flex items-center gap-1.5">
+<i class="ph ph-file-pdf"></i>
+                  Export Stamped PDF Report
+                </span>
+<i class="ph ph-download-simple"></i>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">
+                Download a printable, tamper-evident PDF with your signature and thumbnail images.
+              </p>
+</button>
+<!-- Option 2: HL7 FHIR JSON -->
+<button class="w-full text-left p-space-md bg-surface hover:bg-surface-container transition-colors rounded-lg flex flex-col gap-1 group" onclick="triggerExport('FHIR')">
+<div class="flex items-center justify-between">
+<span class="font-body-strong text-body-strong text-on-surface group-hover:text-primary flex items-center gap-1.5">
+<i class="ph ph-sync-alt"></i>
+                  Transmit HL7 FHIR JSON
+                </span>
+<i class="ph ph-send"></i>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">
+                Directly dispatch the structured DiagnosticReport resource to Epic/Cerner EHR.
+              </p>
+</button>
+<!-- Option 3: Return to Worklist -->
+<a class="w-full text-left p-space-md bg-surface hover:bg-surface-container transition-colors rounded-lg flex flex-col gap-1 group" data-path="worklist" href="/worklist.html">
+<div class="flex items-center justify-between">
+<span class="font-body-strong text-body-strong text-on-surface group-hover:text-primary flex items-center gap-1.5">
+<i class="ph ph-queue"></i>
+                  Return to Worklist
+                </span>
+<i class="ph ph-arrow-right"></i>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">
+                Save progress and take the next pending study in the priority queue.
+              </p>
+</a>
+</div>
+</article>
+</aside>
+</div>
+<!-- Notification Toast (Hidden by default) -->
+<div class="hidden fixed bottom-12 right-margin z-50 bg-inverse-surface text-inverse-on-surface px-space-md py-space-sm rounded-lg shadow-md flex items-center gap-space-sm transition-all duration-300" id="toast-msg">
+<i class="ph ph-check-circle"></i>
+<span class="font-body-md text-body-md" id="toast-text">Study successfully signed and certified.</span>
+</div>
+</div>
+</div>
+<script>
+  function handleSignoff() {
+    const btn = document.getElementById('signoff-btn');
+    btn.innerHTML = '<i class="ph ph-spinner"></i> Signing & Stamping...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.innerHTML = '<i class="ph ph-done-all"></i> Signed by Dr. K. Vance';
+      btn.classList.remove('bg-primary-container', 'hover:bg-primary');
+      btn.classList.add('bg-secondary', 'cursor-default');
+      showToast('Electronic signature recorded. Ready for EHR transmission.');
+    }, 700);
+  }
+
+  function triggerExport(type) {
+    if (type === 'PDF') {
+      showToast('Generating signed PDF with encrypted hash...');
+    } else if (type === 'FHIR') {
+      showToast('FHIR Bundle JSON transmitted to hospital interface engine.');
+    }
+  }
+
+  function showToast(text) {
+    const toast = document.getElementById('toast-msg');
+    const toastText = document.getElementById('toast-text');
+    toastText.innerText = text;
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 3500);
+  }
+</script></main><footer class="w-full bg-surface py-space-md shadow-[0_-1px_8px_rgba(58,31,20,0.04)]"><div class="w-full max-w-7xl mx-auto px-margin flex items-center justify-center"><p class="font-label-md text-label-md text-on-surface-variant text-center">Decision support only. A physician must review and sign off every study.</p></div></footer><script type="module" src="/js/verifact-engine.js"></script>
+</body></html>

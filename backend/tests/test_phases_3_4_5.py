@@ -139,9 +139,23 @@ def test_phase5_audit_log_persisted():
     Base.metadata.create_all(bind=engine)
     db = SessionLocal()
     try:
+        user = db.query(User).first()
+        if not user:
+            user = User(email="test@verifact.ai", full_name="Dr Test", role="radiologist")
+            db.add(user)
+            db.commit()
+            db.refresh(user)
+
+        analysis = db.query(Analysis).first()
+        if not analysis:
+            analysis = Analysis(user_id=user.id, image_url="http://test.png", bone="Radius")
+            db.add(analysis)
+            db.commit()
+            db.refresh(analysis)
+
         log = AuditLog(
-            user_id=1,
-            analysis_id=999,
+            user_id=user.id,
+            analysis_id=analysis.id,
             action="SIGN_OFF",
             details="Physician Dr. Smith signed off on analysis"
         )

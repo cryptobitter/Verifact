@@ -53,7 +53,7 @@ class SupabaseStorageService(BaseStorageService):
         if not url or not key:
             raise ValueError("SUPABASE_URL and SUPABASE_KEY are required for Supabase storage.")
         self.client = create_client(url, key)
-        self.bucket = os.getenv("SUPABASE_STORAGE_BUCKET", "verifact-artifacts")
+        self.bucket = os.getenv("SUPABASE_STORAGE_BUCKET") or os.getenv("SUPABASE_BUCKET", "xray-images")
 
     def save_bytes(self, data: bytes, filename: str, content_type: str = "image/jpeg") -> str:
         unique_name = f"{uuid.uuid4().hex}_{filename}"

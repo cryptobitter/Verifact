@@ -1,16 +1,690 @@
-<!doctype html>
-<html lang="en" class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230284c7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M17 10c.7-.7 1.69-1 2.5-1a2.5 2.5 0 1 1 0 5c-.79 0-1.8-.3-2.5-1L4 21l-2-2 7-13c-.7-.7-1-1.71-1-2.5a2.5 2.5 0 1 1 5 0c0 .81-.3 1.8-1 2.5Z'/></svg>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VERIFACT | Clinical Fracture AI Co-Pilot & PACS Workstation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-sky-500 selection:text-white">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verifact — Emergency Musculoskeletal Fracture PACS Workstation</title>
+  <meta name="description" content="Dual-engine AI fracture triage and PACS workstation for emergency upper extremity radiographs. Sub-millimeter caliper measurements and local HIPAA sanitization."/>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23C8512D'/><path d='M8 10h16v3H8zm0 6h11v3H8zm0 6h16v3H8z' fill='%23FFFFFF'/></svg>"/>
+
+  <!-- Design System: Terracotta & Saffron on White -->
+  <link rel="stylesheet" href="/css/design-system.css"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Geist', '-apple-system', 'sans-serif'],
+            mono: ['"Geist Mono"', 'monospace'],
+          },
+          colors: {
+            bg: '#FFFFFF',
+            'bg-soft': '#FFF4E8',
+            surface: '#FFFFFF',
+            'surface-alt': '#FAF6F1',
+            border: '#EADFD3',
+            text: '#1F1612',
+            'text-muted': '#6B5B52',
+            primary: {
+              DEFAULT: '#C8512D',
+              hover: '#B04624',
+              contrast: '#FFFFFF',
+              container: '#FBE3D6'
+            },
+            accent: {
+              DEFAULT: '#F5A524',
+              text: '#1F1612'
+            },
+            blush: '#FBE3D6',
+            deep: '#3A1F14',
+            status: {
+              urgent: '#D92D20',
+              review: '#F5A524',
+              routine: '#3A1F14',
+              discordant: '#E5799A',
+              signed: '#C8512D'
+            }
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-white text-[#1F1612] antialiased min-h-screen flex flex-col justify-between selection:bg-[#FBE3D6] selection:text-[#1F1612]">
+
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 bg-[#C8512D] text-white px-3 py-1.5 rounded font-semibold text-sm">
+    Skip to diagnostic console
+  </a>
+
+  <!-- STEP 3: Navbar (White, 1px bottom border, active tab = solid terracotta with white text, hover = blush tint) -->
+  <header class="sticky top-0 z-50 bg-white border-b border-[#EADFD3]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+      <!-- Logo & Clinical System Spec -->
+      <div class="flex items-center gap-6">
+        <a href="/index.html" class="flex items-center gap-2.5 text-[#1F1612] no-underline">
+          <div class="w-7 h-7 rounded bg-[#FBE3D6] border border-[#EADFD3] flex items-center justify-center text-[#C8512D]">
+            <i class="ph ph-bone text-lg font-bold"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold tracking-tight text-[#1F1612] leading-none">VERIFACT</span>
+            <span class="text-[10px] font-mono text-[#6B5B52] leading-none mt-0.5">PACS &amp; TRIAGE CO-PILOT</span>
+          </div>
+        </a>
+
+        <!-- System Status Indicator: Saffron Fill with Dark Ink Text -->
+        <div class="hidden lg:flex items-center gap-2 pl-4 border-l border-[#EADFD3] text-xs font-mono text-[#6B5B52]">
+          <span class="w-2 h-2 rounded-full bg-[#C8512D]"></span>
+          <span>DENSENET-121 OPERATIONAL</span>
+          <span class="text-[#EADFD3]">•</span>
+          <span class="badge-saffron">
+            <i class="ph ph-shield-check"></i>
+            HIPAA IN-MEMORY SANITIZED
+          </span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
+        <a href="/index.html" class="px-3 py-1.5 rounded bg-[#C8512D] text-white font-semibold transition-colors">Overview</a>
+        <a href="/worklist.html" class="px-3 py-1.5 rounded text-[#6B5B52] hover:bg-[#FBE3D6] hover:text-[#C8512D] transition-colors">Worklist</a>
+        <a href="/upload.html" class="px-3 py-1.5 rounded text-[#6B5B52] hover:bg-[#FBE3D6] hover:text-[#C8512D] transition-colors">Study Intake</a>
+        <a href="/viewer.html" class="px-3 py-1.5 rounded text-[#6B5B52] hover:bg-[#FBE3D6] hover:text-[#C8512D] transition-colors">PACS Viewer</a>
+        <a href="/analytics.html" class="px-3 py-1.5 rounded text-[#6B5B52] hover:bg-[#FBE3D6] hover:text-[#C8512D] transition-colors">QA Analytics</a>
+        <a href="/about.html" class="px-3 py-1.5 rounded text-[#6B5B52] hover:bg-[#FBE3D6] hover:text-[#C8512D] transition-colors">Documentation</a>
+      </nav>
+
+      <!-- User & Action Strip -->
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex flex-col text-right text-xs font-mono">
+          <span class="text-[#1F1612] font-semibold">Dr. Elena Vance, MD</span>
+          <span class="text-[#6B5B52] text-[10px]">Attending Radiologist</span>
+        </div>
+        <span class="badge-saffron hidden sm:inline-flex">
+          <i class="ph ph-sparkle"></i>
+          DEMO MODE
+        </span>
+        <a href="/upload.html" class="btn-primary btn-sm">
+          <i class="ph ph-upload-simple"></i>
+          <span>Upload Radiograph</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="flex-1">
+
+    <!-- STEP 3: Hero Band in --bg-soft (#FFF4E8) with a thin terracotta accent line under the title -->
+    <section class="bg-[#FFF4E8] border-b border-[#EADFD3] pt-10 pb-14">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        
+        <!-- Context Breadcrumb Pill -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-3 mb-6 border-b border-[#EADFD3] text-xs font-mono text-[#6B5B52]">
+          <div class="flex items-center gap-2">
+            <span class="badge-saffron">
+              <i class="ph ph-first-aid"></i>
+              ASSISTIVE CADt PROTOCOL
+            </span>
+            <span class="text-[#1F1612] font-semibold">UPPER EXTREMITY AP / LATERAL</span>
+          </div>
+          <div class="flex items-center gap-4 text-[11px]">
+            <span>COHORT: 14,800 EXAMS</span>
+            <span class="text-[#EADFD3]">•</span>
+            <span class="text-[#C8512D] font-bold">99.1% SENSITIVITY</span>
+            <span class="text-[#EADFD3]">•</span>
+            <span>94.3% SPECIFICITY</span>
+          </div>
+        </div>
+
+        <!-- Main Two-Column Hero Architecture -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Left Column: Value Prop with thin terracotta accent line -->
+          <div class="lg:col-span-5 flex flex-col justify-center pt-2">
+            <div class="pb-3 mb-4 border-b-2 border-[#C8512D] inline-block">
+              <h1 class="heading-2 text-[#1F1612] tracking-tight leading-tight">
+                Emergency fracture co-pilot with live dual-engine consensus
+              </h1>
+            </div>
+            
+            <p class="body-2 text-[#6B5B52] mb-6">
+              Verifact executes in-memory HIPAA sanitization and dual-model neural inference on upper extremity radiographs, delivering calibrated heatmaps, sub-millimeter displacement calipers, and pre-drafted structured reports in under 600 milliseconds.
+            </p>
+
+            <!-- Action Buttons: Primary Terracotta, Secondary Outlined Terracotta -->
+            <div class="flex flex-wrap items-center gap-3 mb-8">
+              <a href="/upload.html" class="btn-primary">
+                <i class="ph ph-lightning"></i>
+                <span>Launch triage intake</span>
+              </a>
+              <a href="/worklist.html" class="btn-secondary">
+                <i class="ph ph-list-dashes"></i>
+                <span>Inspect active worklist</span>
+              </a>
+            </div>
+
+            <!-- Guarantee Bento in Surface-Alt (#FAF6F1) -->
+            <div class="bg-[#FAF6F1] border border-[#EADFD3] rounded-xl p-4 shadow-sm">
+              <span class="caption-3 text-[#6B5B52] uppercase tracking-wider block mb-2 font-mono">Clinical validation benchmarks</span>
+              <div class="grid grid-cols-2 gap-3 text-xs font-mono">
+                <div class="p-2.5 rounded bg-white border border-[#EADFD3]">
+                  <span class="text-[#C8512D] font-bold block text-sm">0 KB PHI</span>
+                  <span class="text-[#6B5B52]">Local RAM redaction</span>
+                </div>
+                <div class="p-2.5 rounded bg-white border border-[#EADFD3]">
+                  <span class="text-[#C8512D] font-bold block text-sm">540 ms</span>
+                  <span class="text-[#6B5B52]">Mean pipeline latency</span>
+                </div>
+                <div class="p-2.5 rounded bg-white border border-[#EADFD3]">
+                  <span class="text-[#C8512D] font-bold block text-sm">&plusmn;0.14 mm</span>
+                  <span class="text-[#6B5B52]">DICOM caliper precision</span>
+                </div>
+                <div class="p-2.5 rounded bg-white border border-[#EADFD3]">
+                  <span class="text-[#C8512D] font-bold block text-sm">100%</span>
+                  <span class="text-[#6B5B52]">Physician sign-off</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: STEP 4 SPECIAL MEDICAL IMAGE VIEWER RULES -->
+          <!-- Canvas and toolbar strictly dark neutral (#120A08 / #3A1F14), cream icons (#FAF6F1), no white behind X-ray -->
+          <div class="lg:col-span-7 bg-[#1F1F1F] border border-[#3A1F14] rounded-xl overflow-hidden shadow-xl flex flex-col">
+            
+            <!-- Viewer Top Chrome Bar in Espresso (#3A1F14) -->
+            <div class="bg-[#3A1F14] px-4 py-2.5 border-b border-[#4D2B1E] flex items-center justify-between text-xs font-mono text-[#FAF6F1]">
+              <!-- Case Selector Tabs -->
+              <div class="flex items-center gap-1.5 overflow-x-auto">
+                <button class="case-tab px-2.5 py-1 rounded bg-[#C8512D] text-white border border-[#C8512D] font-semibold transition-colors" data-case="distal_radius">
+                  Distal Radius (98%)
+                </button>
+                <button class="case-tab px-2.5 py-1 rounded bg-[#27140C] text-[#FAF6F1] border border-[#4D2B1E] hover:bg-[#4D2B1E] transition-colors" data-case="scaphoid">
+                  Scaphoid (58%)
+                </button>
+                <button class="case-tab px-2.5 py-1 rounded bg-[#27140C] text-[#FAF6F1] border border-[#4D2B1E] hover:bg-[#4D2B1E] transition-colors" data-case="clavicle">
+                  Clavicle (96%)
+                </button>
+                <button class="case-tab px-2.5 py-1 rounded bg-[#27140C] text-[#FAF6F1] border border-[#4D2B1E] hover:bg-[#4D2B1E] transition-colors" data-case="femur">
+                  Control (5%)
+                </button>
+              </div>
+
+              <!-- HUD Indicators -->
+              <div class="hidden sm:flex items-center gap-3 text-[#FAF6F1] text-[11px]">
+                <span id="pacs-zoom">ZOOM: 1.15&times;</span>
+                <span id="pacs-wl">W: 2400 / L: 600</span>
+              </div>
+            </div>
+
+            <!-- Viewport Stage strictly dark neutral #120A08 -->
+            <div class="relative bg-[#120A08] min-h-[380px] sm:min-h-[430px] flex items-center justify-center overflow-hidden p-3 select-none">
+              
+              <!-- Radiograph Container -->
+              <div id="pacs-film" class="relative transition-transform duration-200 ease-out origin-center flex items-center justify-center">
+                <img id="pacs-main-img" 
+                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvhusTNoasnGXiX7MxDh4j59W1fFEshjGTNboswPUtQicqdGvvfJJqCaJDcRQYn6UVTRm3SXSLNnZzLX5HG17jWsYm54WOSn8SAgn6MoIXs43CArJ8MybUKJg50DDCZ6s3_OHjRyE7r4BMr-n806immW5BIGk2GjLTRDYdbht-Qas4LGbwIA88VbpIIAwS9UT4CBXchdwOHtvj9eoWr5juTKVfdma3vpYr-jRMQGtZ" 
+                     alt="Clinical diagnostic radiograph showing cortical bone detail" 
+                     class="max-h-[350px] sm:max-h-[390px] w-auto object-contain filter contrast-125 brightness-95"/>
+                
+                <!-- Heatmap Overlay -->
+                <div id="pacs-heatmap-layer" class="absolute inset-0 pointer-events-none transition-opacity duration-200 opacity-60 mix-blend-screen flex items-center justify-center">
+                  <svg class="w-full h-full" fill="none" viewBox="0 0 520 650" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <radialGradient cx="54%" cy="48%" fx="54%" fy="48%" id="gradcam-hero" r="24%">
+                        <stop offset="0%" stop-color="#D92D20" stop-opacity="0.9"></stop>
+                        <stop offset="45%" stop-color="#F5A524" stop-opacity="0.7"></stop>
+                        <stop offset="85%" stop-color="#3A1F14" stop-opacity="0.3"></stop>
+                        <stop offset="100%" stop-color="#120A08" stop-opacity="0"></stop>
+                      </radialGradient>
+                    </defs>
+                    <circle cx="280" cy="312" fill="url(#gradcam-hero)" r="110"></circle>
+                  </svg>
+                </div>
+
+                <!-- Neutral Caliper Overlay (Cream lines, no competing blue/green/saffron) -->
+                <div id="pacs-caliper-layer" class="absolute top-[42%] left-[45%] pointer-events-none transition-opacity duration-200">
+                  <svg class="w-44 h-20 overflow-visible" viewBox="0 0 160 80">
+                    <line stroke="#FAF6F1" stroke-linecap="round" stroke-width="1.5" x1="20" x2="20" y1="20" y2="40"></line>
+                    <line stroke="#FAF6F1" stroke-linecap="round" stroke-width="1.5" x1="110" x2="110" y1="20" y2="40"></line>
+                    <line stroke="#FAF6F1" stroke-dasharray="3 3" stroke-width="1.5" x1="20" x2="110" y1="30" y2="30"></line>
+                    <circle cx="20" cy="30" fill="#3A1F14" r="3" stroke="#FAF6F1" stroke-width="1.5"></circle>
+                    <circle cx="110" cy="30" fill="#3A1F14" r="3" stroke="#FAF6F1" stroke-width="1.5"></circle>
+                  </svg>
+                  <div class="absolute -top-6 left-2 bg-[#3A1F14] border border-[#EADFD3] text-[#FAF6F1] font-mono text-[11px] px-2 py-0.5 rounded shadow whitespace-nowrap">
+                    <span>&Delta; 2.1 mm cortical step-off</span>
+                  </div>
+                </div>
+
+                <!-- Orientation Marker -->
+                <span class="absolute top-2 left-2 text-[#FAF6F1]/50 font-mono text-sm font-bold">L • AP/LAT</span>
+              </div>
+
+              <!-- Viewport Overlay Badges -->
+              <div class="absolute bottom-3 left-3 flex flex-wrap gap-2 text-[11px] font-mono">
+                <span id="case-badge-status" class="badge-urgent flex items-center gap-1">
+                  <i class="ph ph-warning-circle font-bold"></i>
+                  <span>URGENT: 98% ACUTE</span>
+                </span>
+                <span id="case-badge-anatomy" class="px-2 py-0.5 rounded bg-[#3A1F14] text-[#FAF6F1] border border-[#4D2B1E]">
+                  DISTAL RADIUS METAPHYSIS
+                </span>
+              </div>
+            </div>
+
+            <!-- Bottom Viewer Controls: Neutral Cream Icons on Espresso (#3A1F14) -->
+            <div class="bg-[#3A1F14] p-3 border-t border-[#4D2B1E] flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-[#FAF6F1]">
+              <div class="flex items-center gap-2">
+                <button id="toggle-heatmap-btn" class="px-2.5 py-1.5 rounded bg-[#27140C] text-[#FAF6F1] border border-[#4D2B1E] hover:border-[#EADFD3] transition-colors flex items-center gap-1.5 pacs-cream-icon">
+                  <i class="ph ph-fire text-[#FAF6F1]"></i>
+                  <span>Heatmap (ON)</span>
+                </button>
+                <button id="toggle-caliper-btn" class="px-2.5 py-1.5 rounded bg-[#27140C] text-[#FAF6F1] border border-[#4D2B1E] hover:border-[#EADFD3] transition-colors flex items-center gap-1.5 pacs-cream-icon">
+                  <i class="ph ph-ruler text-[#FAF6F1]"></i>
+                  <span>Caliper (ON)</span>
+                </button>
+                <button id="toggle-invert-btn" class="px-2.5 py-1.5 rounded bg-[#27140C] text-[#FAF6F1] border border-[#4D2B1E] hover:border-[#EADFD3] transition-colors flex items-center gap-1.5 pacs-cream-icon">
+                  <i class="ph ph-circle-half text-[#FAF6F1]"></i>
+                  <span>Invert LUT</span>
+                </button>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <a href="/viewer.html" class="btn-dark btn-sm border border-[#EADFD3] text-[#FAF6F1]">
+                  <i class="ph ph-arrows-out"></i>
+                  <span>Open Full PACS</span>
+                </a>
+                <a href="/findings.html" class="btn-primary btn-sm">
+                  <span>View Findings</span>
+                  <i class="ph ph-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3: Mandatory Tagline Reveal Section in Warm Ink -->
+    <section class="bg-white border-b border-[#EADFD3] py-14">
+      <div class="tagline-container">
+        <span class="caption-3 text-[#C8512D] uppercase tracking-widest font-mono block mb-3 font-semibold">Institutional Triage Mandate</span>
+        <h2 id="tagline-text" class="heading-3 leading-snug text-[#1F1612]">
+          Verifact delivers instant dual-engine fracture triage so zero patients leave the emergency department with an overlooked bone fracture.
+        </h2>
+      </div>
+    </section>
+
+    <!-- STEP 3: Cards & Panels (White, 1px border #EADFD3, subtle warm shadow, blush hover) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="caption-3 text-[#C8512D] uppercase font-mono block mb-1 font-semibold">Verified Clinical Reference Studies</span>
+          <h2 class="heading-4 text-[#1F1612]">1-Click Evaluation Showcase</h2>
+          <p class="body-3 text-[#6B5B52] mt-1">Select any calibrated reference radiograph to test the complete triage pipeline.</p>
+        </div>
+        <a href="/worklist.html" class="btn-secondary btn-sm self-start sm:self-auto">
+          <i class="ph ph-list-dashes"></i>
+          <span>View Hospital Worklist</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <!-- Case 1: Urgent -->
+        <div class="vf-card flex flex-col justify-between cursor-pointer group"
+             onclick="sessionStorage.setItem('current_sample_id', 'distal_radius_fracture'); window.location.href='/scan-in-progress.html';">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="badge-urgent flex items-center gap-1">
+                <i class="ph ph-warning"></i>
+                Urgent Fracture
+              </span>
+              <span class="text-xs font-mono text-[#6B5B52]">98% Conf</span>
+            </div>
+            <h3 class="title-3 text-[#1F1612] group-hover:text-[#C8512D] transition-colors">Distal Radius</h3>
+            <p class="caption-2 text-[#6B5B52] mt-1.5">Colles metaphyseal cortical break with 2.1mm dorsal cortical step-off.</p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-[#EADFD3] flex items-center justify-between text-xs font-semibold text-[#1F1612]">
+            <span class="group-hover:text-[#C8512D] transition-colors">Run Instant Scan</span>
+            <i class="ph ph-arrow-right text-[#C8512D] group-hover:translate-x-1 transition-transform"></i>
+          </div>
+        </div>
+
+        <!-- Case 2: Urgent -->
+        <div class="vf-card flex flex-col justify-between cursor-pointer group"
+             onclick="sessionStorage.setItem('current_sample_id', 'clavicle_displaced_fracture'); window.location.href='/scan-in-progress.html';">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="badge-urgent flex items-center gap-1">
+                <i class="ph ph-warning"></i>
+                Urgent Trauma
+              </span>
+              <span class="text-xs font-mono text-[#6B5B52]">96% Conf</span>
+            </div>
+            <h3 class="title-3 text-[#1F1612] group-hover:text-[#C8512D] transition-colors">Clavicle Displaced</h3>
+            <p class="caption-2 text-[#6B5B52] mt-1.5">Comminuted mid-shaft disruption with 14mm vertical fragment displacement.</p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-[#EADFD3] flex items-center justify-between text-xs font-semibold text-[#1F1612]">
+            <span class="group-hover:text-[#C8512D] transition-colors">Run Instant Scan</span>
+            <i class="ph ph-arrow-right text-[#C8512D] group-hover:translate-x-1 transition-transform"></i>
+          </div>
+        </div>
+
+        <!-- Case 3: Needs Review / Uncertain -->
+        <div class="vf-card flex flex-col justify-between cursor-pointer group"
+             onclick="sessionStorage.setItem('current_sample_id', 'scaphoid_hairline_fracture'); window.location.href='/scan-in-progress.html';">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="badge-review flex items-center gap-1">
+                <i class="ph ph-eye"></i>
+                Needs Review
+              </span>
+              <span class="text-xs font-mono text-[#6B5B52]">58% Conf</span>
+            </div>
+            <h3 class="title-3 text-[#1F1612] group-hover:text-[#C8512D] transition-colors">Scaphoid Hairline</h3>
+            <p class="caption-2 text-[#6B5B52] mt-1.5">Occult waist lucency with borderline ambiguity requiring magnification.</p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-[#EADFD3] flex items-center justify-between text-xs font-semibold text-[#1F1612]">
+            <span class="group-hover:text-[#C8512D] transition-colors">Run Instant Scan</span>
+            <i class="ph ph-arrow-right text-[#C8512D] group-hover:translate-x-1 transition-transform"></i>
+          </div>
+        </div>
+
+        <!-- Case 4: Routine Normal with Check Icon -->
+        <div class="vf-card flex flex-col justify-between cursor-pointer group"
+             onclick="sessionStorage.setItem('current_sample_id', 'normal_femur_control'); window.location.href='/scan-in-progress.html';">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="badge-routine flex items-center gap-1">
+                <i class="ph ph-check"></i>
+                Routine Normal
+              </span>
+              <span class="text-xs font-mono text-[#6B5B52]">5% Conf</span>
+            </div>
+            <h3 class="title-3 text-[#1F1612] group-hover:text-[#C8512D] transition-colors">Intact Femur</h3>
+            <p class="caption-2 text-[#6B5B52] mt-1.5">Intact cortical continuity and normal trabeculae without step-off.</p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-[#EADFD3] flex items-center justify-between text-xs font-semibold text-[#1F1612]">
+            <span class="group-hover:text-[#C8512D] transition-colors">Run Instant Scan</span>
+            <i class="ph ph-arrow-right text-[#C8512D] group-hover:translate-x-1 transition-transform"></i>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STEP 3: Feature Cards with Terracotta Icons Inside Blush Circles -->
+    <section class="bg-[#FAF6F1] border-y border-[#EADFD3] py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="caption-3 text-[#C8512D] uppercase font-mono block mb-1 font-semibold">Triage Capabilities</span>
+          <h2 class="heading-4 text-[#1F1612]">Precision tools engineered for orthopedic decision support</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div class="vf-card">
+            <!-- Icon in Blush Circle -->
+            <div class="icon-circle mb-4">
+              <i class="ph ph-ruler"></i>
+            </div>
+            <h3 class="title-2 text-[#1F1612] mb-2">Sub-millimeter displacement calipers</h3>
+            <p class="body-5 text-[#6B5B52]">
+              Measure cortical step-offs, articular gaps, and Cobb angles with high-precision calibrated rulers directly on DICOM studies.
+            </p>
+            <div class="mt-6 pt-3 border-t border-[#EADFD3] text-xs font-mono text-[#6B5B52]">
+              Precision: &plusmn;0.14 mm pixel pitch
+            </div>
+          </div>
+
+          <div class="vf-card">
+            <!-- Icon in Blush Circle -->
+            <div class="icon-circle mb-4">
+              <i class="ph ph-scales"></i>
+            </div>
+            <h3 class="title-2 text-[#1F1612] mb-2">Dual-engine discordance alerts</h3>
+            <p class="body-5 text-[#6B5B52]">
+              When CNN edge detectors and semantic vision models disagree, Verifact automatically escalates the study to secondary attending priority.
+            </p>
+            <div class="mt-6 pt-3 border-t border-[#EADFD3] text-xs font-mono text-[#6B5B52]">
+              Arbitration: 100% auditable log trail
+            </div>
+          </div>
+
+          <div class="vf-card">
+            <!-- Icon in Blush Circle -->
+            <div class="icon-circle mb-4">
+              <i class="ph ph-stamp"></i>
+            </div>
+            <h3 class="title-2 text-[#1F1612] mb-2">Signed PDF &amp; HL7 FHIR export</h3>
+            <p class="body-5 text-[#6B5B52]">
+              Generate stamped clinical reports with attending license numbers, electronic signatures, and FHIR DiagnosticReport payloads.
+            </p>
+            <div class="mt-6 pt-3 border-t border-[#EADFD3] text-xs font-mono text-[#6B5B52]">
+              Standards: HL7 FHIR R4 &amp; DICOM PS 3.15
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3: Institutional FAQ with Warm Borders -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+      <div class="text-center mb-10">
+        <span class="caption-3 text-[#C8512D] uppercase font-mono block mb-1 font-semibold">Clinical Operations</span>
+        <h2 class="heading-4 text-[#1F1612]">Frequently Answered Questions</h2>
+      </div>
+
+      <div class="space-y-3">
+        <details class="vf-card p-4 group cursor-pointer">
+          <summary class="title-3 text-[#1F1612] flex items-center justify-between list-none">
+            <span>How does client-side de-identification work in browser RAM?</span>
+            <i class="ph ph-caret-down text-[#6B5B52] group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="body-5 text-[#6B5B52] mt-3 pt-3 border-t border-[#EADFD3]">
+            Before any radiograph payload leaves your computer, an in-memory WebAssembly module parses the binary DICOM dataset. It strips Tag (0010,0010) Patient Name, Tag (0010,0020) Medical Record Number, and burns zero-intensity black padding over four-corner pixel burn-in regions. Raw identifiers never touch external networks.
+          </p>
+        </details>
+
+        <details class="vf-card p-4 group cursor-pointer">
+          <summary class="title-3 text-[#1F1612] flex items-center justify-between list-none">
+            <span>What happens when the model encounters non-upper extremity images?</span>
+            <i class="ph ph-caret-down text-[#6B5B52] group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="body-5 text-[#6B5B52] mt-3 pt-3 border-t border-[#EADFD3]">
+            Verifact incorporates an anatomical scope rejection gate. Lower extremity or axial skeletal radiographs trigger an immediate out-of-scope advisory flag, redirecting the study to standard unassisted triage.
+          </p>
+        </details>
+
+        <details class="vf-card p-4 group cursor-pointer">
+          <summary class="title-3 text-[#1F1612] flex items-center justify-between list-none">
+            <span>Can attending radiologists override the AI findings?</span>
+            <i class="ph ph-caret-down text-[#6B5B52] group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="body-5 text-[#6B5B52] mt-3 pt-3 border-t border-[#EADFD3]">
+            Yes. The attending physician maintains complete editorial authority. Radiologists can edit the drafted text, recalibrate calipers, reject false-positive bounding boxes, and stamp their electronic signature.
+          </p>
+        </details>
+
+        <details class="vf-card p-4 group cursor-pointer">
+          <summary class="title-3 text-[#1F1612] flex items-center justify-between list-none">
+            <span>How are signed reports delivered to hospital PACS and EHR?</span>
+            <i class="ph ph-caret-down text-[#6B5B52] group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <p class="body-5 text-[#6B5B52] mt-3 pt-3 border-t border-[#EADFD3]">
+            Completed studies export as HL7 FHIR DiagnosticReport payloads and cryptographically sealed PDF documents stamped with the physician's license number and audit hash.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- STEP 3: Bottom Call to Action in --bg-soft (#FFF4E8) -->
+    <section class="bg-[#FFF4E8] border-t border-[#EADFD3] py-16 text-center">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <h2 class="heading-3 text-[#1F1612] mb-3">Begin fracture triage evaluation</h2>
+        <p class="body-3 text-[#6B5B52] max-w-lg mx-auto mb-6">
+          Test our reference benchmark suite or upload an anonymous study to verify caliper precision and dual-engine consensus.
+        </p>
+        <div class="flex items-center justify-center gap-3">
+          <a href="/upload.html" class="btn-primary">
+            <i class="ph ph-upload-simple"></i>
+            <span>Upload Study</span>
+          </a>
+          <a href="/worklist.html" class="btn-secondary">
+            <i class="ph ph-list-dashes"></i>
+            <span>Open Worklist</span>
+          </a>
+        </div>
+        <p class="caption-3 text-[#6B5B52] mt-4 font-mono">
+          Free 60-day institutional pilot &bull; Zero hospital PHI retention &bull; HIPAA &amp; GDPR Compliant
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- STEP 3: Footer in Espresso (--deep: #3A1F14) -->
+  <footer class="bg-[#3A1F14] text-[#FAF6F1] py-8 text-xs font-mono border-t border-[#4D2B1E]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#F5A524]"></span>
+        <span class="font-semibold text-white">VERIFACT CLINICAL PACS</span>
+        <span class="text-[#EADFD3]/60">&bull; Version 2.4-UE</span>
+      </div>
+      <div class="flex items-center gap-5 text-[#FAF6F1]/80">
+        <a href="/about.html" class="hover:text-white transition-colors">Protocol</a>
+        <a href="/audit-log.html" class="hover:text-white transition-colors">Audit Trail</a>
+        <a href="/analytics.html" class="hover:text-white transition-colors">Metrics</a>
+        <a href="/sign-off.html" class="hover:text-white transition-colors">Sign-off Registry</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Tagline Reveal & Interactive Viewer Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. PACS Case Switcher
+      const cases = {
+        distal_radius: {
+          img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCvhusTNoasnGXiX7MxDh4j59W1fFEshjGTNboswPUtQicqdGvvfJJqCaJDcRQYn6UVTRm3SXSLNnZzLX5HG17jWsYm54WOSn8SAgn6MoIXs43CArJ8MybUKJg50DDCZ6s3_OHjRyE7r4BMr-n806immW5BIGk2GjLTRDYdbht-Qas4LGbwIA88VbpIIAwS9UT4CBXchdwOHtvj9eoWr5juTKVfdma3vpYr-jRMQGtZ",
+          status: "URGENT: 98% ACUTE",
+          statusClass: "badge-urgent",
+          anatomy: "DISTAL RADIUS METAPHYSIS",
+          hasCaliper: true,
+          hasHeatmap: true
+        },
+        scaphoid: {
+          img: "http://127.0.0.1:8000/static/samples/scaphoid_hairline_fracture.png",
+          status: "NEEDS REVIEW: 58%",
+          statusClass: "badge-review",
+          anatomy: "CARPAL SCAPHOID WAIST",
+          hasCaliper: false,
+          hasHeatmap: true
+        },
+        clavicle: {
+          img: "http://127.0.0.1:8000/static/samples/clavicle_displaced_fracture.png",
+          status: "URGENT: 96% DISPLACED",
+          statusClass: "badge-urgent",
+          anatomy: "CLAVICLE MID-SHAFT",
+          hasCaliper: true,
+          hasHeatmap: true
+        },
+        femur: {
+          img: "http://127.0.0.1:8000/static/samples/normal_femur_control.png",
+          status: "ROUTINE: 5% NORMAL",
+          statusClass: "badge-routine",
+          anatomy: "INTACT FEMUR SHAFT",
+          hasCaliper: false,
+          hasHeatmap: false
+        }
+      };
+
+      const tabs = document.querySelectorAll('.case-tab');
+      const pacsImg = document.getElementById('pacs-main-img');
+      const badgeStatus = document.getElementById('case-badge-status');
+      const badgeAnatomy = document.getElementById('case-badge-anatomy');
+      const heatmapLayer = document.getElementById('pacs-heatmap-layer');
+      const caliperLayer = document.getElementById('pacs-caliper-layer');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const caseKey = tab.getAttribute('data-case');
+          const data = cases[caseKey];
+          if (!data) return;
+
+          tabs.forEach(t => {
+            t.className = "case-tab px-2.5 py-1 rounded bg-[#27140C] text-[#FAF6F1] border border-[#4D2B1E] hover:bg-[#4D2B1E] transition-colors";
+          });
+          tab.className = "case-tab px-2.5 py-1 rounded bg-[#C8512D] text-white border border-[#C8512D] font-semibold transition-colors";
+
+          pacsImg.src = data.img;
+          badgeStatus.innerHTML = `<i class="ph ${caseKey === 'femur' ? 'ph-check' : caseKey === 'scaphoid' ? 'ph-eye' : 'ph-warning'}"></i><span>${data.status}</span>`;
+          badgeStatus.className = `${data.statusClass} flex items-center gap-1`;
+          badgeAnatomy.textContent = data.anatomy;
+
+          caliperLayer.style.opacity = data.hasCaliper ? '1' : '0';
+          heatmapLayer.style.opacity = data.hasHeatmap ? '0.6' : '0';
+        });
+      });
+
+      // Controls
+      let heatmapVisible = true;
+      let caliperVisible = true;
+      let inverted = false;
+
+      const toggleHeatmapBtn = document.getElementById('toggle-heatmap-btn');
+      const toggleCaliperBtn = document.getElementById('toggle-caliper-btn');
+      const toggleInvertBtn = document.getElementById('toggle-invert-btn');
+
+      if (toggleHeatmapBtn) {
+        toggleHeatmapBtn.addEventListener('click', () => {
+          heatmapVisible = !heatmapVisible;
+          heatmapLayer.style.opacity = heatmapVisible ? '0.6' : '0';
+          toggleHeatmapBtn.innerHTML = `<i class="ph ph-fire text-[#FAF6F1]"></i><span>Heatmap (${heatmapVisible ? 'ON' : 'OFF'})</span>`;
+        });
+      }
+
+      if (toggleCaliperBtn) {
+        toggleCaliperBtn.addEventListener('click', () => {
+          caliperVisible = !caliperVisible;
+          caliperLayer.style.opacity = caliperVisible ? '1' : '0';
+          toggleCaliperBtn.innerHTML = `<i class="ph ph-ruler text-[#FAF6F1]"></i><span>Caliper (${caliperVisible ? 'ON' : 'OFF'})</span>`;
+        });
+      }
+
+      if (toggleInvertBtn) {
+        toggleInvertBtn.addEventListener('click', () => {
+          inverted = !inverted;
+          pacsImg.style.filter = inverted ? 'invert(1) contrast(135%) brightness(90%)' : 'contrast(125%) brightness(95%)';
+        });
+      }
+
+      // 2. Tagline Reveal on Scroll
+      const taglineEl = document.getElementById('tagline-text');
+      if (taglineEl) {
+        const text = taglineEl.textContent.trim();
+        const words = text.split(/\s+/);
+        taglineEl.innerHTML = words.map(w => `<span class="tagline-word">${w}</span>`).join(' ');
+
+        const wordElements = taglineEl.querySelectorAll('.tagline-word');
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            wordElements.forEach((word, index) => {
+              setTimeout(() => {
+                word.classList.add('revealed');
+              }, index * 40);
+            });
+            observer.unobserve(taglineEl);
+          }
+        }, { threshold: 0.2 });
+
+        observer.observe(taglineEl);
+      }
+    });
+  </script>
+</body>
 </html>

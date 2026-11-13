@@ -1,10 +1,20 @@
 {
-  "version": 2,
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/worklist", "destination": "/worklist.html" },
+    { "source": "/upload", "destination": "/upload.html" },
+    { "source": "/privacy-check", "destination": "/privacy-check.html" },
+    { "source": "/scan-in-progress", "destination": "/scan-in-progress.html" },
+    { "source": "/findings", "destination": "/findings.html" },
+    { "source": "/viewer", "destination": "/viewer.html" },
+    { "source": "/sign-off", "destination": "/sign-off.html" },
+    { "source": "/analytics", "destination": "/analytics.html" },
+    { "source": "/audit-log", "destination": "/audit-log.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/how-it-works", "destination": "/how-it-works.html" },
+    { "source": "/login", "destination": "/login.html" }
   ],
   "headers": [
     {

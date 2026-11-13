@@ -3,6 +3,8 @@ node_modules/
 dist/
 vemv/
 venv/
+backend/venv/
+backend/vemv/
 .env
 backend/.env
 frontend/.env
@@ -26,6 +28,12 @@ backend/verifact.db
 # Datasets & Large Evaluation Files
 evaluation/data/
 evaluation/mock_dataset/
+stitch_verifact_clinical_fracture_triage/
+*.zip
+
+# Frontend legacy & backups
+frontend/src_old/
+frontend/postcss.config.js.bak
 
 # OS & Editor
 .DS_Store

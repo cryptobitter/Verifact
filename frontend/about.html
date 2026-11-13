@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Sans+3:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,600&amp;display=swap" rel="stylesheet"/>
+<style>html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": {
+  "bg": "#FFFFFF",
+  "bg-soft": "#FFF4E8",
+  "surface": "#FFFFFF",
+  "surface-alt": "#FAF6F1",
+  "border": "#EADFD3",
+  "text": "#1F1612",
+  "text-muted": "#6B5B52",
+  "primary": "#C8512D",
+  "primary-hover": "#B04624",
+  "primary-contrast": "#FFFFFF",
+  "primary-container": "#FBE3D6",
+  "on-primary": "#FFFFFF",
+  "on-primary-container": "#1F1612",
+  "secondary": "#3A1F14",
+  "secondary-container": "#FAF6F1",
+  "on-secondary": "#FFFFFF",
+  "on-secondary-container": "#1F1612",
+  "tertiary": "#F5A524",
+  "tertiary-container": "#FFF4E8",
+  "on-tertiary": "#1F1612",
+  "on-tertiary-container": "#1F1612",
+  "accent": "#F5A524",
+  "blush": "#FBE3D6",
+  "deep": "#3A1F14",
+  "error": "#D92D20",
+  "error-container": "#FDE8E8",
+  "on-error": "#FFFFFF",
+  "on-error-container": "#D92D20",
+  "background": "#FFFFFF",
+  "on-background": "#1F1612",
+  "surface-dim": "#FAF6F1",
+  "surface-bright": "#FFFFFF",
+  "surface-container-lowest": "#FFFFFF",
+  "surface-container-low": "#FFF4E8",
+  "surface-container": "#FAF6F1",
+  "surface-container-high": "#F5ECE1",
+  "surface-container-highest": "#EADFD3",
+  "on-surface": "#1F1612",
+  "on-surface-variant": "#6B5B52",
+  "outline": "#C5B4A5",
+  "outline-variant": "#EADFD3",
+  "inverse-surface": "#3A1F14",
+  "inverse-on-surface": "#FAF6F1",
+  "inverse-primary": "#FBE3D6",
+  "primary-fixed": "#FBE3D6",
+  "primary-fixed-dim": "#F5ECE1",
+  "on-primary-fixed": "#1F1612",
+  "on-primary-fixed-variant": "#6B5B52",
+  "secondary-fixed": "#EADFD3",
+  "secondary-fixed-dim": "#D8C7B8",
+  "on-secondary-fixed": "#1F1612",
+  "on-secondary-fixed-variant": "#6B5B52",
+  "tertiary-fixed": "#F5A524",
+  "tertiary-fixed-dim": "#E59418",
+  "on-tertiary-fixed": "#1F1612",
+  "on-tertiary-fixed-variant": "#1F1612",
+  "status-urgent": "#D92D20",
+  "status-review": "#F5A524",
+  "status-routine": "#3A1F14",
+  "status-discordant": "#E5799A",
+  "status-signed": "#C8512D",
+  "surface-tint": "#C8512D"
+}, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-md": "1.25rem", "gutter": "1.25rem", "space-sm": "0.75rem", "space-lg": "1.75rem", "space-xs": "0.375rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "margin": "2rem", "space-xl": "2.5rem" }, "fontFamily": { "mono-data": [ "JetBrains Mono" ], "label-md": [ "\"Source Sans 3\"" ], "body-strong": [ "\"Source Sans 3\"" ], "headline-sm": [ "\"Source Serif 4\"" ], "body-md": [ "\"Source Sans 3\"" ], "headline-md": [ "\"Source Serif 4\"" ], "headline-lg": [ "\"Source Serif 4\"" ], "headline-xl-mobile": [ "\"Source Serif 4\"" ], "label-sm": [ "\"Source Sans 3\"" ], "headline-xl": [ "\"Source Serif 4\"" ], "body-lg": [ "\"Source Sans 3\"" ] }, "fontSize": { "mono-data": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ], "label-md": [ "13px", { "lineHeight": "18px", "fontWeight": "500" } ], "body-strong": [ "15px", { "lineHeight": "22px", "fontWeight": "600" } ], "headline-sm": [ "17px", { "lineHeight": "24px", "fontWeight": "600" } ], "body-md": [ "15px", { "lineHeight": "22px", "fontWeight": "400" } ], "headline-md": [ "20px", { "lineHeight": "28px", "fontWeight": "600" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "fontWeight": "600" } ], "headline-xl-mobile": [ "26px", { "lineHeight": "34px", "fontWeight": "600" } ], "label-sm": [ "13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-xl": [ "32px", { "lineHeight": "40px", "fontWeight": "600" } ], "body-lg": [ "17px", { "lineHeight": "26px", "fontWeight": "400" } ] } } } };</script>  <link rel="stylesheet" href="/css/design-system.css"/>
+</head><body class="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-[#EADFD3] shadow-[0_2px_8px_rgba(58,31,20,0.06)]"><div class="h-16 w-full px-margin flex items-center justify-between"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-xs"><span class="font-headline-lg text-headline-lg text-primary tracking-tight font-semibold">Verifact</span><span class="inline-flex items-center px-2 py-0.5 rounded font-mono-data text-xs bg-[#F5A524] text-[#1F1612] font-semibold tracking-wide uppercase shadow-sm">DEMO MODE</span></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="text-primary font-semibold bg-surface-container-low px-space-sm py-1.5 rounded-lg"><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="worklist" href="/worklist.html">Worklist</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="upload" href="/upload.html">Upload</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="analytics" href="/analytics.html">Analytics</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="audit-log" href="/audit-log.html">Audit Log</a><a aria-current="page" class="px-3 py-1.5 transition-colors bg-primary text-white font-semibold rounded-lg" data-path="about" href="/about.html">About</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="how-it-works" href="/how-it-works.html">How It Works</a></nav></div><div class="flex items-center gap-space-md"><div class="hidden sm:flex flex-col text-right"><span class="font-body-strong text-body-strong text-on-surface leading-tight">Dr. K. Vance, MD</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Attending Radiologist</span></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><i class="ph ph-user"></i></div><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="login" href="/login.html">Sign out</a></div></div></div></header><main class="w-full pt-16 flex-1 bg-surface"><div class="flex flex-col w-full">
+<!-- Top Editorial Title Block -->
+<div class="w-full bg-surface-container-low py-space-xl">
+<div class="max-w-7xl mx-auto px-margin">
+<div class="flex flex-col gap-space-xs max-w-3xl">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-mono-data text-mono-data uppercase tracking-wider text-on-surface-variant text-[11px]">System Disclosure &amp; Governance • v2.4</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary font-semibold tracking-tight">About &amp; Clinical Limitations</h1>
+<div class="w-12 h-1 bg-primary rounded-full mt-2"></div>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1 leading-relaxed">
+          What is this page? A transparent guide to what Verifact does, its clinical performance, and where it must never be used.
+        </p>
+</div>
+</div>
+</div>
+<!-- Document Body Grid: Left Sticky Nav + Right Structured Sections -->
+<div class="w-full max-w-7xl mx-auto px-margin py-space-xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Sticky Table of Contents -->
+<aside class="hidden lg:block lg:col-span-3 sticky top-24 self-start">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs border-b border-surface-container">
+<span class="font-label-sm text-label-sm text-on-surface uppercase tracking-wider font-semibold">Table of Contents</span>
+<span class="font-mono-data text-mono-data text-[11px] text-on-surface-variant">7 SECTIONS</span>
+</div>
+<nav class="flex flex-col gap-1" id="toc-nav">
+<a class="toc-link flex items-center justify-between px-space-xs py-1.5 rounded-lg text-label-md font-label-md text-primary font-semibold bg-surface-container-low transition-colors" href="#what-verifact-is">
+<span class="truncate">1. What Verifact Is</span>
+<i class="ph ph-arrow-right"></i>
+</a>
+<a class="toc-link flex items-center justify-between px-space-xs py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" href="#what-it-is-not">
+<span class="truncate">2. What It Is NOT (Safety)</span>
+</a>
+<a class="toc-link flex items-center justify-between px-space-xs py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" href="#datasets-and-training">
+<span class="truncate">3. Datasets &amp; Training</span>
+</a>
+<a class="toc-link flex items-center justify-between px-space-xs py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" href="#clinical-performance">
+<span class="truncate">4. Clinical Performance</span>
+</a>
+<a class="toc-link flex items-center justify-between px-space-xs py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" href="#known-limitations">
+<span class="truncate">5. Known Limitations</span>
+</a>
+<a class="toc-link flex items-center justify-between px-space-xs py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" href="#privacy-architecture">
+<span class="truncate">6. Privacy Architecture</span>
+</a>
+<a class="toc-link flex items-center justify-between px-space-xs py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" href="#built-with">
+<span class="truncate">7. Built With (Stack)</span>
+</a>
+</nav>
+<div class="pt-space-xs border-t border-surface-container flex flex-col gap-1">
+<span class="font-mono-data text-mono-data text-[11px] text-on-surface-variant uppercase">Regulation</span>
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface">FDA SaMD Tier: Class II Adjunct</span>
+</div>
+<span class="font-mono-data text-mono-data text-[11px] text-on-surface-variant">Doc Ref: VF-CLIN-2025-A</span>
+</div>
+</div>
+</aside>
+<!-- Right Main Editorial Column -->
+<div class="col-span-1 lg:col-span-9 flex flex-col gap-space-xl">
+<!-- Section 1: What Verifact is -->
+<section class="scroll-mt-24 flex flex-col gap-space-md" id="what-verifact-is">
+<div class="flex items-baseline justify-between border-b border-surface-container pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-mono-data text-mono-data text-primary font-semibold">01</span>
+<h2 class="font-headline-lg text-headline-lg text-primary font-semibold">What Verifact Is</h2>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded font-mono-data text-xs bg-[#F5A524] text-[#1F1612] font-semibold tracking-wide uppercase shadow-sm">ASSISTIVE AI</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+            Verifact is a <strong class="font-body-strong text-primary">human-in-the-loop clinical decision support co-pilot</strong> engineered specifically for high-acuity emergency radiology, urgent care centers, and trauma triage suites.
+          </p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<i class="ph ph-bone"></i>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-semibold">Screening &amp; Heatmaps</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Pre-screens upper-extremity projections (shoulder, humerus, elbow, forearm, wrist, hand) and generates class activation gradient heatmaps showing suspicious cortical disruptions.
+              </p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<i class="ph ph-edit-note"></i>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-semibold">Structured Drafts</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Generates draft RadLex-compatible clinical findings (cortical breach morphology, displacement degree, anatomical landmark) ready for the physician’s immediate critique or revision.
+              </p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<i class="ph ph-bedtime"></i>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-semibold">Fatigue Protection</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Engineered to mitigate diagnostic misses during 2:00 AM – 6:00 AM nocturnal shifts where diagnostic fatigue rises by 24%, without removing or diluting attending doctor authority.
+              </p>
+</div>
+</div>
+</section>
+<!-- Section 2: What it is NOT (Safety & Regulatory) -->
+<section class="scroll-mt-24 flex flex-col gap-space-md" id="what-it-is-not">
+<div class="flex items-baseline justify-between border-b border-surface-container pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-mono-data text-mono-data text-error font-semibold">02</span>
+<h2 class="font-headline-lg text-headline-lg text-primary font-semibold">What It Is NOT (Safety &amp; Intended Use)</h2>
+</div>
+<span class="px-space-xs py-0.5 rounded text-mono-data font-mono-data text-[11px] bg-error-container text-on-error-container">REGULATORY BOUNDARIES</span>
+</div>
+<!-- Editorial Caution Callout -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center shrink-0">
+<i class="ph ph-gavel"></i>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Statutory Intended Use Scope</span>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Verifact operates exclusively as an adjunct decision-support instrument. Under institutional protocol and medical device guidelines, the software is strictly subject to the following non-negotiable operating constraints:
+                </p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mt-space-md pt-space-md border-t border-surface-container">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-error font-body-strong text-body-strong">
+<i class="ph ph-cancel"></i>
+<span>Not Autonomous</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Never diagnoses independently. It does not prescribe interventions, clear patients for discharge, or release reports directly to patient charts.
+                </p>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-error font-body-strong text-body-strong">
+<i class="ph ph-cancel"></i>
+<span>Not for Axial / Pediatric</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Not validated for pediatric open physes (growth plates) or the axial skeleton (cervical spine, thoracic spine, lumbar spine, pelvis, ribs, skull).
+                </p>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-error font-body-strong text-body-strong">
+<i class="ph ph-cancel"></i>
+<span>Not a Board Substitute</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Cannot replace formal board-certified radiologic interpretation. Every bounding box and observation requires credentialed electronic sign-off.
+                </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Datasets & Training Sources -->
+<section class="scroll-mt-24 flex flex-col gap-space-md" id="datasets-and-training">
+<div class="flex items-baseline justify-between border-b border-surface-container pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-mono-data text-mono-data text-primary font-semibold">03</span>
+<h2 class="font-headline-lg text-headline-lg text-primary font-semibold">Datasets &amp; Training Sources</h2>
+</div>
+<span class="px-space-xs py-0.5 rounded text-mono-data font-mono-data text-[11px] bg-surface-container-high text-on-surface-variant">PROVENANCE</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            The underlying model architecture was trained, validated, and fine-tuned exclusively across musculoskeletal imaging repositories with validated specialist-level ground truth.
+          </p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- FracAtlas -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-mono-data text-mono-data font-semibold text-primary">FRACATLAS</span>
+<span class="font-mono-data text-mono-data text-[11px] text-on-surface-variant">4,083 STUDIES</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Musculoskeletal Atlas</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  High-resolution X-ray series spanning hand, wrist, forearm, elbow, and shoulder. Contains manual polygon annotations verified by two independent radiologists with consensus resolution.
+                </p>
+</div>
+<div class="pt-space-sm mt-space-sm border-t border-surface-container flex items-center justify-between text-mono-data font-mono-data text-[11px] text-on-surface-variant">
+<span>Supervised Bounding</span>
+<span class="text-secondary font-semibold">Ground Truth: 100%</span>
+</div>
+</div>
+<!-- MURA -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-mono-data text-mono-data font-semibold text-primary">STANFORD MURA</span>
+<span class="font-mono-data text-mono-data text-[11px] text-on-surface-variant">14,863 PATIENTS</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Upper Extremity Cohort</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Large-scale Stanford musculoskeletal abnormality dataset spanning 7 anatomical sub-regions. Used for general bone pathology feature extraction and robust transfer learning.
+                </p>
+</div>
+<div class="pt-space-sm mt-space-sm border-t border-surface-container flex items-center justify-between text-mono-data font-mono-data text-[11px] text-on-surface-variant">
+<span>Multi-View Series</span>
+<span class="text-secondary font-semibold">Diverse Hardware</span>
+</div>
+</div>
+<!-- Retrospective Cohort -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-mono-data text-mono-data font-semibold text-primary">RETROSPECTIVE</span>
+<span class="font-mono-data text-mono-data text-[11px] text-on-surface-variant">250 STUDIES</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Trauma Center Bench</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Institutional consecutive acute emergency cases de-identified at hospital gateway. Triple-blinded reading by three board-certified emergency radiologists used for current metric validation.
+                </p>
+</div>
+<div class="pt-space-sm mt-space-sm border-t border-surface-container flex items-center justify-between text-mono-data font-mono-data text-[11px] text-on-surface-variant">
+<span>Hold-out Validation</span>
+<span class="text-secondary font-semibold">Zero Contamination</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Clinical Performance -->
+<section class="scroll-mt-24 flex flex-col gap-space-md" id="clinical-performance">
+<div class="flex items-baseline justify-between border-b border-surface-container pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-mono-data text-mono-data text-primary font-semibold">04</span>
+<h2 class="font-headline-lg text-headline-lg text-primary font-semibold">Clinical Performance</h2>
+</div>
+<span class="px-space-xs py-0.5 rounded text-mono-data font-mono-data text-[11px] bg-secondary-container text-on-secondary-container">PROSPECTIVE BENCHMARK</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="p-space-md pb-space-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs border-b border-surface-container">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Blinded Prospective Benchmark on 250 Emergency Studies</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Blinded comparison against consensus panel of three senior emergency radiologists.</p>
+</div>
+<div class="flex items-center gap-space-xs shrink-0">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-mono-data text-mono-data text-[12px] text-on-surface-variant">N = 250 consecutive</span>
+</div>
+</div>
+<!-- Performance Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm border-b border-surface-container">
+<th class="py-space-sm px-space-md font-semibold">Metric</th>
+<th class="py-space-sm px-space-md font-semibold">Score</th>
+<th class="py-space-sm px-space-md font-semibold">95% Confidence Interval</th>
+<th class="py-space-sm px-space-md font-semibold">Clinical Interpretation</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container text-body-md font-body-md">
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-space-sm px-space-md">
+<div class="font-body-strong text-primary">AUROC</div>
+<div class="font-mono-data text-[11px] text-on-surface-variant">Discriminative power</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="font-mono-data text-mono-data font-semibold text-primary text-base">0.947</span>
+</td>
+<td class="py-space-sm px-space-md font-mono-data text-mono-data text-on-surface-variant">
+                      [0.921 – 0.968]
+                    </td>
+<td class="py-space-sm px-space-md text-on-surface">
+                      Excellent overall discrimination between fractured and intact cortices across varied views.
+                    </td>
+</tr>
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-space-sm px-space-md">
+<div class="font-body-strong text-primary">Sensitivity</div>
+<div class="font-mono-data text-[11px] text-on-surface-variant">True positive rate</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="font-mono-data text-mono-data font-semibold text-primary text-base">83.2%</span>
+</td>
+<td class="py-space-sm px-space-md font-mono-data text-mono-data text-on-surface-variant">
+                      [78.4% – 87.1%]
+                    </td>
+<td class="py-space-sm px-space-md text-on-surface">
+                      Reliably identifies subtle hairline, buckle/torus, and non-displaced cortical breaches.
+                    </td>
+</tr>
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-space-sm px-space-md">
+<div class="font-body-strong text-primary">Specificity</div>
+<div class="font-mono-data text-[11px] text-on-surface-variant">True negative rate</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="font-mono-data text-mono-data font-semibold text-primary text-base">93.6%</span>
+</td>
+<td class="py-space-sm px-space-md font-mono-data text-mono-data text-on-surface-variant">
+                      [90.1% – 96.2%]
+                    </td>
+<td class="py-space-sm px-space-md text-on-surface">
+                      Minimizes false-positive alert fatigue in high-volume negative screening queues.
+                    </td>
+</tr>
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-space-sm px-space-md">
+<div class="font-body-strong text-primary">Median Edge Latency</div>
+<div class="font-mono-data text-[11px] text-on-surface-variant">Client-side runtime</div>
+</td>
+<td class="py-space-sm px-space-md">
+<span class="font-mono-data text-mono-data font-semibold text-secondary text-base">410 ms</span>
+</td>
+<td class="py-space-sm px-space-md font-mono-data text-mono-data text-on-surface-variant">
+                      [320 ms – 580 ms]
+                    </td>
+<td class="py-space-sm px-space-md text-on-surface">
+                      Inference completes entirely on the local client machine before the clinician opens the window.
+                    </td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Explanatory Caption -->
+<div class="p-space-md bg-surface-container-low/50 border-t border-surface-container">
+<div class="flex items-start gap-space-xs text-on-surface-variant">
+<i class="ph ph-info"></i>
+<p class="font-body-md text-body-md leading-relaxed">
+<strong class="font-body-strong text-on-surface">What does 83.2% sensitivity mean in clinical practice?</strong> 
+                  Approximately 17 out of 100 occult or non-displaced hairline fractures will <strong class="font-body-strong text-error">not</strong> trigger an automated bounding box. The attending physician must independently inspect all projection views, fat pad signs, and joint alignments. Verifact is designed as a safety net for overt and intermediate disruptions, never a negative clearance tool.
+                </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Known Limitations & Failure Modes -->
+<section class="scroll-mt-24 flex flex-col gap-space-md" id="known-limitations">
+<div class="flex items-baseline justify-between border-b border-surface-container pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-mono-data text-mono-data text-tertiary-container font-semibold">05</span>
+<h2 class="font-headline-lg text-headline-lg text-primary font-semibold">Known Limitations &amp; Edge Cases</h2>
+</div>
+<span class="px-space-xs py-0.5 rounded text-mono-data font-mono-data text-[11px] bg-surface-container-high text-on-surface-variant">FOUR FAILURE MODES</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            In our retrospective stress testing, model reliability degraded predictably under four specific radiographic conditions. Clinicians should exhibit elevated scrutiny when reviewing:
+          </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Mode A -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center font-mono-data text-mono-data text-[11px] font-semibold text-primary">A</span>
+<span class="font-label-sm text-label-sm text-error uppercase font-semibold">False Positive Risk</span>
+</div>
+<i class="ph ph-child-care"></i>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-semibold">Pediatric Open Growth Plates</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Normal cartilaginous physis lines (distal radial and ulnar physes) present radiolucent bands that mimic acute cortical discontinuities. The model frequently misinterprets physiological growth lines as Salter-Harris fractures.
+              </p>
+<div class="mt-auto pt-space-xs text-mono-data text-mono-data text-[12px] text-on-surface-variant">
+                Mitigation: Enforce age threshold (&gt;18 yrs) before running automated segmentation.
+              </div>
+</div>
+<!-- Mode B -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center font-mono-data text-mono-data text-[11px] font-semibold text-primary">B</span>
+<span class="font-label-sm text-label-sm text-tertiary-container uppercase font-semibold">Degraded Activation</span>
+</div>
+<i class="ph ph-blur-on"></i>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-semibold">Motion Blur &amp; Poor Exposure</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Underexposed films or patient motion artifact diminish edge gradient sharpness. This low signal-to-noise ratio suppresses Grad-CAM activation maps below the 0.65 threshold, causing genuine hairline fractures to be overlooked.
+              </p>
+<div class="mt-auto pt-space-xs text-mono-data text-mono-data text-[12px] text-on-surface-variant">
+                Mitigation: Radiologic technologist repeat series requested for non-diagnostic exposures.
+              </div>
+</div>
+<!-- Mode C -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center font-mono-data text-mono-data text-[11px] font-semibold text-primary">C</span>
+<span class="font-label-sm text-label-sm text-error uppercase font-semibold">High Contrast Artifact</span>
+</div>
+<i class="ph ph-precision-manufacturing"></i>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-semibold">Orthopedic Hardware In-Situ</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Metallic fixation plates, cortical screws, and intramedullary rods introduce harsh beam-hardening boundaries. Convolutional kernels regularly highlight screw holes or plate margins as cortical fracture lines.
+              </p>
+<div class="mt-auto pt-space-xs text-mono-data text-mono-data text-[12px] text-on-surface-variant">
+                Mitigation: Manual exclusion toggle on views containing surgical fixation implants.
+              </div>
+</div>
+<!-- Mode D -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center font-mono-data text-mono-data text-[11px] font-semibold text-primary">D</span>
+<span class="font-label-sm text-label-sm text-tertiary-container uppercase font-semibold">Partial Undercounting</span>
+</div>
+<i class="ph ph-view-quilt"></i>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-semibold">Comminuted &amp; Fragmented Injuries</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                While the model reliably bounds the primary cortical disruption in severe trauma, it frequently consolidates multiple small comminuted micro-fragments into a single broad zone, missing secondary free bone chips.
+              </p>
+<div class="mt-auto pt-space-xs text-mono-data text-mono-data text-[12px] text-on-surface-variant">
+                Mitigation: Recommend supplementary non-contrast CT for complex articular reconstruction.
+              </div>
+</div>
+</div>
+</section>
+<!-- Section 6: Privacy Architecture -->
+<section class="scroll-mt-24 flex flex-col gap-space-md" id="privacy-architecture">
+<div class="flex items-baseline justify-between border-b border-surface-container pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-mono-data text-mono-data text-secondary font-semibold">06</span>
+<h2 class="font-headline-lg text-headline-lg text-primary font-semibold">Privacy &amp; Client-Side Architecture</h2>
+</div>
+<span class="px-space-xs py-0.5 rounded text-mono-data font-mono-data text-[11px] bg-secondary-container text-on-secondary-container">ZERO CLOUD PHI</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-sm border-b border-surface-container">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-semibold">Local-Memory DICOM Sanitation Pipeline</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Patient health information never leaves your clinical workstation session.</p>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1 bg-surface-container-low rounded-lg shrink-0">
+<i class="ph ph-shield-check"></i>
+<span class="font-mono-data text-mono-data text-[12px] text-primary font-medium">HIPAA • DICOM PS 3.15 Compliant</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Feature 1 -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<i class="ph ph-memory"></i>
+</div>
+<span class="font-body-strong text-body-strong text-on-surface">Edge-First Anonymization</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  DICOM Tag Group 0010 (Patient Name, MRN, Date of Birth, Institution ID) is zeroed out directly inside browser WebAssembly RAM before any pixel buffers are passed to the neural network inference engine.
+                </p>
+</div>
+<!-- Feature 2 -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<i class="ph ph-crop"></i>
+</div>
+<span class="font-body-strong text-body-strong text-on-surface">Outer-Margin Burn-In Masking</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  The outer 10% perimeter of the pixel array is automatically analyzed and sanitized, eliminating burnt-in clinic overlays, department timestamps, and equipment serial numbers from downstream activations.
+                </p>
+</div>
+<!-- Feature 3 -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<i class="ph ph-cloud-off"></i>
+</div>
+<span class="font-body-strong text-body-strong text-on-surface">Zero Remote PHI Storage</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  No patient identifiers, uncompressed DICOM records, or clinical notes are persistently logged to external servers. The neural weights are delivered to the edge; data stays behind the hospital firewall.
+                </p>
+</div>
+</div>
+<!-- Visual Flow Bar -->
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col sm:flex-row sm:items-center justify-between text-mono-data text-mono-data text-[12px] gap-space-xs text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Workstation PACS</span>
+</div>
+<i class="ph ph-arrow-right"></i>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>In-Browser Wasm De-ID</span>
+</div>
+<i class="ph ph-arrow-right"></i>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Local ONNX DenseNet-121</span>
+</div>
+<i class="ph ph-arrow-right"></i>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Physician Review Screen</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 7: Built With (Tech Stack) -->
+<section class="scroll-mt-24 flex flex-col gap-space-md" id="built-with">
+<div class="flex items-baseline justify-between border-b border-surface-container pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-mono-data text-mono-data text-primary font-semibold">07</span>
+<h2 class="font-headline-lg text-headline-lg text-primary font-semibold">Built With (Technical Stack)</h2>
+</div>
+<span class="px-space-xs py-0.5 rounded text-mono-data font-mono-data text-[11px] bg-surface-container-high text-on-surface-variant">COMPONENTS</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Tech Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<i class="ph ph-code"></i>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-primary font-semibold">PyTorch &amp; ONNX Runtime Web</h3>
+<span class="font-mono-data text-mono-data text-[11px] text-on-surface-variant">DenseNet-121</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Deep convolutional network optimized via ONNX quantization for client-side hardware-accelerated execution through WebGL and WebGPU shader backends.
+                </p>
+</div>
+</div>
+<!-- Tech Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<i class="ph ph-menu-book"></i>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-primary font-semibold">RadLex &amp; SNOMED CT</h3>
+<span class="font-mono-data text-mono-data text-[11px] text-on-surface-variant">Standard Lexicon</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Harmonized radiological naming lexicon ensuring all machine-drafted cortical observations align with peer-reviewed RSNA nomenclature conventions.
+                </p>
+</div>
+</div>
+<!-- Tech Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<i class="ph ph-lan"></i>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-primary font-semibold">HL7 FHIR R4 Interoperability</h3>
+<span class="font-mono-data text-mono-data text-[11px] text-on-surface-variant">EHR Integration</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Exports approved clinical findings directly to hospital EHR systems (Epic, Cerner) using standard DiagnosticReport and Observation FHIR resources.
+                </p>
+</div>
+</div>
+<!-- Tech Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<i class="ph ph-shield"></i>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-primary font-semibold">WebAssembly (Wasm) Engine</h3>
+<span class="font-mono-data text-mono-data text-[11px] text-on-surface-variant">DICOM PS 3.15</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Compiled C++ parser providing near-native DICOM file decompression, header sanitation, and histogram windowing directly in sandbox memory.
+                </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Navigation Quick Links -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col sm:flex-row sm:items-center justify-between gap-space-md mt-space-md">
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm text-primary font-semibold">Ready to review the interface in action?</span>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Explore the prospective clinical reader or inspect the step-by-step processing protocol.
+            </p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<a class="px-space-md py-2 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors shadow-sm inline-flex items-center gap-1.5" data-path="how-it-works" href="/how-it-works.html">
+<span>View Protocol</span>
+<i class="ph ph-article"></i>
+</a>
+<a class="px-space-md py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm inline-flex items-center gap-1.5" data-path="worklist" href="/worklist.html">
+<span>Open Live Demo</span>
+<i class="ph ph-arrow-right"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple Table of Contents Scroll Highlight
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('.toc-link');
+    const sections = Array.from(links).map(link => {
+      const id = link.getAttribute('href').replace('#', '');
+      return document.getElementById(id);
+    }).filter(Boolean);
+
+    const onScroll = () => {
+      const scrollPos = window.scrollY + 120;
+      let activeIndex = 0;
+
+      sections.forEach((sec, idx) => {
+        if (sec.offsetTop <= scrollPos) {
+          activeIndex = idx;
+        }
+      });
+
+      links.forEach((link, idx) => {
+        if (idx === activeIndex) {
+          link.classList.remove('text-on-surface-variant');
+          link.classList.add('text-primary', 'font-semibold', 'bg-surface-container-low');
+          const arrow = link.querySelector('.ph');
+          if (!arrow) {
+            const icon = document.createElement('span');
+            icon.className = 'ph ph-arrow-right text-xs text-primary';
+            icon.textContent = 'arrow_right';
+            link.appendChild(icon);
+          }
+        } else {
+          link.classList.remove('text-primary', 'font-semibold', 'bg-surface-container-low');
+          link.classList.add('text-on-surface-variant');
+          const arrow = link.querySelector('.ph');
+          if (arrow) arrow.remove();
+        }
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  });
+</script></main><footer class="w-full bg-surface-container-low py-space-sm"><div class="w-full px-margin text-center"><p class="font-label-sm text-label-sm text-on-surface-variant tracking-normal">Decision support only. A physician must review and sign off every study.</p></div></footer><script type="module" src="/js/verifact-engine.js"></script>
+</body></html>

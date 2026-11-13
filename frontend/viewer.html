@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Sans+3:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet"/>
+
+<style>html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors": {
+  "bg": "#FFFFFF",
+  "bg-soft": "#FFF4E8",
+  "surface": "#FFFFFF",
+  "surface-alt": "#FAF6F1",
+  "border": "#EADFD3",
+  "text": "#1F1612",
+  "text-muted": "#6B5B52",
+  "primary": "#C8512D",
+  "primary-hover": "#B04624",
+  "primary-contrast": "#FFFFFF",
+  "primary-container": "#FBE3D6",
+  "on-primary": "#FFFFFF",
+  "on-primary-container": "#1F1612",
+  "secondary": "#3A1F14",
+  "secondary-container": "#FAF6F1",
+  "on-secondary": "#FFFFFF",
+  "on-secondary-container": "#1F1612",
+  "tertiary": "#F5A524",
+  "tertiary-container": "#FFF4E8",
+  "on-tertiary": "#1F1612",
+  "on-tertiary-container": "#1F1612",
+  "accent": "#F5A524",
+  "blush": "#FBE3D6",
+  "deep": "#3A1F14",
+  "error": "#D92D20",
+  "error-container": "#FDE8E8",
+  "on-error": "#FFFFFF",
+  "on-error-container": "#D92D20",
+  "background": "#FFFFFF",
+  "on-background": "#1F1612",
+  "surface-dim": "#FAF6F1",
+  "surface-bright": "#FFFFFF",
+  "surface-container-lowest": "#FFFFFF",
+  "surface-container-low": "#FFF4E8",
+  "surface-container": "#FAF6F1",
+  "surface-container-high": "#F5ECE1",
+  "surface-container-highest": "#EADFD3",
+  "on-surface": "#1F1612",
+  "on-surface-variant": "#6B5B52",
+  "outline": "#C5B4A5",
+  "outline-variant": "#EADFD3",
+  "inverse-surface": "#3A1F14",
+  "inverse-on-surface": "#FAF6F1",
+  "inverse-primary": "#FBE3D6",
+  "primary-fixed": "#FBE3D6",
+  "primary-fixed-dim": "#F5ECE1",
+  "on-primary-fixed": "#1F1612",
+  "on-primary-fixed-variant": "#6B5B52",
+  "secondary-fixed": "#EADFD3",
+  "secondary-fixed-dim": "#D8C7B8",
+  "on-secondary-fixed": "#1F1612",
+  "on-secondary-fixed-variant": "#6B5B52",
+  "tertiary-fixed": "#F5A524",
+  "tertiary-fixed-dim": "#E59418",
+  "on-tertiary-fixed": "#1F1612",
+  "on-tertiary-fixed-variant": "#1F1612",
+  "status-urgent": "#D92D20",
+  "status-review": "#F5A524",
+  "status-routine": "#3A1F14",
+  "status-discordant": "#E5799A",
+  "status-signed": "#C8512D",
+  "surface-tint": "#C8512D"
+},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xl":"2.5rem","space-xs":"0.375rem","gutter":"1.25rem","space-md":"1.25rem","gutter-mobile":"0.75rem","margin":"2rem","margin-mobile":"1rem","space-lg":"1.75rem","space-sm":"0.75rem"},"fontFamily":{"label-sm":["\"Source Sans 3\""],"body-lg":["\"Source Sans 3\""],"body-strong":["\"Source Sans 3\""],"mono-data":["JetBrains Mono"],"body-md":["\"Source Sans 3\""],"headline-md":["\"Source Serif 4\""],"headline-lg":["\"Source Serif 4\""],"headline-sm":["\"Source Serif 4\""],"label-md":["\"Source Sans 3\""],"headline-xl-mobile":["\"Source Serif 4\""],"headline-xl":["\"Source Serif 4\""],"headline-xl":["\"Source Serif 4\""]},"fontSize":{"label-sm":["13px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"body-lg":["17px",{"lineHeight":"26px","fontWeight":"400"}],"body-strong":["15px",{"lineHeight":"22px","fontWeight":"600"}],"mono-data":["13px",{"lineHeight":"18px","fontWeight":"400"}],"body-md":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-sm":["17px",{"lineHeight":"24px","fontWeight":"600"}],"label-md":["13px",{"lineHeight":"18px","fontWeight":"500"}],"headline-xl-mobile":["26px",{"lineHeight":"34px","fontWeight":"600"}],"headline-xl":["32px",{"lineHeight":"40px","fontWeight":"600"}]}}}}</script>  <link rel="stylesheet" href="/css/design-system.css"/>
+</head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-[#EADFD3] shadow-[0_2px_8px_rgba(58,31,20,0.06)]"><div class="h-16 w-full max-w-7xl mx-auto px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-xl"><a class="flex items-center gap-space-xs" data-path="worklist" href="/worklist.html"><div class="w-2.5 h-2.5 bg-primary rounded-DEFAULT"></div><span class="font-headline-md text-headline-md tracking-tight text-primary">Verifact</span></a><nav class="hidden md:flex items-center gap-space-xs" data-active-classes="bg-surface-container-high text-on-surface font-body-strong rounded-lg"><a aria-current="page" class="px-3 py-1.5 transition-colors bg-primary text-white font-semibold rounded-lg" data-path="worklist" href="/worklist.html">Worklist</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="upload" href="/upload.html">Upload</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="analytics" href="/analytics.html">Analytics</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="audit-log" href="/audit-log.html">Audit Log</a><a class="px-3 py-1.5 transition-colors text-on-surface-variant hover:text-primary hover:bg-blush rounded-lg font-medium" data-path="about" href="/about.html">About</a></nav></div><div class="flex items-center gap-space-md"><span class="inline-flex items-center px-2 py-0.5 rounded font-mono-data text-xs bg-[#F5A524] text-[#1F1612] font-semibold tracking-wide uppercase shadow-sm">Demo Mode</span><div class="hidden lg:flex flex-col text-right"><span class="font-body-strong text-label-md text-on-surface leading-tight">Dr. K. Vance, MD</span><span class="font-label-md text-label-sm text-on-surface-variant leading-tight">Attending Radiologist</span></div><a class="hidden sm:inline-block font-label-md text-label-md text-on-surface-variant hover:text-error transition-colors" data-path="login" href="/login.html">Sign out</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><i class="ph ph-user"></i></div></div></div></header><main class="w-full pt-16 flex-1 bg-surface"><div class="flex flex-col w-full">
+<div class="w-full bg-inverse-surface text-surface-bright pb-space-xl">
+<!-- Top Context & Workflow Strip -->
+<div class="w-full bg-on-surface px-margin py-space-sm shadow-sm">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-space-sm">
+<!-- Step Breadcrumb Sequence -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="flex items-center gap-1.5 font-label-md text-label-md text-surface-dim">
+<span class="w-5 h-5 rounded-full bg-surface-container/20 text-surface-dim flex items-center justify-center font-mono-data text-[11px]">1</span>
+<span>Intake</span>
+</div>
+<span class="text-surface-dim/40 font-mono-data">/</span>
+<div class="flex items-center gap-1.5 font-label-md text-label-md text-surface-dim">
+<span class="w-5 h-5 rounded-full bg-surface-container/20 text-surface-dim flex items-center justify-center font-mono-data text-[11px]">2</span>
+<span>Preprocessing</span>
+</div>
+<span class="text-surface-dim/40 font-mono-data">/</span>
+<div class="flex items-center gap-1.5 font-label-md text-label-md text-surface-dim">
+<span class="w-5 h-5 rounded-full bg-surface-container/20 text-surface-dim flex items-center justify-center font-mono-data text-[11px]">3</span>
+<span>Inference</span>
+</div>
+<span class="text-surface-dim/40 font-mono-data">/</span>
+<div class="flex items-center gap-1.5 px-space-xs py-0.5 rounded bg-primary-container text-surface-bright font-body-strong text-label-md shadow-inner">
+<span class="w-5 h-5 rounded-full bg-primary text-surface-bright flex items-center justify-center font-mono-data text-[11px]">4</span>
+<span>Review &amp; Sign-off</span>
+<span class="ml-1 text-[11px] font-mono-data px-1.5 py-0.2 bg-primary/80 rounded text-surface-bright/90">Part 1: Image</span>
+</div>
+</div>
+<!-- Priority Pill & Quick Anatomical Badge -->
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-error-container text-on-error-container font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span>Urgent Review</span>
+</div>
+<div class="hidden sm:flex items-center gap-1 text-surface-dim font-mono-data text-mono-data">
+<i class="ph ph-seal-check"></i>
+<span>Upper Extremity (Wrist) Confirmed</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Metadata Banner & Editorial Guidance -->
+<div class="w-full max-w-7xl mx-auto px-margin pt-space-md pb-space-sm">
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-sm flex-wrap text-surface-dim font-mono-data text-mono-data mb-1">
+<span class="text-surface-bright font-body-strong">Study #FRX-2026-0891</span>
+<span class="opacity-40">•</span>
+<span>View: Left Wrist AP/Lat</span>
+<span class="opacity-40">•</span>
+<span>Patient: ANON-8841 (42yo M)</span>
+<span class="opacity-40">•</span>
+<span>Acquired: 2026-03-31 08:42 EST</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-surface-bright tracking-tight">Primary Radiograph Inspection</h1>
+<p class="font-body-md text-body-md text-surface-dim mt-1 max-w-3xl">
+<strong class="text-surface-bright font-body-strong">What is this page?</strong> Inspect the original high-resolution radiograph using standard measurement, caliper, and windowing tools before reviewing automated AI diagnostic conclusions.
+          </p>
+</div>
+<!-- Nav / Direct Action to Part 2 -->
+<div class="flex items-center gap-space-sm shrink-0">
+<a class="px-space-sm py-2 rounded text-surface-dim hover:text-surface-bright hover:bg-surface-variant/20 font-label-md text-label-md flex items-center gap-1 transition-colors" href="#">
+<i class="ph ph-arrow-left"></i>
+<span>Worklist</span>
+</a>
+<button class="px-space-md py-2.5 rounded bg-primary-container hover:bg-primary text-surface-bright font-body-strong text-label-md flex items-center gap-2 shadow-sm transition-all" id="btn-next-findings">
+<span>See AI Findings</span>
+<i class="ph ph-arrow-right"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- Central Image Workspace Canvas -->
+<div class="w-full max-w-7xl mx-auto px-margin mt-space-xs">
+<!-- Diagnostic Console Container -->
+<div class="relative w-full rounded-xl bg-on-surface overflow-hidden shadow-xl flex flex-col">
+<!-- Viewer Top HUD Bar -->
+<div class="w-full px-space-md py-space-xs bg-inverse-surface/80 backdrop-blur flex items-center justify-between z-20 font-mono-data text-[12px] text-surface-dim">
+<div class="flex items-center gap-space-md">
+<span class="text-surface-bright font-body-strong">SERIES 01 / IMG 04</span>
+<span class="hidden md:inline">FOV: 180×240 mm</span>
+<span class="hidden md:inline">KVp: 58 | mA: 125</span>
+<span class="hidden sm:inline">MATRIX: 2480×3120</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span id="window-indicator">W: 2400 / L: 600</span>
+<span class="text-surface-tint font-body-strong" id="zoom-indicator">ZOOM: 1.25×</span>
+<span class="px-1.5 py-0.5 rounded bg-primary/40 text-surface-bright">DICOM LOSSLESS</span>
+</div>
+</div>
+<!-- Main Radiograph Display Frame -->
+<div class="relative w-full h-[580px] lg:h-[640px] bg-[#120A08] flex items-center justify-center overflow-hidden select-none cursor-crosshair" id="viewport-stage">
+<!-- Radiograph Image Asset -->
+<div class="relative transition-transform duration-150 ease-out origin-center" id="film-container" style="transform: scale(1.25);">
+<img class="w-[420px] md:w-[480px] lg:w-[520px] h-auto object-contain filter contrast-125 brightness-95" data-alt="Monochrome medical diagnostic X-ray radiograph of an adult human left wrist showing anterior-posterior projection with an acute transverse distal radius metaphyseal fracture line with cortical disruption, dark obsidian clinical background, crisp bony trabeculae, authentic radiography contrast." id="radiograph-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvhusTNoasnGXiX7MxDh4j59W1fFEshjGTNboswPUtQicqdGvvfJJqCaJDcRQYn6UVTRm3SXSLNnZzLX5HG17jWsYm54WOSn8SAgn6MoIXs43CArJ8MybUKJg50DDCZ6s3_OHjRyE7r4BMr-n806immW5BIGk2GjLTRDYdbht-Qas4LGbwIA88VbpIIAwS9UT4CBXchdwOHtvj9eoWr5juTKVfdma3vpYr-jRMQGtZ"/>
+<!-- Heatmap Attention Layer (Simulated Grad-CAM overlay) -->
+<div class="absolute inset-0 pointer-events-none transition-opacity duration-200 opacity-40 mix-blend-screen flex items-center justify-center" id="heatmap-overlay">
+<svg class="w-full h-full" fill="none" viewbox="0 0 520 650" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialgradient cx="54%" cy="48%" fx="54%" fy="48%" id="gradcam" r="22%">
+<stop offset="0%" stop-color="#ff3b30" stop-opacity="0.85"></stop>
+<stop offset="45%" stop-color="#ff9500" stop-opacity="0.65"></stop>
+<stop offset="75%" stop-color="#ffd60a" stop-opacity="0.4"></stop>
+<stop offset="100%" stop-color="#ffd60a" stop-opacity="0"></stop>
+</radialgradient>
+</defs>
+<circle cx="280" cy="312" fill="url(#gradcam)" r="110"></circle>
+</svg>
+</div>
+<!-- Caliper Measurement Overlay (Active Anatomical Annotation) -->
+<div class="absolute top-[44%] left-[46%] pointer-events-none" id="caliper-annotation">
+<!-- Caliper Line & Markers -->
+<svg class="w-48 h-24 overflow-visible" viewbox="0 0 160 80">
+<!-- Hairline Caliper Points -->
+<line stroke="#FAF6F1" stroke-linecap="round" stroke-width="1.5" x1="20" x2="20" y1="20" y2="40"></line>
+<line stroke="#FAF6F1" stroke-linecap="round" stroke-width="1.5" x1="110" x2="110" y1="20" y2="40"></line>
+<line stroke="#FAF6F1" stroke-dasharray="3 3" stroke-width="1.5" x1="20" x2="110" y1="30" y2="30"></line>
+<!-- End crosshairs -->
+<circle cx="20" cy="30" fill="#3A1F14" r="3" stroke="#FAF6F1" stroke-width="1.5"></circle>
+<circle cx="110" cy="30" fill="#3A1F14" r="3" stroke="#FAF6F1" stroke-width="1.5"></circle>
+</svg>
+<!-- Live Reading Tag -->
+<div class="absolute -top-7 left-4 bg-primary text-surface-bright font-mono-data text-[12px] px-2 py-0.5 rounded shadow-md whitespace-nowrap flex items-center gap-1.5 border border-primary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+<span>14.2 mm cortical step-off</span>
+</div>
+</div>
+<!-- Orientation Anatomical Markers -->
+<span class="absolute top-4 left-4 text-surface-dim font-headline-md text-headline-md tracking-wider opacity-60">L</span>
+<span class="absolute bottom-4 right-4 text-surface-dim font-mono-data text-[11px] opacity-60">PA PRONE</span>
+</div>
+<!-- Bottom Left HUD Status -->
+<div class="absolute bottom-4 left-4 z-20 flex flex-col gap-1 pointer-events-none">
+<span class="font-mono-data text-[11px] text-surface-dim bg-inverse-surface/80 px-2 py-1 rounded backdrop-blur">
+              LATENCY: 42ms | PROJECTION: TRUE AP
+            </span>
+</div>
+</div>
+<!-- 5-Tool Horizontal Floating Interactive Strip -->
+<div class="w-full bg-inverse-surface px-space-md py-space-sm z-30">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<!-- Tool 1: Brightness & Contrast (Window Level/Width) -->
+<div class="flex items-center gap-space-sm">
+<button class="p-2 rounded bg-surface-variant/10 hover:bg-surface-variant/20 text-surface-bright flex items-center gap-2 transition-colors group" id="tool-window">
+<i class="ph ph-circle-half"></i>
+<div class="flex flex-col text-left">
+<span class="font-label-md text-label-md leading-tight text-surface-bright">Window Level</span>
+<span class="font-mono-data text-[11px] text-surface-dim leading-none">W: 2400 L: 600</span>
+</div>
+</button>
+</div>
+<!-- Tool 2: Invert Polarity -->
+<div class="flex items-center gap-space-sm">
+<button class="p-2 rounded bg-surface-variant/10 hover:bg-surface-variant/20 text-surface-bright flex items-center gap-2 transition-colors group" id="tool-invert">
+<i class="ph ph-invert-colors"></i>
+<div class="flex flex-col text-left">
+<span class="font-label-md text-label-md leading-tight text-surface-bright">Invert Polarity</span>
+<span class="font-mono-data text-[11px] text-surface-dim leading-none" id="invert-state">Positive (Bone White)</span>
+</div>
+</button>
+</div>
+<!-- Tool 3: Measure Caliper -->
+<div class="flex items-center gap-space-sm">
+<button class="p-2 rounded bg-primary-container/40 text-surface-bright flex items-center gap-2 transition-colors" id="tool-measure">
+<i class="ph ph-ruler"></i>
+<div class="flex flex-col text-left">
+<span class="font-label-md text-label-md leading-tight text-surface-bright">Measure (mm)</span>
+<span class="font-mono-data text-[11px] text-surface-dim leading-none">14.2 mm cortical step-off</span>
+</div>
+</button>
+</div>
+<!-- Tool 4: Heatmap Slider & Presets -->
+<div class="flex items-center gap-space-sm bg-surface-variant/10 px-3 py-1.5 rounded">
+<div class="flex items-center gap-2">
+<i class="ph ph-local-fire-department"></i>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md leading-tight text-surface-bright">Heatmap</span>
+<span class="font-mono-data text-[11px] text-surface-dim leading-none" id="heatmap-val-label">40% blend</span>
+</div>
+</div>
+<!-- Slider Input -->
+<input class="w-24 accent-surface-tint h-1.5 bg-surface-variant/30 rounded-lg cursor-pointer mx-1" id="heatmap-slider" max="100" min="0" type="range" value="40"/>
+<!-- Preset Chips -->
+<div class="flex items-center gap-1 font-mono-data text-[11px]">
+<button class="heatmap-preset px-1.5 py-0.5 rounded bg-surface-variant/20 hover:bg-surface-variant/40 text-surface-dim" data-val="0">0%</button>
+<button class="heatmap-preset px-1.5 py-0.5 rounded bg-primary-container text-surface-bright" data-val="40">40%</button>
+<button class="heatmap-preset px-1.5 py-0.5 rounded bg-surface-variant/20 hover:bg-surface-variant/40 text-surface-dim" data-val="100">100%</button>
+</div>
+</div>
+<!-- Tool 5: Zoom & Pan -->
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-1 bg-surface-variant/10 p-1.5 rounded">
+<button class="p-1 rounded hover:bg-surface-variant/30 text-surface-dim hover:text-surface-bright" id="btn-zoom-out">
+<i class="ph ph-magnifying-glass-minus"></i>
+</button>
+<span class="font-mono-data text-[12px] px-1 text-surface-bright">1.25×</span>
+<button class="p-1 rounded hover:bg-surface-variant/30 text-surface-dim hover:text-surface-bright" id="btn-zoom-in">
+<i class="ph ph-magnifying-glass-plus"></i>
+</button>
+<button class="ml-1 px-2 py-0.5 rounded bg-surface-variant/20 hover:bg-surface-variant/40 font-label-md text-[11px] text-surface-dim" id="btn-zoom-reset">
+                  Reset
+                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Contextual Callout & Interpretive Clarifications -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md mt-space-md">
+<!-- Grad-CAM Plain-English Education Card -->
+<div class="md:col-span-7 bg-surface-variant/10 rounded-lg p-space-md flex gap-space-sm items-start">
+<i class="ph ph-info"></i>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-surface-bright">What is the heatmap?</h2>
+<p class="font-body-md text-body-md text-surface-dim mt-1 leading-relaxed">
+              The coloured area shows where the deep learning network focused its attention when detecting the suspected fracture. It is a visual activation gradient (<span class="font-mono-data text-surface-bright">Grad-CAM</span>), <strong>not a definitive anatomical border or surgical boundary</strong>.
+            </p>
+</div>
+</div>
+<!-- Radiologist Quick Reading Confirmation -->
+<div class="md:col-span-5 bg-surface-variant/10 rounded-lg p-space-md flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-surface-dim uppercase tracking-wider">Modality Spec</span>
+<span class="font-mono-data text-[11px] text-secondary-fixed">DICOM QA PASSED</span>
+</div>
+<div class="font-body-md text-body-md text-surface-bright mt-2">
+            No motion artifact detected. Optimal radial styloid profile &amp; distal radioulnar joint congruence visible for reading.
+          </div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-surface-dim font-mono-data text-[12px]">
+<span>PACS Ref: #IMG-449-WRIST</span>
+<span class="text-surface-tint">Dr. K. Vance signed in</span>
+</div>
+</div>
+</div>
+<!-- Bottom Action Strip -->
+<div class="w-full mt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md bg-on-surface p-space-md rounded-lg shadow-sm">
+<div class="flex items-center gap-space-sm">
+<a class="px-space-md py-2 rounded bg-surface-variant/20 hover:bg-surface-variant/30 text-surface-bright font-label-md text-label-md flex items-center gap-1.5 transition-colors" href="#">
+<i class="ph ph-view-list"></i>
+<span>Return to Triage Worklist</span>
+</a>
+<span class="hidden sm:inline text-surface-dim/40 font-mono-data">|</span>
+<span class="hidden sm:inline font-mono-data text-mono-data text-surface-dim">Step 4 (Part 1 of 2 Complete)</span>
+</div>
+<div class="flex items-center gap-space-md w-full sm:w-auto justify-end">
+<button class="w-full sm:w-auto px-space-xl py-3 rounded bg-primary-container hover:bg-primary text-surface-bright font-body-strong text-body-lg flex items-center justify-center gap-2 shadow-md transition-all" id="btn-next-action">
+<span>See AI Findings &amp; Report</span>
+<i class="ph ph-arrow-right"></i>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function initViewerInteractions() {
+    // 1. Heatmap Slider & Presets
+    const heatmapSlider = document.getElementById('heatmap-slider');
+    const heatmapOverlay = document.getElementById('heatmap-overlay');
+    const heatmapLabel = document.getElementById('heatmap-val-label');
+    const presetButtons = document.querySelectorAll('.heatmap-preset');
+
+    function updateHeatmap(value) {
+      if (!heatmapOverlay || !heatmapLabel) return;
+      heatmapOverlay.style.opacity = (value / 100).toString();
+      heatmapLabel.textContent = `${value}% blend`;
+      presetButtons.forEach(btn => {
+        if (btn.getAttribute('data-val') === value.toString()) {
+          btn.classList.add('bg-primary-container', 'text-surface-bright');
+          btn.classList.remove('bg-surface-variant/20', 'text-surface-dim');
+        } else {
+          btn.classList.remove('bg-primary-container', 'text-surface-bright');
+          btn.classList.add('bg-surface-variant/20', 'text-surface-dim');
+        }
+      });
+    }
+
+    if (heatmapSlider) {
+      heatmapSlider.addEventListener('input', (e) => {
+        updateHeatmap(e.target.value);
+      });
+    }
+
+    presetButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-val');
+        if (heatmapSlider) heatmapSlider.value = val;
+        updateHeatmap(val);
+      });
+    });
+
+    // 2. Invert Tool
+    const invertBtn = document.getElementById('tool-invert');
+    const radiographImg = document.getElementById('radiograph-img');
+    const invertState = document.getElementById('invert-state');
+    let isInverted = false;
+
+    if (invertBtn && radiographImg) {
+      invertBtn.addEventListener('click', () => {
+        isInverted = !isInverted;
+        if (isInverted) {
+          radiographImg.classList.add('invert');
+          if (invertState) invertState.textContent = 'Negative (Bone Dark)';
+          invertBtn.classList.add('bg-surface-variant/30');
+        } else {
+          radiographImg.classList.remove('invert');
+          if (invertState) invertState.textContent = 'Positive (Bone White)';
+          invertBtn.classList.remove('bg-surface-variant/30');
+        }
+      });
+    }
+
+    // 3. Zoom & Pan State
+    const filmContainer = document.getElementById('film-container');
+    const zoomInBtn = document.getElementById('btn-zoom-in');
+    const zoomOutBtn = document.getElementById('btn-zoom-out');
+    const zoomResetBtn = document.getElementById('btn-zoom-reset');
+    const zoomIndicator = document.getElementById('zoom-indicator');
+    let currentZoom = 1.25;
+
+    function applyZoom(zoom) {
+      currentZoom = Math.min(Math.max(zoom, 0.75), 3.0);
+      if (filmContainer) {
+        filmContainer.style.transform = `scale(${currentZoom.toFixed(2)})`;
+      }
+      if (zoomIndicator) {
+        zoomIndicator.textContent = `ZOOM: ${currentZoom.toFixed(2)}×`;
+      }
+    }
+
+    if (zoomInBtn) zoomInBtn.addEventListener('click', () => applyZoom(currentZoom + 0.25));
+    if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => applyZoom(currentZoom - 0.25));
+    if (zoomResetBtn) zoomResetBtn.addEventListener('click', () => applyZoom(1.0));
+
+    // 4. Caliper Toggle
+    const caliperTool = document.getElementById('tool-measure');
+    const caliperAnnotation = document.getElementById('caliper-annotation');
+    let caliperVisible = true;
+
+    if (caliperTool && caliperAnnotation) {
+      caliperTool.addEventListener('click', () => {
+        caliperVisible = !caliperVisible;
+        caliperAnnotation.style.display = caliperVisible ? 'block' : 'none';
+        caliperTool.classList.toggle('bg-primary-container/40', caliperVisible);
+        caliperTool.classList.toggle('bg-surface-variant/10', !caliperVisible);
+      });
+    }
+
+    // 5. Brightness & Window Level Simulation
+    const windowBtn = document.getElementById('tool-window');
+    const windowIndicator = document.getElementById('window-indicator');
+    let windowLevelIdx = 0;
+    const presets = [
+      { text: "W: 2400 / L: 600", filter: "contrast-125 brightness-95" },
+      { text: "W: 1600 / L: 450 (Bone Detail)", filter: "contrast-150 brightness-110" },
+      { text: "W: 3200 / L: 800 (Soft Tissue)", filter: "contrast-100 brightness-90" }
+    ];
+
+    if (windowBtn && radiographImg && windowIndicator) {
+      windowBtn.addEventListener('click', () => {
+        windowLevelIdx = (windowLevelIdx + 1) % presets.length;
+        const current = presets[windowLevelIdx];
+        radiographImg.className = `w-[420px] md:w-[480px] lg:w-[520px] h-auto object-contain filter ${current.filter} ${isInverted ? 'invert' : ''}`;
+        windowIndicator.textContent = current.text;
+        const subtext = windowBtn.querySelector('span.font-mono-data');
+        if (subtext) subtext.textContent = current.text;
+      });
+    }
+
+    // 6. Navigation Actions (simulate seamless workflow continuation)
+    const nextButtons = [document.getElementById('btn-next-findings'), document.getElementById('btn-next-action')];
+    nextButtons.forEach(btn => {
+      if (btn) {
+        btn.addEventListener('click', () => {
+          // Standard clinical route continuation to Step 4 Part 2
+          console.log('Navigating to /viewer/FRX-2026-0891/findings');
+        });
+      }
+    });
+  })();
+</script></main><footer class="w-full bg-surface py-space-md shadow-[0_-1px_8px_rgba(58,31,20,0.04)]"><div class="w-full max-w-7xl mx-auto px-margin flex items-center justify-center"><p class="font-label-md text-label-md text-on-surface-variant text-center">Decision support only. A physician must review and sign off every study.</p></div></footer><script type="module" src="/js/verifact-engine.js"></script>
+</body></html>
