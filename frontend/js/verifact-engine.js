@@ -9,7 +9,7 @@ const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env && (impo
     || localStorage.getItem('VERIFACT_API_URL')
     || (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://127.0.0.1:8000'
-        : window.location.origin);
+        : 'https://verifact-josv.onrender.com');
 
 // Default demo showcase analysis state
 const DEFAULT_DEMO_ANALYSIS = {
