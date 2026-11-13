@@ -14,7 +14,9 @@
     { "source": "/audit-log", "destination": "/audit-log.html" },
     { "source": "/about", "destination": "/about.html" },
     { "source": "/how-it-works", "destination": "/how-it-works.html" },
-    { "source": "/login", "destination": "/login.html" }
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/signup", "destination": "/signup.html" },
+    { "source": "/profile", "destination": "/profile.html" }
   ],
   "headers": [
     {

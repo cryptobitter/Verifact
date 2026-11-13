@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Create Account — Verifact PACS</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/design-system.css"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#FFFFFF',
+            'bg-soft': '#FFF4E8',
+            surface: '#FFFFFF',
+            'surface-alt': '#FAF6F1',
+            border: '#EADFD3',
+            text: '#1F1612',
+            'text-muted': '#6B5B52',
+            primary: { DEFAULT: '#C8512D', hover: '#B04624' },
+            accent: '#F5A524',
+            blush: '#FBE3D6',
+            deep: '#3A1F14',
+            urgent: '#D92D20'
+          }
+        }
+      }
+    };
+  </script>
+  <script type="module" src="/js/auth-guard.js"></script>
+</head>
+<body class="bg-[#FFF4E8] text-[#1F1612] antialiased min-h-screen flex flex-col justify-between selection:bg-[#FBE3D6] selection:text-[#1F1612]">
+
+  <!-- Minimal Brand Header (Logo + Demo Mode only) -->
+  <header class="w-full h-16 border-b border-[#EADFD3] bg-white/90 backdrop-blur-md px-4 sm:px-8 flex items-center justify-between">
+    <a href="/login.html" class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg bg-[#FBE3D6] border border-[#EADFD3] flex items-center justify-center text-[#C8512D]">
+        <i class="ph ph-bone text-lg font-bold"></i>
+      </div>
+      <div class="flex flex-col">
+        <span class="font-bold text-base tracking-tight text-[#1F1612]">VERIFACT</span>
+        <span class="font-mono text-[9px] uppercase tracking-wider text-[#6B5B52]">CLINICAL ONBOARDING</span>
+      </div>
+    </a>
+    <span class="px-2.5 py-0.5 rounded font-mono text-xs bg-[#F5A524] text-[#1F1612] font-semibold tracking-wide uppercase shadow-sm">
+      DEMO MODE
+    </span>
+  </header>
+
+  <!-- Main Split Layout -->
+  <main class="flex-1 w-full max-w-6xl mx-auto px-4 py-8 sm:py-12 flex items-center justify-center">
+    <div class="w-full grid grid-cols-1 lg:grid-cols-12 bg-white rounded-2xl border border-[#EADFD3] shadow-[0_4px_24px_rgba(58,31,20,0.08)] overflow-hidden">
+      
+      <!-- Left Column: Form Card on Soft Peach (#FFF4E8) -->
+      <div class="lg:col-span-7 p-6 sm:p-10 flex flex-col justify-center bg-[#FFF4E8]">
+        <div class="max-w-md w-full mx-auto">
+          
+          <div class="mb-6">
+            <span class="text-xs font-mono text-[#C8512D] font-semibold uppercase tracking-wider block mb-1">
+              Physician Credentialing
+            </span>
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#1F1612]">Create Verifact Account</h1>
+            <p class="text-sm text-[#6B5B52] mt-1">Register your institutional credentials to access diagnostic triage.</p>
+          </div>
+
+          <!-- Dynamic Error Alert -->
+          <div id="error-alert" class="hidden mb-5 p-3.5 rounded-lg bg-[#FDE8E8] border border-[#D92D20] text-[#D92D20] text-sm flex items-start gap-2.5">
+            <i class="ph ph-x-circle text-lg shrink-0 mt-0.5"></i>
+            <div id="error-alert-text" class="font-medium"></div>
+          </div>
+
+          <!-- Signup Form -->
+          <form id="signup-form" class="space-y-3.5" novalidate>
+            
+            <!-- Full Name -->
+            <div>
+              <label for="full_name" class="block text-xs font-semibold uppercase tracking-wider text-[#1F1612] mb-1">
+                Full Name with Title <span class="text-[#D92D20]">*</span>
+              </label>
+              <input 
+                id="full_name" 
+                type="text" 
+                required 
+                placeholder="Dr. Elena Vance, MD"
+                class="w-full h-10 px-3.5 rounded-lg border border-[#EADFD3] bg-white text-[#1F1612] placeholder-[#6B5B52]/50 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D] focus:border-transparent"
+              />
+            </div>
+
+            <!-- Work Email -->
+            <div>
+              <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-[#1F1612] mb-1">
+                Institutional Email <span class="text-[#D92D20]">*</span>
+              </label>
+              <input 
+                id="email" 
+                type="email" 
+                required 
+                autocomplete="email"
+                placeholder="e.vance@stanfordhealthcare.org"
+                class="w-full h-10 px-3.5 rounded-lg border border-[#EADFD3] bg-white text-[#1F1612] placeholder-[#6B5B52]/50 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D] focus:border-transparent"
+              />
+            </div>
+
+            <!-- Institution & Role 2-col -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="institution" class="block text-xs font-semibold uppercase tracking-wider text-[#1F1612] mb-1">
+                  Hospital / Institution <span class="text-[#D92D20]">*</span>
+                </label>
+                <input 
+                  id="institution" 
+                  type="text" 
+                  required 
+                  placeholder="Stanford Health Care"
+                  class="w-full h-10 px-3.5 rounded-lg border border-[#EADFD3] bg-white text-[#1F1612] placeholder-[#6B5B52]/50 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D] focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label for="role" class="block text-xs font-semibold uppercase tracking-wider text-[#1F1612] mb-1">
+                  Clinical Role <span class="text-[#D92D20]">*</span>
+                </label>
+                <select 
+                  id="role" 
+                  required
+                  class="w-full h-10 px-3 rounded-lg border border-[#EADFD3] bg-white text-[#1F1612] text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D] focus:border-transparent"
+                >
+                  <option value="radiologist">Attending Radiologist</option>
+                  <option value="resident">Radiology Resident</option>
+                  <option value="admin">PACS Administrator</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div>
+              <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-[#1F1612] mb-1">
+                Password (min. 10 chars) <span class="text-[#D92D20]">*</span>
+              </label>
+              <div class="relative">
+                <input 
+                  id="password" 
+                  type="password" 
+                  required 
+                  autocomplete="new-password"
+                  placeholder="At least 10 characters with numbers"
+                  class="w-full h-10 pl-3.5 pr-10 rounded-lg border border-[#EADFD3] bg-white text-[#1F1612] placeholder-[#6B5B52]/50 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D] focus:border-transparent"
+                />
+                <button 
+                  type="button" 
+                  id="toggle-password-btn" 
+                  aria-label="Toggle password visibility"
+                  class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#6B5B52] hover:text-[#1F1612] p-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8512D]"
+                >
+                  <i id="toggle-password-icon" class="ph ph-eye text-lg"></i>
+                </button>
+              </div>
+
+              <!-- Password Strength Meter -->
+              <div class="mt-2">
+                <div class="w-full h-1.5 bg-[#EADFD3] rounded-full overflow-hidden">
+                  <div id="strength-bar" class="h-full w-0 transition-all duration-300 bg-[#D92D20]"></div>
+                </div>
+                <div class="flex items-center justify-between text-[11px] text-[#6B5B52] mt-1 font-mono">
+                  <span id="strength-label">Strength: Too short</span>
+                  <span>10+ chars, letter &amp; number</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div>
+              <label for="confirm_password" class="block text-xs font-semibold uppercase tracking-wider text-[#1F1612] mb-1">
+                Confirm Password <span class="text-[#D92D20]">*</span>
+              </label>
+              <input 
+                id="confirm_password" 
+                type="password" 
+                required 
+                autocomplete="new-password"
+                placeholder="Re-enter your password"
+                class="w-full h-10 px-3.5 rounded-lg border border-[#EADFD3] bg-white text-[#1F1612] placeholder-[#6B5B52]/50 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D] focus:border-transparent"
+              />
+            </div>
+
+            <!-- Mandatory Assistive Disclaimer Checkbox -->
+            <div class="pt-1.5">
+              <label class="flex items-start gap-2.5 cursor-pointer">
+                <input 
+                  type="checkbox" 
+                  id="disclaimer-checkbox" 
+                  required
+                  class="mt-1 h-4 w-4 rounded border-[#EADFD3] text-[#C8512D] focus:ring-[#C8512D]"
+                />
+                <span class="text-xs text-[#6B5B52] leading-tight select-none">
+                  I understand Verifact is an assistive clinical decision support tool and the physician is solely responsible for the final diagnostic decision and report sign-off. <span class="text-[#D92D20]">*</span>
+                </span>
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button 
+              type="submit" 
+              id="submit-btn" 
+              class="w-full h-11 mt-3 rounded-lg bg-[#C8512D] hover:bg-[#B04624] text-white font-medium text-sm transition-all shadow-sm flex items-center justify-center gap-2 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8512D] focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span id="btn-text">Create account</span>
+              <i id="btn-spinner" class="ph ph-spinner animate-spin text-lg hidden"></i>
+            </button>
+          </form>
+
+          <div class="mt-4 text-center text-xs text-[#6B5B52]">
+            Already have an attending account? 
+            <a href="/login.html" class="text-[#C8512D] font-semibold hover:underline">Sign in</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right Column: Espresso (#3A1F14) Brand Trust Panel (Hidden on Mobile) -->
+      <div class="hidden lg:flex lg:col-span-5 p-10 bg-[#3A1F14] text-[#FAF6F1] flex-col justify-between relative overflow-hidden">
+        
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-[#FFF4E8]/10 border border-[#FFF4E8]/20 flex items-center justify-center text-[#F5A524] mb-6">
+            <i class="ph ph-shield-check text-2xl font-bold"></i>
+          </div>
+
+          <h2 class="text-xl font-bold tracking-tight text-white leading-snug">
+            Verified clinical access for emergency musculoskeletal triage.
+          </h2>
+          <p class="text-xs text-[#FAF6F1]/80 mt-2 leading-relaxed">
+            By creating an account, your diagnostic actions and signature attestations are cryptographically linked to your institutional profile.
+          </p>
+        </div>
+
+        <div class="space-y-4 my-6">
+          <div class="p-3 rounded-lg bg-white/5 border border-white/10">
+            <span class="text-xs font-semibold text-white block">Audit Compliance</span>
+            <p class="text-[11px] text-[#FAF6F1]/70 mt-0.5">Every override and sign-off generates an immutable SHA-256 Merkle log record.</p>
+          </div>
+          <div class="p-3 rounded-lg bg-white/5 border border-white/10">
+            <span class="text-xs font-semibold text-white block">Assistive Guardrails</span>
+            <p class="text-[11px] text-[#FAF6F1]/70 mt-0.5">DenseNet-121 CNN + Vision LLM dual-concordance verification protects against blind spots.</p>
+          </div>
+        </div>
+
+        <div class="text-[11px] text-[#FAF6F1]/60 font-mono border-t border-white/10 pt-3">
+          VERIFACT v2.0 · CLINICAL SUITE
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Signup Logic Script -->
+  <script type="module">
+    const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env && (import.meta.env.VITE_API_BASE || import.meta.env.VITE_API_URL))
+      || window.__VERIFACT_API_URL__
+      || localStorage.getItem('VERIFACT_API_URL')
+      || (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+          ? 'http://127.0.0.1:8000'
+          : 'https://verifact-josv.onrender.com');
+
+    const form = document.getElementById('signup-form');
+    const fullNameInput = document.getElementById('full_name');
+    const emailInput = document.getElementById('email');
+    const institutionInput = document.getElementById('institution');
+    const roleInput = document.getElementById('role');
+    const passwordInput = document.getElementById('password');
+    const confirmInput = document.getElementById('confirm_password');
+    const disclaimerInput = document.getElementById('disclaimer-checkbox');
+    const strengthBar = document.getElementById('strength-bar');
+    const strengthLabel = document.getElementById('strength-label');
+    const toggleBtn = document.getElementById('toggle-password-btn');
+    const toggleIcon = document.getElementById('toggle-password-icon');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const errorAlert = document.getElementById('error-alert');
+    const errorAlertText = document.getElementById('error-alert-text');
+
+    // Password visibility toggle
+    toggleBtn.addEventListener('click', () => {
+      const isPassword = passwordInput.getAttribute('type') === 'password';
+      passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+      confirmInput.setAttribute('type', isPassword ? 'text' : 'password');
+      toggleIcon.className = isPassword ? 'ph ph-eye-slash text-lg' : 'ph ph-eye text-lg';
+    });
+
+    // Real-time password strength meter
+    passwordInput.addEventListener('input', () => {
+      const val = passwordInput.value;
+      let score = 0;
+      if (val.length >= 10) score += 1;
+      if (/[0-9]/.test(val)) score += 1;
+      if (/[A-Z]/.test(val) && /[a-z]/.test(val)) score += 1;
+      if (/[^A-Za-z0-9]/.test(val)) score += 1;
+
+      if (val.length === 0) {
+        strengthBar.style.width = '0%';
+        strengthLabel.textContent = 'Strength: Too short';
+        strengthBar.className = 'h-full transition-all duration-300 bg-[#D92D20]';
+      } else if (val.length < 10) {
+        strengthBar.style.width = '25%';
+        strengthLabel.textContent = 'Strength: Too short (min 10 chars)';
+        strengthBar.className = 'h-full transition-all duration-300 bg-[#D92D20]';
+      } else if (score <= 2) {
+        strengthBar.style.width = '50%';
+        strengthLabel.textContent = 'Strength: Fair (add number/symbol)';
+        strengthBar.className = 'h-full transition-all duration-300 bg-[#F5A524]';
+      } else if (score === 3) {
+        strengthBar.style.width = '75%';
+        strengthLabel.textContent = 'Strength: Good';
+        strengthBar.className = 'h-full transition-all duration-300 bg-[#C8512D]';
+      } else {
+        strengthBar.style.width = '100%';
+        strengthLabel.textContent = 'Strength: Strong clinical password';
+        strengthBar.className = 'h-full transition-all duration-300 bg-[#3A1F14]';
+      }
+    });
+
+    // Form submission
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorAlert.classList.add('hidden');
+
+      const full_name = fullNameInput.value.trim();
+      const email = emailInput.value.trim().toLowerCase();
+      const institution = institutionInput.value.trim();
+      const role = roleInput.value;
+      const password = passwordInput.value;
+      const confirmPassword = confirmInput.value;
+
+      if (!full_name || !email || !institution || !password) {
+        errorAlertText.textContent = 'Please fill out all required clinical credential fields.';
+        errorAlert.classList.remove('hidden');
+        return;
+      }
+
+      if (password.length < 10) {
+        errorAlertText.textContent = 'Password must be at least 10 characters long.';
+        errorAlert.classList.remove('hidden');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        errorAlertText.textContent = 'Passwords do not match. Please verify both fields.';
+        errorAlert.classList.remove('hidden');
+        return;
+      }
+
+      if (!disclaimerInput.checked) {
+        errorAlertText.textContent = 'You must acknowledge the clinical assistive decision support disclaimer.';
+        errorAlert.classList.remove('hidden');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      btnText.textContent = 'Creating account...';
+      btnSpinner.classList.remove('hidden');
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            full_name,
+            email,
+            institution,
+            role,
+            password
+          })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          errorAlertText.textContent = data.detail || 'Registration failed. Please check your inputs.';
+          errorAlert.classList.remove('hidden');
+          submitBtn.disabled = false;
+          btnText.textContent = 'Create account';
+          btnSpinner.classList.add('hidden');
+          return;
+        }
+
+        // Store tokens for cross-domain backup
+        if (data.access_token) {
+          sessionStorage.setItem('verifact_token', data.access_token);
+        }
+        if (data.user) {
+          sessionStorage.setItem('verifact_user', JSON.stringify(data.user));
+        }
+
+        btnText.textContent = 'Account created! Entering PACS...';
+        setTimeout(() => {
+          const params = new URLSearchParams(window.location.search);
+          const nextUrl = params.get('next') || '/index.html';
+          window.location.href = nextUrl;
+        }, 400);
+
+      } catch (err) {
+        errorAlertText.textContent = 'Network error connecting to Verifact backend. Please try again.';
+        errorAlert.classList.remove('hidden');
+        submitBtn.disabled = false;
+        btnText.textContent = 'Create account';
+        btnSpinner.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

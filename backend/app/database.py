@@ -1,7 +1,7 @@
 import os
 import shutil
 from pathlib import Path
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text, inspect
 from sqlalchemy.orm import sessionmaker, declarative_base
 from app.config import settings
 
@@ -60,6 +60,28 @@ def _build_engine():
 
 
 engine = _build_engine()
+
+
+def _ensure_sqlite_columns():
+    """Ensures newly added columns exist in SQLite databases without needing manual migrations."""
+    try:
+        with engine.begin() as conn:
+            inspector = inspect(conn)
+            tables = inspector.get_table_names()
+            if 'users' in tables:
+                cols = [col["name"] for col in inspector.get_columns("users")]
+                if "last_login_at" not in cols:
+                    conn.execute(text("ALTER TABLE users ADD COLUMN last_login_at TIMESTAMP"))
+                if "institution" not in cols:
+                    conn.execute(text("ALTER TABLE users ADD COLUMN institution VARCHAR(255)"))
+                if "license_number" not in cols:
+                    conn.execute(text("ALTER TABLE users ADD COLUMN license_number VARCHAR(100)"))
+    except Exception as exc:
+        print(f"[WARN] Failed to auto-migrate columns: {exc}")
+
+
+_ensure_sqlite_columns()
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()

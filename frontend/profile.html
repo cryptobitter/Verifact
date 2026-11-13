@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Physician Profile — Verifact PACS</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/design-system.css"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#FFFFFF',
+            'bg-soft': '#FFF4E8',
+            surface: '#FFFFFF',
+            'surface-alt': '#FAF6F1',
+            border: '#EADFD3',
+            text: '#1F1612',
+            'text-muted': '#6B5B52',
+            primary: { DEFAULT: '#C8512D', hover: '#B04624' },
+            accent: '#F5A524',
+            blush: '#FBE3D6',
+            deep: '#3A1F14',
+            urgent: '#D92D20'
+          }
+        }
+      }
+    };
+  </script>
+  <script type="module" src="/js/auth-guard.js"></script>
+</head>
+<body class="bg-white text-[#1F1612] antialiased min-h-screen flex flex-col justify-between selection:bg-[#FBE3D6] selection:text-[#1F1612]">
+
+  <!-- Global Header will be mounted / present here -->
+  <header id="global-navbar" class="sticky top-0 z-50 w-full shadow-[0_2px_8px_rgba(58,31,20,0.06)] bg-white">
+    <!-- Top Status Strip -->
+    <div class="h-7 w-full bg-[#3A1F14] text-[#FAF6F1] font-mono text-[12px] hidden md:flex items-center justify-between px-4 lg:px-8 border-b border-[#4D2B1E] select-none">
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#C8512D] animate-pulse"></span>
+          <span class="tracking-wide">DENSENET-121 OPERATIONAL</span>
+        </div>
+        <span class="text-[#FAF6F1]/40">·</span>
+        <span class="tracking-wide text-[#FAF6F1]/90">HIPAA IN-MEMORY SANITIZED</span>
+        <span class="text-[#FAF6F1]/40">·</span>
+        <span class="tracking-wide text-[#F5A524] font-medium">DEMO MODE</span>
+      </div>
+      <div class="flex items-center gap-3 text-[11px] text-[#FAF6F1]/70">
+        <span>LATENCY: 42ms</span>
+        <span class="text-[#FAF6F1]/40">·</span>
+        <span>PACS: SECTRA-CONNECT</span>
+      </div>
+    </div>
+
+    <!-- Main 64px Bar -->
+    <div class="h-16 w-full bg-white/98 backdrop-blur-md border-b border-[#EADFD3] px-4 lg:px-8 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="/index.html" class="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8512D] rounded-lg p-0.5">
+          <div class="w-9 h-9 rounded-lg bg-[#FBE3D6] border border-[#EADFD3] flex items-center justify-center text-[#C8512D] group-hover:bg-[#C8512D] group-hover:text-white transition-colors shadow-sm shrink-0">
+            <i class="ph ph-bone text-lg font-bold"></i>
+          </div>
+          <div class="flex flex-col text-left">
+            <span class="font-headline-md text-[17px] font-bold tracking-tight text-[#1F1612] leading-tight group-hover:text-[#C8512D] transition-colors">VERIFACT</span>
+            <span class="font-mono text-[9.5px] sm:text-[10px] tracking-wider uppercase text-[#6B5B52] leading-none mt-0.5 whitespace-nowrap">PACS &amp; TRIAGE CO-PILOT</span>
+          </div>
+        </a>
+      </div>
+
+      <nav class="hidden lg:flex items-center gap-6" aria-label="Main Navigation">
+        <a href="/index.html" data-nav="overview" class="nav-link text-[#1F1612] hover:bg-[#FBE3D6] hover:text-[#C8512D] font-medium whitespace-nowrap text-[15px] px-3 py-1.5 rounded-md transition-colors">Overview</a>
+        <a href="/worklist.html" data-nav="worklist" class="nav-link text-[#1F1612] hover:bg-[#FBE3D6] hover:text-[#C8512D] font-medium whitespace-nowrap text-[15px] px-3 py-1.5 rounded-md transition-colors">Worklist</a>
+        <a href="/upload.html" data-nav="intake" class="nav-link text-[#1F1612] hover:bg-[#FBE3D6] hover:text-[#C8512D] font-medium whitespace-nowrap text-[15px] px-3 py-1.5 rounded-md transition-colors">Intake</a>
+        <a href="/viewer.html" data-nav="viewer" class="nav-link text-[#1F1612] hover:bg-[#FBE3D6] hover:text-[#C8512D] font-medium whitespace-nowrap text-[15px] px-3 py-1.5 rounded-md transition-colors">Viewer</a>
+        <a href="/analytics.html" data-nav="analytics" class="nav-link text-[#1F1612] hover:bg-[#FBE3D6] hover:text-[#C8512D] font-medium whitespace-nowrap text-[15px] px-3 py-1.5 rounded-md transition-colors">Analytics</a>
+        <a href="/about.html" data-nav="docs" class="nav-link text-[#1F1612] hover:bg-[#FBE3D6] hover:text-[#C8512D] font-medium whitespace-nowrap text-[15px] px-3 py-1.5 rounded-md transition-colors">Docs</a>
+      </nav>
+
+      <!-- User Dropdown & CTA -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <div class="relative" id="user-menu-container">
+          <button id="user-menu-btn" type="button" aria-expanded="false" class="flex items-center gap-2.5 pl-2 py-1 pr-1.5 rounded-lg hover:bg-[#FAF6F1] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8512D]">
+            <div id="nav-user-avatar" class="w-9 h-9 rounded-full bg-[#FBE3D6] border border-[#EADFD3] text-[#C8512D] font-semibold text-xs flex items-center justify-center shrink-0 shadow-inner">
+              EV
+            </div>
+            <div class="hidden xl:flex flex-col text-left max-w-[140px]">
+              <span id="nav-user-name" class="text-sm font-semibold text-[#1F1612] truncate leading-tight">Dr. Elena Vance</span>
+              <span id="nav-user-role" class="text-[12px] text-[#6B5B52] truncate leading-tight">Attending Radiologist</span>
+            </div>
+            <i class="ph ph-caret-down text-xs text-[#6B5B52] hidden xl:inline"></i>
+          </button>
+
+          <!-- Dropdown -->
+          <div id="user-menu-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl border border-[#EADFD3] shadow-[0_4px_20px_rgba(58,31,20,0.12)] py-1.5 z-50">
+            <div class="px-4 py-2 border-b border-[#EADFD3]">
+              <div id="dropdown-user-name" class="text-xs font-semibold text-[#1F1612] truncate">Dr. Elena Vance</div>
+              <div id="dropdown-user-email" class="text-[11px] text-[#6B5B52] truncate">e.vance@stanford.edu</div>
+            </div>
+            <a href="/profile.html" class="flex items-center gap-2.5 px-4 py-2 text-sm text-[#C8512D] font-semibold bg-[#FFF4E8] hover:bg-[#FBE3D6] transition-colors">
+              <i class="ph ph-user text-base"></i>
+              <span>My Profile</span>
+            </a>
+            <button type="button" id="signout-btn" class="w-full flex items-center gap-2.5 px-4 py-2 text-sm text-[#D92D20] hover:bg-[#FDE8E8] transition-colors text-left">
+              <i class="ph ph-sign-out text-base"></i>
+              <span>Sign out</span>
+            </button>
+          </div>
+        </div>
+
+        <a href="/upload.html" class="h-10 px-3 sm:px-4 rounded-lg bg-[#C8512D] hover:bg-[#B04624] text-white text-xs sm:text-sm font-medium whitespace-nowrap flex items-center gap-1.5 sm:gap-2 shadow-sm transition-all active:scale-[0.98]">
+          <i class="ph ph-upload-simple text-sm sm:text-base"></i>
+          <span>Upload Radiograph</span>
+        </a>
+
+        <button id="mobile-menu-btn" type="button" aria-expanded="false" class="lg:hidden p-2 rounded-lg text-[#1F1612] hover:bg-[#FBE3D6]">
+          <i id="hamburger-icon" class="ph ph-list text-2xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Slide-down Panel -->
+    <div id="mobile-menu-panel" class="hidden lg:hidden bg-white border-b border-[#EADFD3] px-4 py-4 shadow-lg">
+      <div class="flex flex-col gap-1">
+        <a href="/index.html" class="nav-link flex items-center justify-between text-[15px] font-medium px-3 py-2 rounded-lg text-[#1F1612]"><span>Overview</span><i class="ph ph-caret-right text-xs"></i></a>
+        <a href="/worklist.html" class="nav-link flex items-center justify-between text-[15px] font-medium px-3 py-2 rounded-lg text-[#1F1612]"><span>Worklist</span><i class="ph ph-caret-right text-xs"></i></a>
+        <a href="/upload.html" class="nav-link flex items-center justify-between text-[15px] font-medium px-3 py-2 rounded-lg text-[#1F1612]"><span>Intake</span><i class="ph ph-caret-right text-xs"></i></a>
+        <a href="/viewer.html" class="nav-link flex items-center justify-between text-[15px] font-medium px-3 py-2 rounded-lg text-[#1F1612]"><span>Viewer</span><i class="ph ph-caret-right text-xs"></i></a>
+        <a href="/analytics.html" class="nav-link flex items-center justify-between text-[15px] font-medium px-3 py-2 rounded-lg text-[#1F1612]"><span>Analytics</span><i class="ph ph-caret-right text-xs"></i></a>
+        <a href="/about.html" class="nav-link flex items-center justify-between text-[15px] font-medium px-3 py-2 rounded-lg text-[#1F1612]"><span>Docs</span><i class="ph ph-caret-right text-xs"></i></a>
+        <a href="/profile.html" class="nav-link flex items-center justify-between text-[15px] font-semibold px-3 py-2 rounded-lg bg-[#FBE3D6] text-[#C8512D]"><span>My Profile</span><i class="ph ph-caret-right text-xs text-[#C8512D]"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Profile Band: Peach (#FFF4E8) -->
+  <section class="w-full bg-[#FFF4E8] border-b border-[#EADFD3] py-8 sm:py-10 px-4 sm:px-8">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+      <div class="flex items-center gap-5">
+        <div id="profile-hero-avatar" class="w-20 h-20 rounded-2xl bg-[#FBE3D6] border-2 border-[#EADFD3] text-[#C8512D] text-2xl font-bold flex items-center justify-center shadow-sm shrink-0">
+          EV
+        </div>
+        <div>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <h1 id="profile-hero-name" class="text-2xl sm:text-3xl font-bold text-[#1F1612] tracking-tight">Dr. Elena Vance</h1>
+            <span id="profile-hero-role" class="px-2.5 py-0.5 rounded text-xs font-mono font-bold bg-[#F5A524] text-[#1F1612] uppercase shadow-sm">
+              RADIOLOGIST
+            </span>
+          </div>
+          <p id="profile-hero-institution" class="text-sm text-[#6B5B52] mt-1 font-medium flex items-center gap-1.5">
+            <i class="ph ph-hospital text-base text-[#C8512D]"></i>
+            <span>Stanford Health Care · Department of Diagnostic Radiology</span>
+          </p>
+          <div class="flex items-center gap-4 text-xs font-mono text-[#6B5B52] mt-2">
+            <span id="profile-hero-email">doctor@hospital.org</span>
+            <span>·</span>
+            <span id="profile-hero-license">LICENSE: N/A</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Session Badge -->
+      <div class="bg-white/80 backdrop-blur border border-[#EADFD3] rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm self-start sm:self-center">
+        <div class="w-2.5 h-2.5 rounded-full bg-[#C8512D] animate-pulse"></div>
+        <div class="text-xs">
+          <div class="font-semibold text-[#1F1612]">Cryptographic Session Active</div>
+          <div id="profile-hero-last-login" class="text-[#6B5B52] font-mono text-[11px] mt-0.5">Last login: Today</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notification Toast Container -->
+  <div id="toast-box" class="fixed bottom-6 right-6 z-50 transform transition-all duration-300 translate-y-20 opacity-0 pointer-events-none">
+    <div id="toast-content" class="px-4 py-3 rounded-xl bg-[#3A1F14] text-white shadow-xl flex items-center gap-3 border border-[#EADFD3]/30">
+      <i id="toast-icon" class="ph ph-check-circle text-xl text-[#F5A524]"></i>
+      <span id="toast-text" class="text-sm font-medium">Profile updated successfully</span>
+    </div>
+  </div>
+
+  <!-- Main Profile Body Grid (2-col desktop, stacked mobile) -->
+  <main class="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-8 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- Left Column (7 cols): Personal Details + Activity -->
+      <div class="lg:col-span-7 space-y-6">
+
+        <!-- Card 1: Personal Details -->
+        <section class="bg-white rounded-2xl border border-[#EADFD3] shadow-[0_2px_8px_rgba(58,31,20,0.06)] p-6 sm:p-7">
+          <div class="flex items-center justify-between pb-4 border-b border-[#EADFD3]">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-lg bg-[#FBE3D6] text-[#C8512D] flex items-center justify-center">
+                <i class="ph ph-identification-card text-lg"></i>
+              </div>
+              <h2 class="text-lg font-bold text-[#1F1612]">Personal &amp; Clinical Details</h2>
+            </div>
+            <button 
+              type="button" 
+              id="edit-details-btn" 
+              class="px-3 py-1.5 rounded-lg border border-[#EADFD3] bg-white hover:bg-[#FAF6F1] text-xs font-semibold text-[#1F1612] transition-colors flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8512D]"
+            >
+              <i class="ph ph-pencil-simple text-sm text-[#C8512D]"></i>
+              <span id="edit-btn-text">Edit Details</span>
+            </button>
+          </div>
+
+          <form id="profile-form" class="mt-5 space-y-4">
+            <!-- Full Name -->
+            <div>
+              <label for="prof_name" class="block text-xs font-semibold uppercase tracking-wider text-[#6B5B52] mb-1">
+                Full Name with Credential
+              </label>
+              <input 
+                id="prof_name" 
+                type="text" 
+                disabled 
+                class="w-full h-10 px-3.5 rounded-lg border border-[#EADFD3] bg-[#FAF6F1] text-[#1F1612] text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D] disabled:opacity-85 disabled:cursor-not-allowed"
+              />
+            </div>
+
+            <!-- Email (Strict Read-only) -->
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label for="prof_email" class="block text-xs font-semibold uppercase tracking-wider text-[#6B5B52]">
+                  Institutional Email
+                </label>
+                <span class="text-[11px] font-mono text-[#6B5B52] flex items-center gap-1">
+                  <i class="ph ph-lock-key"></i> Read-only identifier
+                </span>
+              </div>
+              <input 
+                id="prof_email" 
+                type="email" 
+                readonly 
+                disabled
+                class="w-full h-10 px-3.5 rounded-lg border border-[#EADFD3] bg-[#FAF6F1] text-[#6B5B52] font-mono text-sm cursor-not-allowed opacity-80"
+              />
+            </div>
+
+            <!-- Institution & Department -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="prof_institution" class="block text-xs font-semibold uppercase tracking-wider text-[#6B5B52] mb-1">
+                  Hospital / Institution
+                </label>
+                <input 
+                  id="prof_institution" 
+                  type="text" 
+                  disabled 
+                  class="w-full h-10 px-3.5 rounded-lg border border-[#EADFD3] bg-[#FAF6F1] text-[#1F1612] text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D] disabled:opacity-85 disabled:cursor-not-allowed"
+                />
+              </div>
+
+              <div>
+                <label for="prof_department" class="block text-xs font-semibold uppercase tracking-wider text-[#6B5B52] mb-1">
+                  Department
+                </label>
+                <input 
+                  id="prof_department" 
+                  type="text" 
+                  disabled 
+                  class="w-full h-10 px-3.5 rounded-lg border border-[#EADFD3] bg-[#FAF6F1] text-[#1F1612] text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D] disabled:opacity-85 disabled:cursor-not-allowed"
+                />
+              </div>
+            </div>
+
+            <!-- License / Registration Number -->
+            <div>
+              <label for="prof_license" class="block text-xs font-semibold uppercase tracking-wider text-[#6B5B52] mb-1">
+                Medical License / Registration Number
+              </label>
+              <input 
+                id="prof_license" 
+                type="text" 
+                disabled 
+                placeholder="e.g. RAD-88419-TX"
+                class="w-full h-10 px-3.5 rounded-lg border border-[#EADFD3] bg-[#FAF6F1] text-[#1F1612] font-mono text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D] disabled:opacity-85 disabled:cursor-not-allowed"
+              />
+            </div>
+
+            <!-- Action buttons (Hidden until Edit mode) -->
+            <div id="profile-actions" class="hidden pt-3 border-t border-[#EADFD3] flex items-center justify-end gap-3">
+              <button 
+                type="button" 
+                id="cancel-edit-btn" 
+                class="px-4 py-2 rounded-lg border border-[#EADFD3] text-sm font-medium text-[#1F1612] hover:bg-[#FAF6F1] transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                type="submit" 
+                id="save-profile-btn" 
+                class="px-4 py-2 rounded-lg bg-[#C8512D] hover:bg-[#B04624] text-white text-sm font-medium transition-colors shadow-sm flex items-center gap-2"
+              >
+                <span>Save Changes</span>
+                <i id="save-spinner" class="ph ph-spinner animate-spin text-base hidden"></i>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Card 2: My Activity & Telemetry Counts -->
+        <section class="bg-white rounded-2xl border border-[#EADFD3] shadow-[0_2px_8px_rgba(58,31,20,0.06)] p-6 sm:p-7">
+          <div class="flex items-center justify-between pb-4 border-b border-[#EADFD3]">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-lg bg-[#FBE3D6] text-[#C8512D] flex items-center justify-center">
+                <i class="ph ph-chart-line-up text-lg"></i>
+              </div>
+              <h2 class="text-lg font-bold text-[#1F1612]">Clinical Activity &amp; Audit Entries</h2>
+            </div>
+            <span class="text-xs font-mono text-[#6B5B52]">Prospective Telemetry</span>
+          </div>
+
+          <!-- Activity KPI Counts -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mt-5">
+            <div class="p-3.5 rounded-xl bg-[#FFF4E8] border border-[#EADFD3]">
+              <span class="text-xs font-semibold text-[#6B5B52] uppercase block">Studies Reviewed</span>
+              <span id="act-reviewed-count" class="text-2xl font-bold text-[#1F1612] font-mono block mt-1">14</span>
+              <span class="text-[11px] text-[#6B5B52] mt-0.5 block">Active session queue</span>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#FFF4E8] border border-[#EADFD3]">
+              <span class="text-xs font-semibold text-[#6B5B52] uppercase block">Signed Off Reports</span>
+              <span id="act-signed-count" class="text-2xl font-bold text-[#C8512D] font-mono block mt-1">4</span>
+              <span class="text-[11px] text-[#6B5B52] mt-0.5 block">NPI attested reads</span>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#FFF4E8] border border-[#EADFD3]">
+              <span class="text-xs font-semibold text-[#6B5B52] uppercase block">Discordant Overrides</span>
+              <span id="act-discordant-count" class="text-2xl font-bold text-[#3A1F14] font-mono block mt-1">2</span>
+              <span class="text-[11px] text-[#6B5B52] mt-0.5 block">Physician overrides</span>
+            </div>
+          </div>
+
+          <!-- Recent Audit Log Stream -->
+          <div class="mt-6">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-[#6B5B52] mb-3">
+              Last 5 Audit Trail Entries
+            </h3>
+            <div id="audit-log-list" class="space-y-2">
+              <div class="p-3 rounded-lg border border-[#EADFD3] bg-[#FAF6F1] flex items-center justify-between text-xs font-mono">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[#C8512D]"></span>
+                  <span class="font-semibold text-[#1F1612]">LOGIN</span>
+                  <span class="text-[#6B5B52]">User authenticated successfully</span>
+                </div>
+                <span class="text-[#6B5B52]">Just now</span>
+              </div>
+              <div class="p-3 rounded-lg border border-[#EADFD3] bg-[#FAF6F1] flex items-center justify-between text-xs font-mono">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[#F5A524]"></span>
+                  <span class="font-semibold text-[#1F1612]">QUEUE_ACCESS</span>
+                  <span class="text-[#6B5B52]">Worklist priority sync</span>
+                </div>
+                <span class="text-[#6B5B52]">5m ago</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Right Column (5 cols): Security & Danger Zone -->
+      <div class="lg:col-span-5 space-y-6">
+
+        <!-- Card 3: Security & Password Update -->
+        <section class="bg-white rounded-2xl border border-[#EADFD3] shadow-[0_2px_8px_rgba(58,31,20,0.06)] p-6 sm:p-7">
+          <div class="flex items-center gap-2.5 pb-4 border-b border-[#EADFD3]">
+            <div class="w-8 h-8 rounded-lg bg-[#FBE3D6] text-[#C8512D] flex items-center justify-center">
+              <i class="ph ph-shield-lock text-lg"></i>
+            </div>
+            <h2 class="text-lg font-bold text-[#1F1612]">Security &amp; Credentials</h2>
+          </div>
+
+          <!-- Password Change Alert -->
+          <div id="pw-alert" class="hidden my-4 p-3 rounded-lg text-xs font-medium flex items-center gap-2"></div>
+
+          <form id="password-form" class="mt-5 space-y-3.5">
+            <div>
+              <label for="current_password" class="block text-xs font-semibold uppercase tracking-wider text-[#6B5B52] mb-1">
+                Current Password <span class="text-[#D92D20]">*</span>
+              </label>
+              <input 
+                id="current_password" 
+                type="password" 
+                required 
+                autocomplete="current-password"
+                placeholder="Enter current password"
+                class="w-full h-10 px-3.5 rounded-lg border border-[#EADFD3] bg-white text-[#1F1612] text-sm focus:outline-none focus:ring-2 focus:ring-[#C8512D]"
+              />
+            </div>
+
+            <div>
+              <label for="new_password" class="block text-xs font-semibold uppercase tracking-wider text-[#6B5B52] mb-1">
+                New Password (min 10 chars) <span class="text-[#D92D20]">*</span>
+              </label>
+              <input 
+                id="new_password" 
+                type="password" 
+                required 
+                autocomplete="new-password"
+                placeholder="Min. 10 chars with numbers"
+                class="w-full h-10 px-3.5 rounded-lg border border-[#EADFD3] bg-white text-[#1F1612] text-sm focus:outline-none focus:ring-2 focus:ring-[#C8512D]"
+              />
+            </div>
+
+            <div>
+              <label for="confirm_new_password" class="block text-xs font-semibold uppercase tracking-wider text-[#6B5B52] mb-1">
+                Confirm New Password <span class="text-[#D92D20]">*</span>
+              </label>
+              <input 
+                id="confirm_new_password" 
+                type="password" 
+                required 
+                autocomplete="new-password"
+                placeholder="Confirm new password"
+                class="w-full h-10 px-3.5 rounded-lg border border-[#EADFD3] bg-white text-[#1F1612] text-sm focus:outline-none focus:ring-2 focus:ring-[#C8512D]"
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              id="change-pw-btn" 
+              class="w-full h-10 mt-2 rounded-lg bg-[#3A1F14] hover:bg-[#27140C] text-white text-xs font-semibold tracking-wide uppercase transition-colors shadow-sm flex items-center justify-center gap-2"
+            >
+              <span>Update Password</span>
+              <i id="pw-spinner" class="ph ph-spinner animate-spin text-base hidden"></i>
+            </button>
+          </form>
+
+          <div class="mt-6 pt-5 border-t border-[#EADFD3] flex items-center justify-between">
+            <div>
+              <span class="text-xs font-semibold text-[#1F1612] block">Active Station Session</span>
+              <span class="text-[11px] text-[#6B5B52]">Sign out and clear session tokens</span>
+            </div>
+            <button 
+              type="button" 
+              id="side-signout-btn" 
+              class="px-3.5 py-1.5 rounded-lg border border-[#D92D20] text-[#D92D20] hover:bg-[#FDE8E8] text-xs font-semibold transition-colors"
+            >
+              Sign out
+            </button>
+          </div>
+        </section>
+
+        <!-- Card 4: Danger Zone -->
+        <section class="bg-white rounded-2xl border-2 border-[#D92D20]/40 shadow-sm p-6 sm:p-7">
+          <div class="flex items-center gap-2.5 pb-3 border-b border-[#EADFD3]">
+            <i class="ph ph-warning-octagon text-xl text-[#D92D20]"></i>
+            <h2 class="text-base font-bold text-[#D92D20]">Danger Zone</h2>
+          </div>
+
+          <div class="mt-4">
+            <span class="text-sm font-semibold text-[#1F1612] block">Delete Physician Account</span>
+            <p class="text-xs text-[#6B5B52] leading-relaxed mt-1">
+              Physician diagnostic accounts associated with signed radiological records and regulatory audit logs are permanently retained and cannot be deleted per medical record retention protocols.
+            </p>
+
+            <button 
+              type="button" 
+              disabled 
+              title="Disabled per clinical audit-log retention regulations"
+              class="mt-4 w-full h-10 rounded-lg border border-[#EADFD3] bg-[#FAF6F1] text-[#6B5B52] text-xs font-semibold uppercase tracking-wider cursor-not-allowed opacity-70 flex items-center justify-center gap-2"
+            >
+              <i class="ph ph-lock-key"></i>
+              <span>Account Deletion Disabled by Policy</span>
+            </button>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="w-full bg-[#3A1F14] text-[#FAF6F1] py-6 px-4 sm:px-8 border-t border-[#4D2B1E] text-xs font-mono flex flex-col sm:flex-row items-center justify-between gap-3 mt-12">
+    <div>VERIFACT HEALTHCARE ARCHITECTURE · ATTESTED CREDENTIALS</div>
+    <div class="text-[#FAF6F1]/60">NPI &amp; MERKLE SIGNATURE ENFORCED</div>
+  </footer>
+
+  <!-- Profile Page Logic Script -->
+  <script type="module">
+    const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env && (import.meta.env.VITE_API_BASE || import.meta.env.VITE_API_URL))
+      || window.__VERIFACT_API_URL__
+      || localStorage.getItem('VERIFACT_API_URL')
+      || (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+          ? 'http://127.0.0.1:8000'
+          : 'https://verifact-josv.onrender.com');
+
+    // DOM Elements
+    const heroAvatar = document.getElementById('profile-hero-avatar');
+    const heroName = document.getElementById('profile-hero-name');
+    const heroRole = document.getElementById('profile-hero-role');
+    const heroInst = document.getElementById('profile-hero-institution');
+    const heroEmail = document.getElementById('profile-hero-email');
+    const heroLicense = document.getElementById('profile-hero-license');
+    const heroLastLogin = document.getElementById('profile-hero-last-login');
+
+    const profName = document.getElementById('prof_name');
+    const profEmail = document.getElementById('prof_email');
+    const profInst = document.getElementById('prof_institution');
+    const profDept = document.getElementById('prof_department');
+    const profLicense = document.getElementById('prof_license');
+
+    const editBtn = document.getElementById('edit-details-btn');
+    const editBtnText = document.getElementById('edit-btn-text');
+    const cancelBtn = document.getElementById('cancel-edit-btn');
+    const actionsBox = document.getElementById('profile-actions');
+    const saveSpinner = document.getElementById('save-spinner');
+    const profileForm = document.getElementById('profile-form');
+
+    const pwForm = document.getElementById('password-form');
+    const curPw = document.getElementById('current_password');
+    const newPw = document.getElementById('new_password');
+    const confPw = document.getElementById('confirm_new_password');
+    const pwAlert = document.getElementById('pw-alert');
+    const pwSpinner = document.getElementById('pw-spinner');
+
+    const toastBox = document.getElementById('toast-box');
+    const toastText = document.getElementById('toast-text');
+
+    let isEditing = false;
+    let originalData = null;
+
+    function showToast(msg, isError = false) {
+      toastText.textContent = msg;
+      toastBox.className = `fixed bottom-6 right-6 z-50 transform transition-all duration-300 translate-y-0 opacity-100 pointer-events-auto`;
+      const toastContent = document.getElementById('toast-content');
+      toastContent.className = isError
+        ? `px-4 py-3 rounded-xl bg-[#D92D20] text-white shadow-xl flex items-center gap-3 border border-white/20`
+        : `px-4 py-3 rounded-xl bg-[#3A1F14] text-white shadow-xl flex items-center gap-3 border border-[#EADFD3]/30`;
+      
+      setTimeout(() => {
+        toastBox.className = `fixed bottom-6 right-6 z-50 transform transition-all duration-300 translate-y-20 opacity-0 pointer-events-none`;
+      }, 3500);
+    }
+
+    function populateUI(user) {
+      originalData = user;
+      const initials = (user.full_name || 'Doctor')
+        .split(' ')
+        .filter(n => n.length > 0 && !n.includes('Dr.'))
+        .map(n => n[0])
+        .join('')
+        .slice(0, 2)
+        .toUpperCase() || 'DR';
+
+      heroAvatar.textContent = initials;
+      heroName.textContent = user.full_name || 'Dr. Elena Vance';
+      heroRole.textContent = (user.role || 'radiologist').toUpperCase();
+      heroInst.innerHTML = `<i class="ph ph-hospital text-base text-[#C8512D]"></i><span>${user.institution || user.hospital || 'Verifact Trauma Center'} · ${user.department || 'Diagnostic Radiology'}</span>`;
+      heroEmail.textContent = user.email || '';
+      heroLicense.textContent = `LICENSE: ${user.license_number || user.registration_number || 'N/A'}`;
+      
+      if (user.last_login_at) {
+        try {
+          const d = new Date(user.last_login_at);
+          heroLastLogin.textContent = `Last login: ${d.toLocaleDateString()} ${d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+        } catch(e) {}
+      }
+
+      profName.value = user.full_name || '';
+      profEmail.value = user.email || '';
+      profInst.value = user.institution || user.hospital || '';
+      profDept.value = user.department || '';
+      profLicense.value = user.license_number || user.registration_number || '';
+    }
+
+    // Load Profile from Backend
+    async function loadProfile() {
+      const token = sessionStorage.getItem('verifact_token');
+      const headers = { 'Accept': 'application/json' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/me`, {
+          method: 'GET',
+          headers: headers,
+          credentials: 'include'
+        });
+
+        if (res.ok) {
+          const user = await res.json();
+          sessionStorage.setItem('verifact_user', JSON.stringify(user));
+          populateUI(user);
+        } else if (res.status === 401) {
+          window.location.href = '/login.html?next=/profile.html';
+        }
+      } catch (err) {
+        // Fallback to cached user if network temporarily down
+        const cached = sessionStorage.getItem('verifact_user');
+        if (cached) populateUI(JSON.parse(cached));
+      }
+    }
+
+    // Toggle Edit Mode
+    function setEditMode(state) {
+      isEditing = state;
+      [profName, profInst, profDept, profLicense].forEach(input => {
+        input.disabled = !state;
+        input.className = state 
+          ? 'w-full h-10 px-3.5 rounded-lg border border-[#C8512D] bg-white text-[#1F1612] text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D]'
+          : 'w-full h-10 px-3.5 rounded-lg border border-[#EADFD3] bg-[#FAF6F1] text-[#1F1612] text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D] disabled:opacity-85 disabled:cursor-not-allowed';
+      });
+
+      if (state) {
+        actionsBox.classList.remove('hidden');
+        editBtn.classList.add('hidden');
+        profName.focus();
+      } else {
+        actionsBox.classList.add('hidden');
+        editBtn.classList.remove('hidden');
+        if (originalData) populateUI(originalData);
+      }
+    }
+
+    editBtn.addEventListener('click', () => setEditMode(true));
+    cancelBtn.addEventListener('click', () => setEditMode(false));
+
+    // Profile Update Handler
+    profileForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      saveSpinner.classList.remove('hidden');
+
+      const token = sessionStorage.getItem('verifact_token');
+      const headers = { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json' 
+      };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
+      const payload = {
+        full_name: profName.value.trim(),
+        institution: profInst.value.trim(),
+        department: profDept.value.trim(),
+        license_number: profLicense.value.trim()
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/me`, {
+          method: 'PATCH',
+          headers: headers,
+          credentials: 'include',
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          const updated = await res.json();
+          sessionStorage.setItem('verifact_user', JSON.stringify(updated));
+          populateUI(updated);
+          setEditMode(false);
+          showToast('Physician details updated successfully!');
+        } else {
+          const err = await res.json();
+          showToast(err.detail || 'Failed to update profile.', true);
+        }
+      } catch (err) {
+        showToast('Network error updating profile.', true);
+      } finally {
+        saveSpinner.classList.add('hidden');
+      }
+    });
+
+    // Password Change Handler
+    pwForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      pwAlert.classList.add('hidden');
+
+      const current_password = curPw.value;
+      const new_password = newPw.value;
+      const confirm_new = confPw.value;
+
+      if (new_password.length < 10) {
+        pwAlert.className = 'my-4 p-3 rounded-lg bg-[#FDE8E8] border border-[#D92D20] text-[#D92D20] text-xs font-medium block';
+        pwAlert.textContent = 'New password must be at least 10 characters long.';
+        return;
+      }
+
+      if (new_password !== confirm_new) {
+        pwAlert.className = 'my-4 p-3 rounded-lg bg-[#FDE8E8] border border-[#D92D20] text-[#D92D20] text-xs font-medium block';
+        pwAlert.textContent = 'New passwords do not match.';
+        return;
+      }
+
+      pwSpinner.classList.remove('hidden');
+
+      const token = sessionStorage.getItem('verifact_token');
+      const headers = { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json' 
+      };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/change-password`, {
+          method: 'POST',
+          headers: headers,
+          credentials: 'include',
+          body: JSON.stringify({ current_password, new_password })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          pwAlert.className = 'my-4 p-3 rounded-lg bg-[#FFF4E8] border border-[#C8512D] text-[#C8512D] text-xs font-medium block';
+          pwAlert.textContent = 'Password changed successfully.';
+          curPw.value = '';
+          newPw.value = '';
+          confPw.value = '';
+          showToast('Password changed successfully.');
+        } else {
+          pwAlert.className = 'my-4 p-3 rounded-lg bg-[#FDE8E8] border border-[#D92D20] text-[#D92D20] text-xs font-medium block';
+          pwAlert.textContent = data.detail || 'Failed to update password.';
+        }
+      } catch (err) {
+        pwAlert.className = 'my-4 p-3 rounded-lg bg-[#FDE8E8] border border-[#D92D20] text-[#D92D20] text-xs font-medium block';
+        pwAlert.textContent = 'Network error changing password.';
+      } finally {
+        pwSpinner.classList.add('hidden');
+      }
+    });
+
+    // Sign out handlers
+    async function handleSignOut() {
+      try {
+        await fetch(`${API_BASE}/auth/logout`, {
+          method: 'POST',
+          credentials: 'include'
+        });
+      } catch(e) {}
+      sessionStorage.clear();
+      localStorage.removeItem('verifact_token');
+      window.location.href = '/login.html';
+    }
+
+    document.getElementById('side-signout-btn').addEventListener('click', handleSignOut);
+    const dropSignout = document.getElementById('signout-btn');
+    if (dropSignout) dropSignout.addEventListener('click', handleSignOut);
+
+    // Initial load
+    loadProfile();
+  </script>
+  <script type="module" src="/js/navbar.js"></script>
+</body>
+</html>

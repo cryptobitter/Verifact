@@ -19,6 +19,8 @@ from sqlalchemy import text
 
 from app.config import settings
 from app.routes import auth_routes, analysis_routes
+from app.utils.security import get_current_user
+from sqlalchemy import inspect
 from app.database import Base, engine
 import app.models
 
@@ -90,6 +92,15 @@ app.add_middleware(
 # Ensure database schema is initialized
 try:
     Base.metadata.create_all(bind=engine)
+    with engine.begin() as conn:
+        inspector = inspect(conn)
+        cols = [col["name"] for col in inspector.get_columns("users")]
+        if "last_login_at" not in cols:
+            conn.execute(text("ALTER TABLE users ADD COLUMN last_login_at TIMESTAMP"))
+        if "institution" not in cols:
+            conn.execute(text("ALTER TABLE users ADD COLUMN institution VARCHAR(255)"))
+        if "license_number" not in cols:
+            conn.execute(text("ALTER TABLE users ADD COLUMN license_number VARCHAR(100)"))
 except Exception as _db_err:
     print(f"[WARN] Failed to verify DB schema at startup: {_db_err}")
 
@@ -145,4 +156,4 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 app.include_router(auth_routes.router, prefix="/auth", tags=["auth"])
-app.include_router(analysis_routes.router, tags=["analysis"])
+app.include_router(analysis_routes.router, tags=["analysis"], dependencies=[Depends(get_current_user)])

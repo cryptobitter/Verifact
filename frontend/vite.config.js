@@ -12,6 +12,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         login: resolve(__dirname, 'login.html'),
+        signup: resolve(__dirname, 'signup.html'),
+        profile: resolve(__dirname, 'profile.html'),
         upload: resolve(__dirname, 'upload.html'),
         privacy: resolve(__dirname, 'privacy-check.html'),
         scan: resolve(__dirname, 'scan-in-progress.html'),

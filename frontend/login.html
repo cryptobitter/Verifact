@@ -1,364 +1,324 @@
 <!DOCTYPE html>
-
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_blank" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Source+Sans+3:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,600&amp;display=swap" rel="stylesheet"/>
-<style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": {
-  "bg": "#FFFFFF",
-  "bg-soft": "#FFF4E8",
-  "surface": "#FFFFFF",
-  "surface-alt": "#FAF6F1",
-  "border": "#EADFD3",
-  "text": "#1F1612",
-  "text-muted": "#6B5B52",
-  "primary": "#C8512D",
-  "primary-hover": "#B04624",
-  "primary-contrast": "#FFFFFF",
-  "primary-container": "#FBE3D6",
-  "on-primary": "#FFFFFF",
-  "on-primary-container": "#1F1612",
-  "secondary": "#3A1F14",
-  "secondary-container": "#FAF6F1",
-  "on-secondary": "#FFFFFF",
-  "on-secondary-container": "#1F1612",
-  "tertiary": "#F5A524",
-  "tertiary-container": "#FFF4E8",
-  "on-tertiary": "#1F1612",
-  "on-tertiary-container": "#1F1612",
-  "accent": "#F5A524",
-  "blush": "#FBE3D6",
-  "deep": "#3A1F14",
-  "error": "#D92D20",
-  "error-container": "#FDE8E8",
-  "on-error": "#FFFFFF",
-  "on-error-container": "#D92D20",
-  "background": "#FFFFFF",
-  "on-background": "#1F1612",
-  "surface-dim": "#FAF6F1",
-  "surface-bright": "#FFFFFF",
-  "surface-container-lowest": "#FFFFFF",
-  "surface-container-low": "#FFF4E8",
-  "surface-container": "#FAF6F1",
-  "surface-container-high": "#F5ECE1",
-  "surface-container-highest": "#EADFD3",
-  "on-surface": "#1F1612",
-  "on-surface-variant": "#6B5B52",
-  "outline": "#C5B4A5",
-  "outline-variant": "#EADFD3",
-  "inverse-surface": "#3A1F14",
-  "inverse-on-surface": "#FAF6F1",
-  "inverse-primary": "#FBE3D6",
-  "primary-fixed": "#FBE3D6",
-  "primary-fixed-dim": "#F5ECE1",
-  "on-primary-fixed": "#1F1612",
-  "on-primary-fixed-variant": "#6B5B52",
-  "secondary-fixed": "#EADFD3",
-  "secondary-fixed-dim": "#D8C7B8",
-  "on-secondary-fixed": "#1F1612",
-  "on-secondary-fixed-variant": "#6B5B52",
-  "tertiary-fixed": "#F5A524",
-  "tertiary-fixed-dim": "#E59418",
-  "on-tertiary-fixed": "#1F1612",
-  "on-tertiary-fixed-variant": "#1F1612",
-  "status-urgent": "#D92D20",
-  "status-review": "#F5A524",
-  "status-routine": "#3A1F14",
-  "status-discordant": "#E5799A",
-  "status-signed": "#C8512D",
-  "surface-tint": "#C8512D"
-}, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-xl": "2.5rem", "gutter-mobile": "0.75rem", "gutter": "1.25rem", "space-md": "1.25rem", "margin": "2rem", "space-sm": "0.75rem", "margin-mobile": "1rem", "space-xs": "0.375rem", "space-lg": "1.75rem" }, "fontFamily": { "headline-xl-mobile": [ "\"Source Serif 4\"" ], "headline-lg": [ "\"Source Serif 4\"" ], "label-sm": [ "\"Source Sans 3\"" ], "headline-md": [ "\"Source Serif 4\"" ], "body-strong": [ "\"Source Sans 3\"" ], "label-md": [ "\"Source Sans 3\"" ], "body-md": [ "\"Source Sans 3\"" ], "body-lg": [ "\"Source Sans 3\"" ], "headline-sm": [ "\"Source Serif 4\"" ], "headline-xl": [ "\"Source Serif 4\"" ], "mono-data": [ "JetBrains Mono" ] }, "fontSize": { "headline-xl-mobile": [ "26px", { "lineHeight": "34px", "fontWeight": "600" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "fontWeight": "600" } ], "label-sm": [ "13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-md": [ "20px", { "lineHeight": "28px", "fontWeight": "600" } ], "body-strong": [ "15px", { "lineHeight": "22px", "fontWeight": "600" } ], "label-md": [ "13px", { "lineHeight": "18px", "fontWeight": "500" } ], "body-md": [ "15px", { "lineHeight": "22px", "fontWeight": "400" } ], "body-lg": [ "17px", { "lineHeight": "26px", "fontWeight": "400" } ], "headline-sm": [ "17px", { "lineHeight": "24px", "fontWeight": "600" } ], "headline-xl": [ "32px", { "lineHeight": "40px", "fontWeight": "600" } ], "mono-data": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } }</script>  <link rel="stylesheet" href="/css/design-system.css"/>
-</head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="w-full bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(58,31,20,0.05)]"><div class="max-w-7xl mx-auto px-margin-mobile md:px-margin h-16 flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"><i class="ph ph-seal-check"></i></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Verifact</span><span class="font-label-sm text-label-sm text-on-surface-variant font-mono-data tracking-wide">CLINICAL DIAGNOSTICS</span></div></div><div class="flex items-center gap-space-sm bg-surface-container px-space-sm py-space-xs rounded-lg"><i class="ph ph-lock"></i><span class="font-label-sm text-label-sm text-on-surface-variant tracking-wider uppercase">HIPAA SECURE • BAA ENFORCED</span></div></div></header><main class="flex-1 flex items-center justify-center px-margin-mobile md:px-margin py-space-xl"><div class="flex flex-col w-full">
-<div class="w-full max-w-6xl mx-auto flex flex-col gap-space-lg">
-<!-- Top Eyebrow & Institutional Banner -->
-<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-sm pb-space-sm">
-<div class="flex flex-col">
-<div class="flex items-center gap-space-xs text-on-surface-variant font-mono-data text-label-sm uppercase tracking-wider mb-1">
-<span class="inline-block w-1.5 h-1.5 rounded-full bg-secondary"></span>
-<span>Verifact Clinical Access</span>
-<span class="text-outline-variant">•</span>
-<span>SaMD Tier II Clinical Decision Support</span>
-</div>
-<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">Clinician Sign-in &amp; Electronic Credentialing</h1>
-<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-3xl">
-          Secure authenticated gateway for attending emergency physicians and musculoskeletal radiologists reviewing AI-triaged upper-extremity radiographs under 21 CFR Part 11 attestation rules.
-        </p>
-</div>
-<div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-space-xs rounded-lg self-start sm:self-auto">
-<div class="flex flex-col text-right">
-<span class="font-mono-data text-label-sm text-on-surface">SESSION AUDIT: STRICT</span>
-<span class="font-mono-data text-label-sm text-secondary">EPIC-HIE • SECTRA PACS ACTIVE</span>
-</div>
-<i class="ph ph-shield-check"></i>
-</div>
-</div>
-<!-- Main Workspace Grid: Dual Pathway -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
-<!-- Primary Credentialing Pane (7 cols) -->
-<div class="lg:col-span-7 bg-surface-container-lowest rounded-lg p-space-md sm:p-space-lg shadow-sm flex flex-col gap-space-md">
-<!-- Federated Identity Integration -->
-<div class="flex flex-col gap-space-sm">
-<div class="flex items-center justify-between">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Federated Clinical SSO</span>
-<span class="font-mono-data text-label-sm text-on-surface-variant">SAML 2.0 / SMART on FHIR</span>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
-<button class="flex items-center justify-start gap-space-sm px-space-md py-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors text-left group" onclick="triggerFederation('Epic EHR')" type="button">
-<i class="ph ph-local-hospital"></i>
-<div class="flex flex-col min-w-0">
-<span class="font-body-strong text-body-strong text-on-surface truncate">Hospital EHR / Epic</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Provider Federated SSO</span>
-</div>
-</button>
-<button class="flex items-center justify-start gap-space-sm px-space-md py-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors text-left group" onclick="triggerFederation('PACS Gateway')" type="button">
-<i class="ph ph-bone"></i>
-<div class="flex flex-col min-w-0">
-<span class="font-body-strong text-body-strong text-on-surface truncate">IntelePACS / Sectra</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Diagnostic Station Auth</span>
-</div>
-</button>
-</div>
-</div>
-<!-- Hairline Divider -->
-<div class="relative flex items-center justify-center my-space-xs">
-<div class="w-full h-px bg-surface-container"></div>
-<span class="absolute bg-surface-container-lowest px-space-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">or institutional credential verification</span>
-</div>
-<!-- Attestation Form -->
-<form class="flex flex-col gap-space-md" id="credentialForm" onsubmit="handleAuth(event)">
-<!-- Field: Work ID -->
-<div class="flex flex-col gap-1">
-<div class="flex justify-between items-center">
-<label class="font-body-strong text-body-strong text-on-surface" for="workEmail">Institutional Identifier or Work Email</label>
-<span class="font-mono-data text-label-sm text-on-surface-variant">e.g. k.vance@stjude.health</span>
-</div>
-<div class="relative flex items-center">
-<i class="ph ph-badge"></i>
-<input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md pl-10 pr-3 py-2 rounded-lg bg-surface-container-low/50 focus:bg-surface-container-lowest focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-outline" id="workEmail" placeholder="clinician.id@traumacenter.org" required="" type="email"/>
-</div>
-</div>
-<!-- Field: Passkey / Password -->
-<div class="flex flex-col gap-1">
-<div class="flex justify-between items-center">
-<label class="font-body-strong text-body-strong text-on-surface" for="password">Password or Passkey Token</label>
-<a class="font-label-sm text-label-sm text-primary hover:underline" href="#reset" onclick="alert('Credential recovery protocol initialized. Please check your institutional PIV card reader or contact your PACS administrator.'); return false;">Forgot passkey?</a>
-</div>
-<div class="relative flex items-center">
-<i class="ph ph-lock"></i>
-<input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md pl-10 pr-10 py-2 rounded-lg bg-surface-container-low/50 focus:bg-surface-container-lowest focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-outline" id="password" placeholder="••••••••••••••••" required="" type="password"/>
-<button class="absolute right-3 text-on-surface-variant hover:text-on-surface flex items-center" onclick="togglePasswordVisibility()" title="Toggle visibility" type="button">
-<i class="ph ph-eye text-sm" id="pwdToggleIcon"></i>
-</button>
-</div>
-</div>
-<!-- Field: NPI / License Attestation -->
-<div class="flex flex-col gap-1 bg-surface-container-low/40 p-space-sm rounded-lg">
-<div class="flex justify-between items-baseline">
-<label class="font-body-strong text-body-strong text-on-surface flex items-center gap-1" for="npiNumber">
-                National Provider Identifier (NPI) / State License
-                <span class="text-error font-mono-data">*</span>
-</label>
-<span class="font-mono-data text-label-sm text-secondary bg-secondary-container/30 px-1.5 py-0.5 rounded">MANDATORY</span>
-</div>
-<div class="relative flex items-center mt-1">
-<i class="ph ph-medical-services"></i>
-<input class="w-full bg-surface-container-lowest text-on-surface font-mono-data text-mono-data pl-10 pr-3 py-2 rounded-lg bg-surface-container-low/50 focus:bg-surface-container-lowest focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-outline" id="npiNumber" pattern="[0-9A-Za-z-]{8,14}" placeholder="NPI (10 digits) or State License ID" required="" type="text"/>
-</div>
-<p class="font-label-sm text-label-sm text-on-surface-variant mt-1 leading-relaxed">
-              Required for cryptographic digital attestation of signed diagnostic reports under 21 CFR Part 11 regulatory compliance.
-            </p>
-</div>
-<!-- Workstation Persistence -->
-<div class="flex items-center justify-between pt-1">
-<label class="flex items-center gap-2 cursor-pointer select-none">
-<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary bg-surface-container-low" id="persistSession" type="checkbox"/>
-<span class="font-label-md text-label-md text-on-surface">Retain terminal authorization for 12-hour ED shift</span>
-</label>
-<span class="font-mono-data text-label-sm text-on-surface-variant hidden sm:inline">HIPAA KIOSK MODE</span>
-</div>
-<!-- Submit CTA -->
-<button class="w-full bg-primary text-white hover:bg-primary-hover py-space-sm px-space-md rounded-lg font-body-strong text-body-strong hover:bg-primary transition-colors flex items-center justify-center gap-2 shadow-sm" id="loginSubmitBtn" type="submit">
-<span>Authenticate &amp; Open Diagnostic Worklist</span>
-<i class="ph ph-arrow-right"></i>
-</button>
-</form>
-<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm pt-space-xs">
-<span>Need NPI validation or residency credential mapping?</span>
-<a class="text-primary hover:underline font-body-strong" href="#helpdesk" onclick="alert('Routing to Hospital IT Clinical Informatics desk: ext 4402'); return false;">Clinical Helpdesk</a>
-</div>
-</div>
-<!-- Right Column: Rapid Clinical Demo Access & Security Governance (5 cols) -->
-<div class="lg:col-span-5 flex flex-col gap-space-md">
-<!-- Evaluation / Rapid Demo Card -->
-<div class="bg-surface-container-lowest rounded-lg p-space-md shadow-sm flex flex-col gap-space-sm">
-<div class="flex items-center justify-between pb-space-xs">
-<div class="flex items-center gap-1.5">
-<span class="inline-block w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
-<span class="font-headline-sm text-headline-sm text-primary">Rapid Clinical Demo Access</span>
-</div>
-<span class="font-mono-data text-label-sm text-tertiary font-medium bg-tertiary-fixed/40 px-2 py-0.5 rounded">EVALUATION MODE</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant">
-            Evaluating Verifact diagnostic capabilities? Load pre-configured attending credentials to examine active upper-extremity trauma cases without EHR binding.
-          </p>
-<!-- Pre-loaded Persona 1: Attending -->
-<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-2">
-<div class="flex items-start justify-between">
-<div class="flex items-center gap-2">
-<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-mono-data text-label-sm font-semibold">
-                  KV
-                </div>
-<div class="flex flex-col">
-<span class="font-body-strong text-body-strong text-on-surface">Dr. Katherine Vance, MD</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Attending Radiologist • MSK Trauma</span>
-</div>
-</div>
-<span class="font-mono-data text-label-sm text-secondary bg-secondary-container/40 px-1.5 py-0.5 rounded">NPI: 1942084719</span>
-</div>
-<div class="flex items-center justify-between pt-1">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Queue: 14 Pending Upper-Limb Radiographs</span>
-<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-primary hover:bg-surface-container font-label-md text-label-md transition-colors flex items-center gap-1" onclick="loadDemoUser('k.vance@stjude.health', '1942084719', 'Attending Emergency Radiologist')" type="button">
-<span>Load Profile</span>
-<i class="ph ph-login"></i>
-</button>
-</div>
-</div>
-<!-- Pre-loaded Persona 2: Orthopedic Fellow -->
-<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-2">
-<div class="flex items-start justify-between">
-<div class="flex items-center gap-2">
-<div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-on-secondary font-mono-data text-label-sm font-semibold">
-                  MC
-                </div>
-<div class="flex flex-col">
-<span class="font-body-strong text-body-strong text-on-surface">Dr. Marcus Chen, DO</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Orthopedic Surgery Fellow • Trauma</span>
-</div>
-</div>
-<span class="font-mono-data text-label-sm text-secondary bg-secondary-container/40 px-1.5 py-0.5 rounded">NPI: 1083921744</span>
-</div>
-<div class="flex items-center justify-between pt-1">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Mode: Second-Reader / Audit Protocol</span>
-<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-primary hover:bg-surface-container font-label-md text-label-md transition-colors flex items-center gap-1" onclick="loadDemoUser('m.chen@memorial.ortho', '1083921744', 'Orthopedic Surgery Fellow')" type="button">
-<span>Load Profile</span>
-<i class="ph ph-login"></i>
-</button>
-</div>
-</div>
-</div>
-<!-- Telemetry & Security Notice Card -->
-<div class="bg-surface-container-lowest rounded-lg p-space-md shadow-sm flex flex-col gap-space-sm">
-<div class="flex items-center gap-2 text-primary font-headline-sm text-headline-sm">
-<i class="ph ph-security"></i>
-<span>Security &amp; Regulatory Safeguards</span>
-</div>
-<div class="flex flex-col gap-2 text-on-surface-variant font-label-md text-label-md leading-relaxed">
-<div class="flex items-start gap-2">
-<i class="ph ph-check-circle"></i>
-<span><strong class="text-on-surface font-body-strong">Zero Local PHI:</strong> Studies rendered directly in secure WebGL buffer; DICOM images flushed upon tab destruction.</span>
-</div>
-<div class="flex items-start gap-2">
-<i class="ph ph-check-circle"></i>
-<span><strong class="text-on-surface font-body-strong">Part 11 Audit Trail:</strong> Every confidence slider adjustment and bounding-box acknowledgment is immutably logged with NPI signature.</span>
-</div>
-<div class="flex items-start gap-2">
-<i class="ph ph-check-circle"></i>
-<span><strong class="text-on-surface font-body-strong">BAA Enforced:</strong> TLS 1.3 mutual handshake with institutional DICOM routers.</span>
-</div>
-</div>
-<!-- Telemetry Status Bar -->
-<div class="mt-space-xs pt-space-xs bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1 font-mono-data text-label-sm">
-<div class="flex justify-between items-center">
-<span class="text-on-surface-variant">PACS EDGE GATEWAY</span>
-<span class="text-secondary flex items-center gap-1">
-<span class="inline-block w-1.5 h-1.5 rounded-full bg-secondary"></span> 42ms (RTT Normal)
-              </span>
-</div>
-<div class="flex justify-between items-center">
-<span class="text-on-surface-variant">INFERENCE ENGINE</span>
-<span class="text-on-surface">DenseNet-121 v2.4 (Ready)</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Clinical Disclaimer Notification Ribbon -->
-<div class="bg-surface-container-high/60 rounded-lg p-space-sm flex items-center justify-between gap-space-sm text-on-surface-variant font-label-sm text-label-sm">
-<div class="flex items-center gap-2">
-<i class="ph ph-info"></i>
-<span>
-<strong class="text-on-surface font-body-strong">Mandatory Notice:</strong> Verifact is an FDA Class II SaMD decision support aid. It does not replace independent primary radiological interpretation. All triaged upper-extremity fractures must be reviewed and countersigned by a credentialed physician.
-        </span>
-</div>
-<span class="font-mono-data text-on-surface-variant whitespace-nowrap hidden md:inline">REV-2025.04.1</span>
-</div>
-</div>
-</div>
-<script>
-  function togglePasswordVisibility() {
-    const input = document.getElementById('password');
-    const icon = document.getElementById('pwdToggleIcon');
-    if (!input || !icon) return;
-
-    if (input.type === 'password') {
-      input.type = 'text';
-      icon.textContent = 'visibility_off';
-    } else {
-      input.type = 'password';
-      icon.textContent = 'visibility';
-    }
-  }
-
-  function loadDemoUser(email, npi, role) {
-    const emailField = document.getElementById('workEmail');
-    const pwdField = document.getElementById('password');
-    const npiField = document.getElementById('npiNumber');
-    const submitBtn = document.getElementById('loginSubmitBtn');
-
-    if (emailField && pwdField && npiField) {
-      emailField.value = email;
-      pwdField.value = 'ClinicalDemoPass2025!';
-      npiField.value = npi;
-      
-      if (submitBtn) {
-        submitBtn.innerHTML = '<span>Sign In as ' + role + ' &rarr;</span>';
-        submitBtn.classList.add('bg-secondary');
-        submitBtn.classList.remove('bg-primary-container');
-        setTimeout(() => {
-          submitBtn.classList.remove('bg-secondary');
-          submitBtn.classList.add('bg-primary-container');
-        }, 1200);
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Sign in — Verifact PACS</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/design-system.css"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#FFFFFF',
+            'bg-soft': '#FFF4E8',
+            surface: '#FFFFFF',
+            'surface-alt': '#FAF6F1',
+            border: '#EADFD3',
+            text: '#1F1612',
+            'text-muted': '#6B5B52',
+            primary: { DEFAULT: '#C8512D', hover: '#B04624' },
+            accent: '#F5A524',
+            blush: '#FBE3D6',
+            deep: '#3A1F14',
+            urgent: '#D92D20'
+          }
+        }
       }
-    }
-  }
+    };
+  </script>
+  <script type="module" src="/js/auth-guard.js"></script>
+</head>
+<body class="bg-[#FFF4E8] text-[#1F1612] antialiased min-h-screen flex flex-col justify-between selection:bg-[#FBE3D6] selection:text-[#1F1612]">
 
-  function triggerFederation(provider) {
-    const submitBtn = document.getElementById('loginSubmitBtn');
-    if (submitBtn) {
-      submitBtn.innerHTML = '<i class="ph ph-spinner"></i> Connecting to ' + provider + '...';
-      setTimeout(() => {
-        alert('Federated SSO Handshake Simulated for ' + provider + '. Redirecting to upper-extremity diagnostic triage worklist...');
-        submitBtn.innerHTML = '<span>Sign in to Diagnostic Worklist &rarr;</span>';
-      }, 900);
-    }
-  }
+  <!-- Minimal Brand Header (Logo + Demo Mode only) -->
+  <header class="w-full h-16 border-b border-[#EADFD3] bg-white/90 backdrop-blur-md px-4 sm:px-8 flex items-center justify-between">
+    <a href="/login.html" class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg bg-[#FBE3D6] border border-[#EADFD3] flex items-center justify-center text-[#C8512D]">
+        <i class="ph ph-bone text-lg font-bold"></i>
+      </div>
+      <div class="flex flex-col">
+        <span class="font-bold text-base tracking-tight text-[#1F1612]">VERIFACT</span>
+        <span class="font-mono text-[9px] uppercase tracking-wider text-[#6B5B52]">CLINICAL ACCESS GATEWAY</span>
+      </div>
+    </a>
+    <span class="px-2.5 py-0.5 rounded font-mono text-xs bg-[#F5A524] text-[#1F1612] font-semibold tracking-wide uppercase shadow-sm">
+      DEMO MODE
+    </span>
+  </header>
 
-  function handleAuth(event) {
-    event.preventDefault();
-    const email = document.getElementById('workEmail').value;
-    const npi = document.getElementById('npiNumber').value;
-    const submitBtn = document.getElementById('loginSubmitBtn');
-
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="ph ph-spinner"></i> Verifying NPI Attestation (' + npi + ')...';
+  <!-- Main Split Layout -->
+  <main class="flex-1 w-full max-w-6xl mx-auto px-4 py-8 sm:py-12 flex items-center justify-center">
+    <div class="w-full grid grid-cols-1 lg:grid-cols-12 bg-white rounded-2xl border border-[#EADFD3] shadow-[0_4px_24px_rgba(58,31,20,0.08)] overflow-hidden">
       
-      setTimeout(() => {
-        submitBtn.innerHTML = '<i class="ph ph-check-circle"></i> Credential Verified';
-        setTimeout(() => {
-          alert('Electronic signature authenticated for ' + email + ' (NPI: ' + npi + '). Routing to /worklist with 14 pending studies.');
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = '<span>Sign in to Diagnostic Worklist &rarr;</span>';
-        }, 600);
-      }, 1000);
+      <!-- Left Column: Form Card on Soft Peach (#FFF4E8) -->
+      <div class="lg:col-span-6 p-6 sm:p-10 lg:p-12 flex flex-col justify-center bg-[#FFF4E8]">
+        <div class="max-w-md w-full mx-auto">
+          
+          <div class="mb-8">
+            <span class="text-xs font-mono text-[#C8512D] font-semibold uppercase tracking-wider block mb-1">
+              Physician Authentication
+            </span>
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#1F1612]">Sign in to Verifact</h1>
+            <p class="text-sm text-[#6B5B52] mt-1.5">Enter your credentialed clinical email to access triage queues.</p>
+          </div>
+
+          <!-- Flash Session Message (if redirected after expiry) -->
+          <div id="flash-message-box" class="hidden mb-5 p-3 rounded-lg bg-[#FFF4E8] border border-[#C8512D] text-[#C8512D] text-sm flex items-center gap-2">
+            <i class="ph ph-warning-circle text-lg shrink-0"></i>
+            <span id="flash-message-text"></span>
+          </div>
+
+          <!-- Dynamic Error Alert -->
+          <div id="error-alert" class="hidden mb-5 p-3.5 rounded-lg bg-[#FDE8E8] border border-[#D92D20] text-[#D92D20] text-sm flex items-start gap-2.5">
+            <i class="ph ph-x-circle text-lg shrink-0 mt-0.5"></i>
+            <div id="error-alert-text" class="font-medium"></div>
+          </div>
+
+          <!-- Login Form -->
+          <form id="login-form" class="space-y-4" novalidate>
+            <div>
+              <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-[#1F1612] mb-1.5">
+                Work Email <span class="text-[#D92D20]">*</span>
+              </label>
+              <input 
+                id="email" 
+                type="email" 
+                required 
+                autocomplete="email"
+                placeholder="doctor@hospital.org"
+                class="w-full h-11 px-3.5 rounded-lg border border-[#EADFD3] bg-white text-[#1F1612] placeholder-[#6B5B52]/50 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D] focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-[#1F1612]">
+                  Password <span class="text-[#D92D20]">*</span>
+                </label>
+              </div>
+              <div class="relative">
+                <input 
+                  id="password" 
+                  type="password" 
+                  required 
+                  autocomplete="current-password"
+                  placeholder="Enter your clinical password"
+                  class="w-full h-11 pl-3.5 pr-10 rounded-lg border border-[#EADFD3] bg-white text-[#1F1612] placeholder-[#6B5B52]/50 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#C8512D] focus:border-transparent"
+                />
+                <button 
+                  type="button" 
+                  id="toggle-password-btn" 
+                  aria-label="Toggle password visibility"
+                  class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#6B5B52] hover:text-[#1F1612] p-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8512D]"
+                >
+                  <i id="toggle-password-icon" class="ph ph-eye text-lg"></i>
+                </button>
+              </div>
+            </div>
+
+            <button 
+              type="submit" 
+              id="submit-btn" 
+              class="w-full h-11 mt-2 rounded-lg bg-[#C8512D] hover:bg-[#B04624] text-white font-medium text-sm transition-all shadow-sm flex items-center justify-center gap-2 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8512D] focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span id="btn-text">Sign in</span>
+              <i id="btn-spinner" class="ph ph-spinner animate-spin text-lg hidden"></i>
+            </button>
+          </form>
+
+          <!-- Demo Quick Fill Pill -->
+          <div class="mt-6 pt-5 border-t border-[#EADFD3] flex items-center justify-between text-xs">
+            <span class="text-[#6B5B52]">Testing Demo credentials?</span>
+            <button 
+              type="button" 
+              id="quick-demo-fill" 
+              class="text-[#C8512D] font-semibold hover:underline flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8512D] rounded px-1"
+            >
+              <i class="ph ph-lightning"></i>
+              <span>Autofill Demo Doctor</span>
+            </button>
+          </div>
+
+          <div class="mt-4 text-center text-xs text-[#6B5B52]">
+            Don't have an attending account? 
+            <a href="/signup.html" class="text-[#C8512D] font-semibold hover:underline">Create account</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right Column: Espresso (#3A1F14) Brand Trust Panel (Hidden on Mobile) -->
+      <div class="hidden lg:flex lg:col-span-6 p-10 lg:p-12 bg-[#3A1F14] text-[#FAF6F1] flex-col justify-between relative overflow-hidden">
+        
+        <!-- Subtle background watermark badge -->
+        <div class="absolute -right-12 -bottom-12 opacity-5 pointer-events-none text-white">
+          <i class="ph ph-shield-check text-[260px]"></i>
+        </div>
+
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-[#FFF4E8]/10 border border-[#FFF4E8]/20 flex items-center justify-center text-[#F5A524] mb-6">
+            <i class="ph ph-sparkle text-2xl font-bold"></i>
+          </div>
+
+          <h2 class="text-2xl font-bold tracking-tight text-white leading-snug">
+            Dual-engine fracture triage with the physician in control.
+          </h2>
+          <p class="text-sm text-[#FAF6F1]/80 mt-2 leading-relaxed">
+            Verifact orchestrates DenseNet-121 CNN feature-activation maps alongside multimodal vision LLMs to eliminate blind spots in upper-extremity emergency diagnostics.
+          </p>
+        </div>
+
+        <!-- Three Clinical Trust Points -->
+        <div class="space-y-4 my-8">
+          <div class="flex items-start gap-3.5">
+            <div class="w-8 h-8 rounded-lg bg-[#C8512D]/20 text-[#C8512D] border border-[#C8512D]/40 flex items-center justify-center shrink-0 mt-0.5">
+              <i class="ph ph-shield-check text-lg"></i>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-white">In-Memory PHI Sanitization</h3>
+              <p class="text-xs text-[#FAF6F1]/70 leading-relaxed mt-0.5">DICOM headers are cryptographically redacted before inference so zero patient metadata touches the cloud.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3.5">
+            <div class="w-8 h-8 rounded-lg bg-[#F5A524]/20 text-[#F5A524] border border-[#F5A524]/40 flex items-center justify-center shrink-0 mt-0.5">
+              <i class="ph ph-stamp text-lg"></i>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-white">Physician Sign-Off on Every Report</h3>
+              <p class="text-xs text-[#FAF6F1]/70 leading-relaxed mt-0.5">AI operates purely in assistive advisory mode. No diagnostic report is finalized without attending sign-off.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3.5">
+            <div class="w-8 h-8 rounded-lg bg-[#C8512D]/20 text-[#C8512D] border border-[#C8512D]/40 flex items-center justify-center shrink-0 mt-0.5">
+              <i class="ph ph-clock-counter-clockwise text-lg"></i>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-white">Full Cryptographic Audit Trail</h3>
+              <p class="text-xs text-[#FAF6F1]/70 leading-relaxed mt-0.5">Every queue review, caliper edit, and override is immutably timestamped and verified.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer regulatory notice -->
+        <div class="pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-[#FAF6F1]/60 font-mono">
+          <span>COMPLIANCE: HIPAA &amp; DICOM PS 3.10</span>
+          <span>EST. LATENCY: &lt;600MS</span>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Login Logic Script -->
+  <script type="module">
+    const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env && (import.meta.env.VITE_API_BASE || import.meta.env.VITE_API_URL))
+      || window.__VERIFACT_API_URL__
+      || localStorage.getItem('VERIFACT_API_URL')
+      || (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+          ? 'http://127.0.0.1:8000'
+          : 'https://verifact-josv.onrender.com');
+
+    const form = document.getElementById('login-form');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const toggleBtn = document.getElementById('toggle-password-btn');
+    const toggleIcon = document.getElementById('toggle-password-icon');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const errorAlert = document.getElementById('error-alert');
+    const errorAlertText = document.getElementById('error-alert-text');
+    const flashBox = document.getElementById('flash-message-box');
+    const flashText = document.getElementById('flash-message-text');
+
+    // Display session expired message if present
+    const flashMsg = sessionStorage.getItem('verifact_flash_message');
+    if (flashMsg) {
+      flashText.textContent = flashMsg;
+      flashBox.classList.remove('hidden');
+      sessionStorage.removeItem('verifact_flash_message');
     }
-  }
-</script></main><footer class="w-full bg-surface-container-lowest py-space-md shadow-[0_-1px_6px_rgba(58,31,20,0.04)]"><div class="max-w-7xl mx-auto px-margin-mobile md:px-margin flex flex-col sm:flex-row items-center justify-between gap-space-sm text-center sm:text-left"><p class="font-label-sm text-label-sm text-on-surface-variant"><strong class="font-body-strong text-on-surface">Medical Decision Support:</strong> For qualified clinician and certified pathologist use only. Verification protocol standard revision 4.2.</p><div class="flex items-center gap-space-md"><span class="font-mono-data text-mono-data text-on-surface-variant">SYS-ID: VF-AUTH-NODE-01</span><span class="inline-block w-2 h-2 rounded-full bg-secondary" title="Compliance Monitor Online"></span></div></div></footer><script type="module" src="/js/verifact-engine.js"></script>
-</body></html>
+
+    // Password visibility toggle
+    toggleBtn.addEventListener('click', () => {
+      const isPassword = passwordInput.getAttribute('type') === 'password';
+      passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+      toggleIcon.className = isPassword ? 'ph ph-eye-slash text-lg' : 'ph ph-eye text-lg';
+    });
+
+    // Quick demo autofill
+    document.getElementById('quick-demo-fill').addEventListener('click', () => {
+      emailInput.value = 'demo@verifact.ai';
+      passwordInput.value = 'DemoDoctor2026!';
+    });
+
+    // Submission handler
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorAlert.classList.add('hidden');
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      if (!email || !password) {
+        errorAlertText.textContent = 'Please enter both your clinical email and password.';
+        errorAlert.classList.remove('hidden');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      btnText.textContent = 'Authenticating...';
+      btnSpinner.classList.remove('hidden');
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          errorAlertText.textContent = data.detail || 'Invalid email or password. Please verify your credentials.';
+          errorAlert.classList.remove('hidden');
+          submitBtn.disabled = false;
+          btnText.textContent = 'Sign in';
+          btnSpinner.classList.add('hidden');
+          return;
+        }
+
+        // Store tokens for cross-domain backup
+        if (data.access_token) {
+          sessionStorage.setItem('verifact_token', data.access_token);
+        }
+        if (data.user) {
+          sessionStorage.setItem('verifact_user', JSON.stringify(data.user));
+        }
+
+        btnText.textContent = 'Success! Entering PACS...';
+
+        // Redirect to intended next page or Overview
+        const params = new URLSearchParams(window.location.search);
+        const nextUrl = params.get('next') || '/index.html';
+        window.location.href = nextUrl;
+      } catch (err) {
+        errorAlertText.textContent = 'Network error connecting to Verifact backend. Please try again.';
+        errorAlert.classList.remove('hidden');
+        submitBtn.disabled = false;
+        btnText.textContent = 'Sign in';
+        btnSpinner.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
