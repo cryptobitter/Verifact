@@ -10,11 +10,20 @@ const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env && (impo
         ? 'http://127.0.0.1:8000'
         : 'https://verifact-josv.onrender.com');
 
-// Public routes that do not require authentication
-const PUBLIC_PATHS = ['/login', '/login.html', '/signup', '/signup.html', '/404', '/404.html'];
+// Auth-only routes (redirect to Overview if already logged in)
+const AUTH_ONLY_PATHS = ['/login', '/login.html', '/signup', '/signup.html'];
 
-function isPublicPage() {
+// Public routes that do not require authentication
+const PUBLIC_PATHS = ['/', '/index', '/index.html', '/about.html', '/how-it-works.html', '/404', '/404.html', ...AUTH_ONLY_PATHS];
+
+export function isAuthOnlyPage() {
     const path = window.location.pathname.toLowerCase();
+    return AUTH_ONLY_PATHS.some(p => path === p || path.endsWith(p));
+}
+
+export function isPublicPage() {
+    const path = window.location.pathname.toLowerCase();
+    if (path === '' || path === '/') return true;
     return PUBLIC_PATHS.some(p => path === p || path.endsWith(p));
 }
 
@@ -95,8 +104,8 @@ export async function checkAuthSession() {
             const userData = await res.json();
             sessionStorage.setItem('verifact_user', JSON.stringify(userData));
 
-            // If user is logged in but visiting login/signup, redirect to Overview
-            if (isPublic && !window.location.pathname.includes('404')) {
+            // If user is already logged in and visiting login/signup, redirect to next or Overview
+            if (isAuthOnlyPage()) {
                 const params = new URLSearchParams(window.location.search);
                 const next = params.get('next') || '/index.html';
                 window.location.href = next;
